@@ -102,8 +102,9 @@ swastika-jankalyan-foundation/
 ├── src/
 │   ├── assets/          # Images, logo, icons
 │   ├── components/      # Reusable components
-│   ├── App.jsx          # Root component
 │   ├── App.css          # Global styles
+│   ├── App.jsx          # Root component
+│   ├── index.css        # Global styles(2.0)
 │   └── main.jsx         # Entry point
 ├── index.html
 ├── tailwind.config.js
@@ -124,9 +125,9 @@ Near Sunday Market, Hatia, Ranchi, Jharkhand, India — 834003
 |---|---|
 | 📧 Email | [swastikajankalyanfoundation@gmail.com](mailto:swastikajankalyanfoundation@gmail.com) |
 | 📞 Phone | [+91 9229875702](tel:+919229875702) *(Mon–Fri, 9AM–5PM)* |
-| 📸 Instagram | [@YOUR_HANDLE](https://instagram.com/YOUR_HANDLE) |
-| 💼 LinkedIn | [SJKF](https://linkedin.com/company/YOUR_HANDLE) |
-| ▶️ YouTube | [@YOUR_CHANNEL](https://youtube.com/@YOUR_CHANNEL) |
+| 📸 Instagram | [@swastikajankalyanfoundation](https://www.instagram.com/swastikajankalyanfoundation) |
+| 💼 LinkedIn | [Swastika Jan Kalyan Foundation](https://www.linkedin.com/company/swastikajankalyanfoundation/) |
+| ⚓ Threads | [@swastikajankalyanfoundation](https://www.threads.com/@swastikajankalyanfoundation) |
 
 ---
 
@@ -154,4 +155,5 @@ Made with 💚 for the planet and its people
 
 **Swastika Jan Kalyan Foundation** · Ranchi, Jharkhand, India
 
+© 2026 Swastika Jan Kalyan Foundation. All rights reserved.
 </div>
