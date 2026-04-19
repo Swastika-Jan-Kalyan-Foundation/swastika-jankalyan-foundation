@@ -8,10 +8,10 @@ const FacebookIcon = () => (
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
   </svg>
 );
-const TwitterIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
+const ThreadIcon = () => (
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path fill="#E0E0E0" d="M337.36 243.58c-1.46-.7-2.95-1.38-4.46-2.02-2.62-48.36-29.04-76.05-73.41-76.33-25.6-.17-48.52 10.27-62.8 31.94l24.4 16.74c10.15-15.4 26.08-18.68 37.81-18.68h.4c14.61.09 25.64 4.34 32.77 12.62 5.19 6.04 8.67 14.37 10.39 24.89-12.96-2.2-26.96-2.88-41.94-2.02-42.18 2.43-69.3 27.03-67.48 61.21.92 17.35 9.56 32.26 24.32 42.01 12.48 8.24 28.56 12.27 45.26 11.35 22.07-1.2 39.37-9.62 51.45-25.01 9.17-11.69 14.97-26.84 17.53-45.92 10.51 6.34 18.3 14.69 22.61 24.73 7.31 17.06 7.74 45.1-15.14 67.96-20.04 20.03-44.14 28.69-80.55 28.96-40.4-.3-70.95-13.26-90.81-38.51-18.6-23.64-28.21-57.79-28.57-101.5.36-43.71 9.97-77.86 28.57-101.5 19.86-25.25 50.41-38.21 90.81-38.51 40.68.3 71.76 13.32 92.39 38.69 10.11 12.44 17.73 28.09 22.76 46.33l28.59-7.63c-6.09-22.45-15.67-41.8-28.72-57.85-26.44-32.53-65.1-49.19-114.92-49.54h-.2c-49.72.35-87.96 17.08-113.64 49.73-22.86 29.05-34.65 69.48-35.04 120.16v.24c.39 50.68 12.18 91.11 35.04 120.16 25.68 32.65 63.92 49.39 113.64 49.73h.2c44.2-.31 75.36-11.88 101.03-37.53 33.58-33.55 32.57-75.6 21.5-101.42-7.94-18.51-23.08-33.55-43.79-43.48zm-76.32 71.76c-18.48 1.04-37.69-7.26-38.64-25.03-.7-13.18 9.38-27.89 39.78-29.64 3.48-.2 6.9-.3 10.25-.3 11.04 0 21.37 1.07 30.76 3.13-3.5 43.74-24.04 50.84-42.15 51.84z"/>
+</svg>
 );
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -63,20 +63,20 @@ const ShieldIcon = () => (
 const navLinks = [
   { label: "Home", href: "#" },
   { label: "About Us", href: "#" },
-  { label: "Our Mission", href: "#" },
-  { label: "Programs", href: "#" },
+  { label: "Annual Report", href: "#" },
+  { label: "Projects", href: "#" },
   { label: "Get Involved", href: "#" },
-  { label: "Impact Stories", href: "#" },
+  { label: "Track Your Impact", href: "#" },
   { label: "Donate", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact Us", href: "#" },
 ];
 
 const socials = [
-  { icon: <FacebookIcon />, href: "#", label: "Facebook", hoverBg: "#1877F2" },
-  { icon: <TwitterIcon />, href: "#", label: "Twitter / X", hoverBg: "#0f172a" },
+  //{ icon: <FacebookIcon />, href: "#", label: "Facebook", hoverBg: "#1877F2" },
+  { icon: <ThreadIcon />, href: "https://www.threads.com/@swastikajankalyanfoundation", label: "Threads", hoverBg: "#0f172a" },
   { icon: <InstagramIcon />, href: "https://www.instagram.com/swastikajankalyanfoundation/", label: "Instagram", hoverBg: "#E1306C" },
-  { icon: <LinkedInIcon />, href: "#", label: "LinkedIn", hoverBg: "#0A66C2" },
-  { icon: <YoutubeIcon />, href: "#", label: "YouTube", hoverBg: "#FF0000" },
+  { icon: <LinkedInIcon />, href: "https://www.linkedin.com/company/swastikajankalyanfoundation/", label: "LinkedIn", hoverBg: "#0A66C2" },
+  { icon: <YoutubeIcon />, href: "https://www.youtube.com/@swastikajankalyanfoundation", label: "YouTube", hoverBg: "#FF0000" },
 ];
 
 // ── Decorative SVG helpers ─────────────────────────────────────────────────
@@ -238,7 +238,7 @@ export default function FloatingFooter() {
             <div className="flex flex-col gap-5">
               {/* Brand */}
               <div className="flex items-center gap-2.5">
-              <img className="h-20 w-auto" src={logo} />
+                <img className="h-20 w-auto" src={logo} />
                 <span className="ngo-heading text-xl font-bold text-white tracking-wide">
                   Swastika<span style={{ color: "#8bf89b" }}> Jan Kalyan</span> Foundation
 
@@ -264,8 +264,8 @@ export default function FloatingFooter() {
             {/* ── CENTRE: Address ── */}
             <div className="flex flex-col items-center text-center gap-5">
               {/* Emblem */}
-              
-             <LeafEmblem/>
+
+              <LeafEmblem />
 
               <div>
                 <h3 className="ngo-heading text-white font-semibold text-base leading-tight">
@@ -279,12 +279,12 @@ export default function FloatingFooter() {
                 <div className="flex items-start gap-2.5 justify-center" style={{ color: "rgba(255,255,255,0.58)" }}>
                   <span style={{ color: "#8bf89b" }}><MapPinIcon /></span>
                   <span className="text-left leading-relaxed">
-                  1st Floor, Opposite Durga Mandir, Lower Hatia, Near Sunday Market, Hatia, Ranchi, Jharkhand, India - 834003
+                    1st Floor, Opposite Durga Mandir, Lower Hatia, Near Sunday Market, Hatia, Ranchi, Jharkhand, India - 834003
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2.5 justify-center" style={{ color: "rgba(255,255,255,0.58)" }}>
-                  <span style={{ color: "#8bf89b" }}><PhoneIcon /></span>
+                  <a href="tel:+919229875702" ><span style={{ color: "#8bf89b" }}><PhoneIcon /></span></a>
                   <span>+91 9229875702</span>
                 </div>
 
@@ -303,7 +303,7 @@ export default function FloatingFooter() {
                   background: "rgba(95,175,107,0.07)",
                 }}
               >
-                Reg. No: JH/NGO/2015/00847
+                Reg No: ABQCS5504HE20251 <br/> (u/s 12A of Income Tax Act)
               </div>
 
               {/* Decorative dots row */}
@@ -402,7 +402,7 @@ export default function FloatingFooter() {
           <DividerGlow />
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-2 px-8 md:px-12 py-4">
             <p className="text-white/28 text-xs">
-            © 2026 Swastika Jan Kalyan Foundation. All rights reserved.
+              © 2026 Swastika Jan Kalyan Foundation. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-xs">
               <a href="#" className="ngo-bot-link">Privacy Policy</a>
@@ -414,7 +414,7 @@ export default function FloatingFooter() {
           </div>
 
         </div>
-         
+
       </footer>
     </>
   );
