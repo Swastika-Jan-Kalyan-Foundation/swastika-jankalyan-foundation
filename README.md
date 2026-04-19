@@ -155,9 +155,9 @@ Made with 💚 for the planet and its people
 
 **Swastika Jan Kalyan Foundation** · Ranchi, Jharkhand, India
 
-<<<<<<< HEAD
+
 © 2026 Swastika Jan Kalyan Foundation. All rights reserved.
 </div>
-=======
+
 </div>
->>>>>>> 5b4840bdd8cf42684042ddea58ebb727abb972cb
+
