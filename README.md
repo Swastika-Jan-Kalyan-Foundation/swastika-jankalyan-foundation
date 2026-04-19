@@ -127,7 +127,7 @@ Near Sunday Market, Hatia, Ranchi, Jharkhand, India — 834003
 | 📞 Phone | [+91 9229875702](tel:+919229875702) *(Mon–Fri, 9AM–5PM)* |
 | 📸 Instagram | [@swastikajankalyanfoundation](https://www.instagram.com/swastikajankalyanfoundation) |
 | 💼 LinkedIn | [Swastika Jan Kalyan Foundation](https://www.linkedin.com/company/swastikajankalyanfoundation/) |
-| ⚓ Threads | [@swastikajankalyanfoundation](https://youtube.com/@YOUR_CHANNEL) |
+| ⚓ Threads | [@swastikajankalyanfoundation](https://www.threads.com/@swastikajankalyanfoundation) |
 
 ---
 
