@@ -5,7 +5,7 @@ import img4 from "../assets/image4.jpg";
 import img5 from "../assets/image5.png";
 import { useState, useEffect } from 'react'
 import logo from "../assets/logo.png"
-import Footer  from "../components/Footer";
+
 export const Home = () => {
 
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -18,6 +18,7 @@ export const Home = () => {
     }, 2000);
     return () => clearInterval(timer);
   }, []);
+  
     return (
         <section className="relative min-h-screen bg-[#fdf8f4] overflow-hidden">
         {/* World map watermark background */}
