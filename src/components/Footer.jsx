@@ -285,26 +285,17 @@ export default function FloatingFooter() {
 
                 <div className="flex items-center gap-2.5 justify-center" style={{ color: "rgba(255,255,255,0.58)" }}>
                   <a href="tel:+919229875702" ><span style={{ color: "#8bf89b" }}><PhoneIcon /></span></a>
-                  <span>+91 9229875702</span>
+                  <a href="tel:+919229875702" ><span>+91 9229875702</span></a>
                 </div>
 
                 <div className="flex items-center gap-2.5 justify-center" style={{ color: "rgba(255,255,255,0.58)" }}>
                   <a href="mailto:swastikajankalyanfoundation@gmail.com" ><span style={{ color: "#8bf89b" }}><MailIcon /></span></a>
-                  <span>swastikajankalyanfoundation@gmail.com</span>
+                  <a href="mailto:swastikajankalyanfoundation@gmail.com" ><span>swastikajankalyanfoundation@gmail.com</span></a>
                 </div>
               </div>
 
               {/* Reg badge */}
-              <div
-                className="mt-1 px-4 py-1.5 rounded-full text-xs font-medium tracking-wider"
-                style={{
-                  border: "1px solid rgba(95,175,107,0.35)",
-                  color: "#8bf89b",
-                  background: "rgba(95,175,107,0.07)",
-                }}
-              >
-                Reg No: ABQCS5504HE20251 <br/> (u/s 12A of Income Tax Act)
-              </div>
+              
 
               {/* Decorative dots row */}
               <div className="flex items-center gap-1.5 opacity-25">
@@ -393,7 +384,7 @@ export default function FloatingFooter() {
                 }}
               >
                 <ShieldIcon />
-                Donations eligible under Sec. 80G · FCRA Approved
+                Registered under Section 8 of Companies Act, 2013
               </div>
             </div>
           </div>
