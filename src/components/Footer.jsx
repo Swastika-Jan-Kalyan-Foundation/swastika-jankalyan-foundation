@@ -61,13 +61,13 @@ const ShieldIcon = () => (
 
 // ── Data ───────────────────────────────────────────────────────────────────
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#" },
+  { label: "Home", href: "https://swastikajankalyanfoundation.netlify.app/" },
+  { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
   { label: "Annual Report", href: "#" },
-  { label: "Projects", href: "#" },
-  { label: "Get Involved", href: "#" },
+  { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
+  { label: "Get Involved", href: "https://swastikajankalyanfoundation.netlify.app/beapartofus" },
   { label: "Track Your Impact", href: "#" },
-  { label: "Donate", href: "#" },
+  { label: "Donate", href: "https://swastikajankalyanfoundation.netlify.app/donatetous" },
   { label: "Contact Us", href: "#" },
 ];
 

@@ -437,7 +437,7 @@ export const Projects =  () => {
                             </p>
                         </div>
                         <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-                            <button className="shimmer-badge" style={{
+                            <a href="https://swastikajankalyanfoundation.netlify.app/donatetous" className="shimmer-badge" style={{
                                 padding: "14px 32px",
                                 border: "none", borderRadius: 40,
                                 color: "#ffffff", fontWeight: 700, fontSize: 14,
@@ -446,8 +446,8 @@ export const Projects =  () => {
                                 letterSpacing: "0.04em",
                             }}>
                                 Donate Now →
-                            </button>
-                            <button style={{
+                            </a>
+                            <a href="https://swastikajankalyanfoundation.netlify.app/beapartofus" style={{
                                 padding: "14px 32px",
                                 background: "transparent",
                                 border: "2px solid #2d6a4f",
@@ -458,7 +458,7 @@ export const Projects =  () => {
                                 letterSpacing: "0.04em",
                             }}>
                                 Partner With Us
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

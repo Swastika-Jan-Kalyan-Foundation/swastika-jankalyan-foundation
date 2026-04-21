@@ -80,12 +80,12 @@ export const Home = () => {
           </ul>
 
           {/* CTA */}
-          <button className="hidden md:flex items-center gap-2 bg-[#5FAF6B] hover:bg-[#8bf89b] text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-md shadow-orange-200 hover:-translate-y-0.5 font-['DM_Sans',sans-serif]">
+          <a href="https://swastikajankalyanfoundation.netlify.app/donatetous" className="hidden md:flex items-center gap-2 bg-[#5FAF6B] hover:bg-[#8bf89b] text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-md shadow-orange-200 hover:-translate-y-0.5 font-['DM_Sans',sans-serif]">
             Give Support
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </button>
+          </a>
 
           {/* Mobile hamburger */}
           <button className="md:hidden">
@@ -150,12 +150,12 @@ export const Home = () => {
                 </svg>
               </button>
 
-              <button className="flex items-center gap-2 text-gray-700 hover:text-[#5FAF6B] text-[13.5px] font-semibold px-5 py-3 rounded-full border border-gray-200 hover:border-[#5FAF6B] bg-white/70 backdrop-blur-sm transition-all duration-200 font-['DM_Sans',sans-serif]">
+              <a href="https://swastikajankalyanfoundation.netlify.app/donatetous" className="flex items-center gap-2 text-gray-700 hover:text-[#5FAF6B] text-[13.5px] font-semibold px-5 py-3 rounded-full border border-gray-200 hover:border-[#5FAF6B] bg-white/70 backdrop-blur-sm transition-all duration-200 font-['DM_Sans',sans-serif]">
                 Donate Now
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
 
