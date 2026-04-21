@@ -5,6 +5,8 @@ import './index.css'
 import { Home } from './routes/Home'
 import { About } from './routes/About'
 import { Projects } from './routes/Projects'
+import { Donate } from './routes/Donate'
+import { Volunteer } from './routes/Volunteer'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 
@@ -18,6 +20,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/aboutus' element={<About />} />
         <Route path='/projects' element={<Projects />} />
+        <Route path='/donatetous' element={<Donate />} />
+        <Route path='/beapartofus' element={<Volunteer />} />
       </Routes>
      <Footer /> 
     </>
