@@ -7,6 +7,7 @@ import { About } from './routes/About'
 import { Projects } from './routes/Projects'
 import { Donate } from './routes/Donate'
 import { Volunteer } from './routes/Volunteer'
+import { ContactUs } from './routes/Contact'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/projects' element={<Projects />} />
         <Route path='/donatetous' element={<Donate />} />
         <Route path='/beapartofus' element={<Volunteer />} />
+        <Route path='/contactus' element={<ContactUs />} />
       </Routes>
      <Footer /> 
     </>
