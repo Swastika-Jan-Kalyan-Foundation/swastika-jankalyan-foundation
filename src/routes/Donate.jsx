@@ -393,10 +393,10 @@ export const Donate = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col gap-3 flex-shrink-0">
-              <button className="volunteer-btn px-8 py-4 rounded-2xl font-bold text-sm text-[#2d6a4f] cursor-pointer"
+              <a href="https://swastikajankalyanfoundation.netlify.app/beapartofus" className="volunteer-btn px-8 py-4 rounded-2xl font-bold text-sm text-[#2d6a4f] cursor-pointer"
                 style={{ background: "#ffffff", border: "2px solid #2d6a4f", letterSpacing: "0.03em" }}>
                 Register as Volunteer →
-              </button>
+              </a>
               <button className="px-8 py-3 rounded-2xl font-semibold text-xs text-gray-500 cursor-pointer border-none"
                 style={{ background: "transparent", textDecoration: "underline", textDecorationColor: "rgba(107,114,128,0.4)" }}>
                 Learn more about volunteering
