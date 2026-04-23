@@ -1,5 +1,8 @@
 import { useState } from "react";
 import chairman from '../assets/chairman.png'
+import director from '../assets/director.png'
+import memberdirector from '../assets/memberdirector.png'
+import headoffin from '../assets/headoffin.png'
 const statutoryDetails = [
     { label: "Organization Name", value: "Swastika Jan Kalyan Foundation", icon: "🏛️" },
     { label: "Registration Number", value: "U88900JH2025NPL025146", icon: "🔖" },
@@ -12,7 +15,6 @@ const statutoryDetails = [
     { label: "Tax Deduction Account Number(TAN)", value: "RC*****5E", icon: "💸" },
     { label: "GSTIN", value: "20ABQ******1ZF", icon: "📊" },
 ];
-
 const pastProjects = [
     {
         year: "2023",
@@ -621,6 +623,188 @@ export const About = () => {
       ──────────────────────────────────────────────────── */}
            
 
+            {/* ────────────────────────────────────────────────────
+          SECTION: MEET OUR TEAM
+      ──────────────────────────────────────────────────── */}
+            <section style={{
+                background: "linear-gradient(160deg, #f8faf8 0%, #edf7f1 50%, #e0f2e9 100%)",
+                padding: "96px 24px",
+                position: "relative",
+                overflow: "hidden",
+            }}>
+                <style>{`
+                    .team-card {
+                        transition: transform 0.35s cubic-bezier(0.34,1.25,0.64,1), box-shadow 0.35s ease;
+                        cursor: default;
+                    }
+                    .team-card:hover {
+                        transform: translateY(-10px) scale(1.025);
+                        box-shadow: 0 24px 56px rgba(45,106,79,0.18), 0 4px 16px rgba(0,0,0,0.06) !important;
+                    }
+                    .team-card:hover .team-img-ring {
+                        border-color: #2d6a4f !important;
+                        box-shadow: 0 0 0 6px rgba(45,106,79,0.12) !important;
+                    }
+                    .team-card:hover .team-name {
+                        color: #2d6a4f !important;
+                    }
+                    .team-img-ring {
+                        transition: border-color 0.35s ease, box-shadow 0.35s ease;
+                    }
+                    .team-name {
+                        transition: color 0.3s ease;
+                    }
+                `}</style>
+
+                {/* BG decorations */}
+                <div style={{ position: "absolute", top: -80, left: -80, width: 340, height: 340, borderRadius: "50%", background: "radial-gradient(circle, rgba(82,183,136,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
+                <div style={{ position: "absolute", bottom: -60, right: -60, width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+                <svg style={{ position: "absolute", bottom: 60, left: 80, opacity: 0.09, pointerEvents: "none" }} width="180" height="180" viewBox="0 0 180 180" fill="none">
+                    <circle cx="90" cy="90" r="80" stroke="#2d6a4f" strokeWidth="1.5" strokeDasharray="7 5" />
+                    <circle cx="90" cy="90" r="55" stroke="#40916c" strokeWidth="1" strokeDasharray="4 4" />
+                </svg>
+
+                <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+                    {/* Label */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center", marginBottom: 16 }}>
+                        <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
+                        <span className="section-label">The People Behind The Mission</span>
+                        <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
+                    </div>
+
+                    {/* Heading */}
+                    <h2 style={{
+                        fontFamily: "'Sora', sans-serif", fontWeight: 800,
+                        fontSize: "clamp(26px, 4vw, 40px)", color: "#1a2e1a",
+                        textAlign: "center", marginBottom: 12, lineHeight: 1.2,
+                    }}>
+                        Meet Our <span style={{ color: "#5FAF6B" }}>Team</span>
+                    </h2>
+                    <p style={{ textAlign: "center", color: "#6b7280", fontSize: 15, maxWidth: 520, margin: "0 auto 56px", lineHeight: 1.7 }}>
+                        Passionate changemakers dedicated to building a greener, more equitable Jharkhand — one community at a time.
+                    </p>
+
+                    {/* Team Cards Grid */}
+                    <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                        gap: 28,
+                    }}>
+                        {[
+                            {
+                                name: "Ajay Kumar Sinha",
+                                designation: "Chairman",
+                                memberImage: chairman,
+                                gradient: "linear-gradient(135deg, #d8f3e3 0%, #b7e4c7 100%)",
+                                accent: "#2d6a4f",
+                            },
+                            {
+                                name: "Ashish Yash",
+                                designation: "Director",
+                                memberImage: director,
+                                gradient: "linear-gradient(135deg, #dff0ff 0%, #bfdfff 100%)",
+                                accent: "#2563eb",
+                            },
+                            {
+                                name: "Ayush Kumar Sinha",
+                                designation: "Member Director",
+                                memberImage: memberdirector,
+                                gradient: "linear-gradient(135deg, #fde9d9 0%, #fcd1b0 100%)",
+                                accent: "#c2410c",
+                            },
+                            {
+                                name: "Apoorv Harsh",
+                                designation: "Head of Finance",
+                                memberImage: headoffin,
+                                gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
+                                accent: "#7c3aed",
+                            },
+                        ].map((member, i) => (
+                            <div
+                                key={i}
+                                className="team-card"
+                                style={{
+                                    background: "#ffffff",
+                                    borderRadius: 24,
+                                    padding: "36px 24px 28px",
+                                    boxShadow: "0 4px 24px rgba(45,106,79,0.09), 0 1px 4px rgba(0,0,0,0.04)",
+                                    border: "1px solid rgba(45,106,79,0.10)",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                    position: "relative",
+                                    overflow: "hidden",
+                                }}
+                            >
+                                {/* Top accent bar */}
+                                <div style={{
+                                    position: "absolute", top: 0, left: 0, right: 0, height: 5,
+                                    background: `linear-gradient(90deg, ${member.accent}99, ${member.accent})`,
+                                    borderRadius: "24px 24px 0 0",
+                                }} />
+
+                                {/* Avatar */}
+                                <div
+                                    className="team-img-ring"
+                                    style={{
+                                        width: 104, height: 104, borderRadius: "50%",
+                                        border: `3px solid ${member.accent}55`,
+                                        background: member.gradient,
+                                        display: "flex", alignItems: "center", justifyContent: "center",
+                                        marginBottom: 18,
+                                        boxShadow: `0 6px 20px ${member.accent}22`,
+                                        overflow: "hidden",
+                                        fontSize: 44,
+                                    }}
+                                >
+                                   <img src={member.memberImage} style={{width:"100%",height:"100%",objectFit:"cover"}} />
+                                   
+                                </div>
+
+                                {/* Name */}
+                                <p
+                                    className="team-name"
+                                    style={{
+                                        fontFamily: "'Sora', sans-serif",
+                                        fontWeight: 700, fontSize: 15.5,
+                                        color: "#1a2e1a", margin: "0 0 6px",
+                                        lineHeight: 1.3,
+                                    }}
+                                >
+                                    {member.name}
+                                </p>
+
+                                {/* Designation badge */}
+                                <span style={{
+                                    display: "inline-block",
+                                    background: `${member.accent}14`,
+                                    color: member.accent,
+                                    fontSize: 11, fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    padding: "5px 14px",
+                                    borderRadius: 20,
+                                    border: `1px solid ${member.accent}28`,
+                                }}>
+                                    {member.designation}
+                                </span>
+
+                                {/* Subtle decorative dot */}
+                                <div style={{
+                                    position: "absolute", bottom: 16, right: 20,
+                                    width: 8, height: 8, borderRadius: "50%",
+                                    background: `${member.accent}40`,
+                                }} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ────────────────────────────────────────────────────
+          SECTION: MESSAGE FROM LEADERSHIP
+      ──────────────────────────────────────────────────── */}
             <section style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #f0faf4 50%, #e8f5ee 100%)",
                 padding: "96px 24px",
