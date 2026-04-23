@@ -68,7 +68,7 @@ const navLinks = [
   { label: "Get Involved", href: "https://swastikajankalyanfoundation.netlify.app/beapartofus" },
   { label: "Track Your Impact", href: "#" },
   { label: "Donate", href: "https://swastikajankalyanfoundation.netlify.app/donatetous" },
-  { label: "Contact Us", href: "#" },
+  { label: "Contact Us", href: "https://swastikajankalyanfoundation.netlify.app/contactus" },
 ];
 
 const socials = [
@@ -246,7 +246,7 @@ export default function FloatingFooter() {
               </div>
 
               <p className="text-white/38 text-xs leading-relaxed max-w-[220px]">
-                Empowering communities and nurturing nature — one step at a time, across Jharkhand &amp; beyond.
+                Rooting ways towards greener, healthier and educated India.
               </p>
 
               <SectionRule className="mb-0.5" />
