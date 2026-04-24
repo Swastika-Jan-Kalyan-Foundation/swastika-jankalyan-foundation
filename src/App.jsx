@@ -8,6 +8,8 @@ import { Projects } from './routes/Projects'
 import { Donate } from './routes/Donate'
 import { Volunteer } from './routes/Volunteer'
 import { ContactUs } from './routes/Contact'
+import { TrackImpact } from './routes/TrackImpact'
+import { AnnualReport } from './routes/AnualReport'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 
@@ -24,6 +26,8 @@ function App() {
         <Route path='/donatetous' element={<Donate />} />
         <Route path='/beapartofus' element={<Volunteer />} />
         <Route path='/contactus' element={<ContactUs />} />
+        <Route path='/trackyourimpact' element={<TrackImpact />} />
+        <Route path='/annualreport' element={<AnnualReport />} />
       </Routes>
      <Footer /> 
     </>
