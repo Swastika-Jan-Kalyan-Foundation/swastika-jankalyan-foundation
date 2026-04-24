@@ -91,6 +91,7 @@ export const Volunteer = () => {
   const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const  [applicantID, setApplicantID] = useState("")
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -104,10 +105,46 @@ export const Volunteer = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  
+    const payload = {
+      name: form.name,
+      gender: form.gender,
+      dateOfBirth: form.dob,
+      phoneNumber: form.phone,
+      email: form.email,
+      address: form.address,
+      instagramId: form.instagram,
+      highestEducationalQualification: form.qualification,
+      currentCareerStatus: form.career,
+      skillsAndInterest: form.skills,
+      interestedTeams: form.teams,
+      leadershipPreference: form.leader,
+      previousVolunteerExperience: form.experience,
+      whyJoinUs: form.why,
+    };
+  
+    try {
+      const res = await fetch("http://localhost:5000/api/volunteers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      const data = await res.json();
+      setSubmitted(true)
+      console.log("Your Applicant ID:", data.data.applicantId);
+      setApplicantID(data.data.applicantId)
+  
+      if (!res.ok) throw new Error(data.message);
+  
+      console.log("Success:", data);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const inputBase = (name) => ({
@@ -126,21 +163,63 @@ export const Volunteer = () => {
 
   if (submitted) {
     return (
-      <div style={{ minHeight: "100vh", background: "linear-gradient(150deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Sora, sans-serif", padding: "2rem" }}>
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');`}</style>
-        <div style={{ background: "white", borderRadius: 24, padding: "3rem 2rem", maxWidth: 480, width: "100%", textAlign: "center", position: "relative", overflow: "hidden" }}>
-          <CircleDotSVG style={{ position: "absolute", top: -20, right: -20, width: 100, opacity: 0.3 }} />
-          <div style={{ width: 72, height: 72, borderRadius: "50%", background: "linear-gradient(135deg,#52b788,#2d6a4f)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem" }}>
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 19L14 25L28 11" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      <div style={{ minHeight: "100vh", background: "linear-gradient(150deg,#0d2b1e 0%,#1b4332 40%,#2d6a4f 75%,#40916c 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Sora, sans-serif", padding: "2.5rem" }}>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+          @keyframes cardIn { from { opacity: 0; transform: translateY(32px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+          @keyframes popIn { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+          @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+          .conf-btn:hover { transform: translateY(-2px) !important; box-shadow: 0 10px 28px rgba(45,106,79,0.45) !important; }
+          .conf-btn:active { transform: scale(0.97) !important; }
+        `}</style>
+  
+        <div style={{ background: "#fff", borderRadius: 28, padding: "3.5rem 2.5rem 2.5rem", maxWidth: 460, width: "100%", textAlign: "center", position: "relative", overflow: "hidden", animation: "cardIn 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards" }}>
+          
+          {/* Decorative blobs */}
+          <div style={{ position: "absolute", top: -60, right: -60, width: 180, height: 180, borderRadius: "50%", background: "radial-gradient(circle, rgba(82,183,136,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: -40, left: -40, width: 140, height: 140, borderRadius: "50%", background: "radial-gradient(circle, rgba(45,106,79,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
+          
+          {/* Leaf decoration */}
+          <svg style={{ position: "absolute", top: 18, right: 22, opacity: 0.18 }} width="90" height="90" viewBox="0 0 90 90" fill="none">
+            <ellipse cx="55" cy="35" rx="32" ry="20" fill="#2d6a4f" transform="rotate(-30 55 35)" />
+            <line x1="55" y1="55" x2="30" y2="80" stroke="#2d6a4f" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+  
+          {/* Check circle */}
+          <div style={{ width: 80, height: 80, borderRadius: "50%", background: "linear-gradient(145deg,#52b788,#1b4332)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", boxShadow: "0 12px 32px rgba(45,106,79,0.35), 0 0 0 8px rgba(82,183,136,0.12)", animation: "popIn 0.5s 0.3s cubic-bezier(0.34,1.56,0.64,1) both" }}>
+            <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+              <path d="M9 20L16 27L29 12" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
-          <h2 style={{ color: "#1b4332", fontSize: 26, fontWeight: 800, margin: "0 0 0.75rem" }}>You're In! 🌱</h2>
-          <p style={{ color: "#40916c", fontSize: 15, lineHeight: 1.7, margin: "0 0 2rem" }}>
-            Thank you, <strong>{form.name}</strong>! Your volunteer application has been received. Our team will reach out to you soon.
+  
+          <h2 style={{ fontSize: 28, fontWeight: 800, color: "#1b4332", margin: "0 0 0.5rem", letterSpacing: "-0.5px", animation: "fadeUp 0.5s 0.5s both" }}>You're In! 🌱</h2>
+          <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 15, color: "#52b788", fontWeight: 400, letterSpacing: "0.5px", margin: "0 0 1.25rem", animation: "fadeUp 0.5s 0.6s both" }}>Application Received</p>
+  
+          <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 14.5, color: "#4a7c63", lineHeight: 1.75, margin: "0 0 1.5rem", animation: "fadeUp 0.5s 0.7s both" }}>
+            Thank you, <strong style={{ color: "#1b4332", fontWeight: 600 }}>{form.name}</strong>! Your volunteer application has been received.<br />
+            Our team will reach out to you soon.
           </p>
-          <button onClick={() => { setSubmitted(false); setForm({ name:"",gender:"",dob:"",phone:"",email:"",address:"",instagram:"",qualification:"",career:"",skills:"",teams:[],leader:"",experience:"",why:"" }); }}
-            style={{ background: "linear-gradient(90deg,#2d6a4f,#52b788)", color: "white", border: "none", borderRadius: 30, padding: "11px 30px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "Sora, sans-serif" }}>
+  
+          {/* ID Box */}
+          <div style={{ background: "linear-gradient(135deg,#f0faf5,#e8f5ee)", border: "1.5px solid rgba(82,183,136,0.3)", borderRadius: 14, padding: "14px 20px", margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: 4, animation: "fadeUp 0.5s 0.8s both" }}>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, color: "#52b788", textTransform: "uppercase" }}> Your Application ID</span>
+            <span style={{ fontFamily: "monospace", fontSize: 13, fontWeight: 600, color: "#1b4332", letterSpacing: "0.5px", wordBreak: "break-all" }}>{applicantID}</span>
+          </div>
+  
+          <button
+            className="conf-btn"
+            onClick={() => { setSubmitted(false); setForm({ name:"",gender:"",dob:"",phone:"",email:"",address:"",instagram:"",qualification:"",career:"",skills:"",teams:[],leader:"",experience:"",why:"" }); }}
+            style={{ background: "linear-gradient(135deg,#2d6a4f,#40916c)", color: "white", border: "none", borderRadius: 30, padding: "14px 32px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "Sora, sans-serif", letterSpacing: "0.3px", transition: "all 0.2s", boxShadow: "0 6px 20px rgba(45,106,79,0.35)", display: "inline-flex", alignItems: "center", gap: 8, animation: "fadeUp 0.5s 0.9s both" }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
             Submit Another Application
           </button>
+  
+          {/* Dot indicators */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: "1.75rem", animation: "fadeUp 0.5s 1s both" }}>
+            <div style={{ width: 6, height: 6, borderRadius: 3, background: "#b7e4c7" }} />
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#b7e4c7" }} />
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#b7e4c7" }} />
+          </div>
         </div>
       </div>
     );
@@ -512,7 +591,7 @@ export const Volunteer = () => {
 
               <Field label="Do you wish to be a Leader or Co-Leader of any Team?" style={{ marginBottom: 16 }}>
                 <div className="leader-row">
-                  {["Yes — Leader", "Yes — Co-Leader", "No, not right now"].map(opt => (
+                  {["Leader", "Co-Leader", "No"].map(opt => (
                     <button type="button" key={opt} className="leader-btn" onClick={() => setForm(f => ({ ...f, leader: opt }))}
                       style={{
                         padding: "9px 16px", borderRadius: 20, fontSize: 12.5, fontWeight: 600,
@@ -549,7 +628,7 @@ export const Volunteer = () => {
               </Field>
 
               {/* Submit */}
-              <button type="submit" className="submit-btn"
+              <button  type="submit" className="submit-btn"
                 style={{
                   width: "100%", padding: "15px", borderRadius: 14, border: "none",
                   background: "linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",

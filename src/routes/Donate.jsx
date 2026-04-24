@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const INDIA_MAP_PATH =
   "M 380,40 C 370,38 355,42 345,50 C 335,58 330,70 320,75 C 310,80 295,78 285,85 C 275,92 270,105 260,112 C 250,119 235,120 225,128 C 215,136 210,150 205,162 C 200,174 198,188 195,200 C 192,212 188,224 182,234 C 176,244 168,252 164,263 C 160,274 160,287 157,298 C 154,309 148,319 146,330 C 144,341 145,353 142,364 C 139,375 132,384 128,395 C 124,406 122,418 118,429 C 114,440 108,450 105,461 C 102,472 101,484 100,496 C 99,508 99,521 100,533 C 101,545 104,557 108,568 C 112,579 118,589 124,599 C 130,609 137,618 143,628 C 149,638 154,649 162,657 C 170,665 180,670 188,678 C 196,686 202,696 212,702 C 222,708 234,710 244,716 C 254,722 263,730 274,734 C 285,738 297,738 308,742 C 319,746 329,752 340,755 C 351,758 363,758 374,760 C 385,762 396,765 407,764 C 418,763 428,758 439,756 C 450,754 462,754 472,750 C 482,746 491,738 500,733 C 509,728 519,724 528,718 C 537,712 545,704 552,696 C 559,688 565,679 570,670 C 575,661 578,651 582,641 C 586,631 590,621 592,611 C 594,601 594,590 594,580 C 594,570 592,559 590,549 C 588,539 585,529 581,520 C 577,511 572,503 567,495 C 562,487 556,480 550,473 C 544,466 537,460 530,455 C 523,450 515,446 508,442 C 501,438 494,434 487,430 C 480,426 473,421 466,416 C 459,411 453,404 447,399 C 441,394 434,389 428,384 C 422,379 416,373 411,367 C 406,361 402,354 397,348 C 392,342 387,336 382,330 C 377,324 371,318 367,312 C 363,306 360,299 356,293 C 352,287 347,282 344,276 C 341,270 339,263 336,257 C 333,251 329,245 327,239 C 325,233 323,226 321,220 C 319,214 317,207 315,201 C 313,195 311,188 308,182 C 305,176 301,171 298,165 C 295,159 292,153 289,147 C 286,141 282,135 280,129 C 278,123 276,117 274,111 C 272,105 269,99 267,93 C 265,87 262,81 259,75 C 256,69 252,64 248,59 C 244,54 239,49 234,46 C 229,43 223,41 218,40 C 213,39 207,39 202,41 C 197,43 193,47 190,52 C 187,57 185,63 183,69 C 181,75 180,81 179,87 C 178,93 177,99 175,105 C 173,111 170,117 168,122 C 166,127 163,133 162,139 C 161,145 161,152 160,158 C 159,164 157,170 156,176 C 155,182 154,189 153,195 C 152,201 150,207 149,213 C 148,219 147,226 147,232 C 147,238 147,244 148,250 C 149,256 151,262 153,268 C 155,274 158,280 161,285 C 164,290 168,295 172,300 C 176,305 181,309 185,314 C 189,319 193,325 197,330 C 201,335 205,341 208,347 C 211,353 213,360 215,366 C 217,372 218,379 218,385 C 218,391 217,397 215,403 C 213,409 210,415 207,420 C 204,425 200,430 196,434 C 192,438 187,442 183,446 C 179,450 175,454 173,459 C 171,464 171,470 170,476 C 169,482 168,488 167,494 C 166,500 164,506 163,512 C 162,518 161,524 162,530 C 163,536 165,542 168,547 C 171,552 175,557 179,561 C 183,565 188,569 193,572 C 198,575 203,577 208,579 C 213,581 218,582 224,583 C 230,584 236,584 242,583 C 248,582 254,580 259,577 C 264,574 269,570 273,566 C 277,562 281,558 284,553 C 287,548 289,543 291,537 C 293,531 294,525 294,519 C 294,513 293,507 291,502 C 289,497 286,492 283,488 C 280,484 276,480 273,475 C 270,470 267,465 265,460 C 263,455 261,449 260,443 C 259,437 259,431 260,425 C 261,419 263,413 266,408 C 269,403 273,399 277,395 C 281,391 285,387 290,384 C 295,381 300,378 305,375 C 310,372 315,369 320,366 C 325,363 330,359 335,356 C 340,353 345,349 350,347 C 355,345 360,343 365,342 C 370,341 375,340 380,340 C 385,340 390,341 395,343 C 400,345 405,348 409,352 C 413,356 416,361 419,366 C 422,371 424,377 426,383 C 428,389 429,395 429,401 C 429,407 428,413 426,419 C 424,425 421,431 417,436 C 413,441 408,445 403,449 C 398,453 393,456 388,459 C 383,462 377,464 372,466 C 367,468 362,469 358,471 C 354,473 351,475 348,478 C 345,481 343,484 341,488 C 339,492 337,496 336,500 C 335,504 334,508 334,512 C 334,516 335,520 336,524 C 337,528 339,532 342,536 C 345,540 349,544 353,547 C 357,550 362,553 367,555 C 372,557 378,558 384,558 C 390,558 396,557 402,555 C 408,553 414,550 420,546 C 426,542 431,537 436,532 C 441,527 445,521 449,515 C 453,509 456,502 459,495 C 462,488 464,481 465,473 C 466,465 466,457 465,449 C 464,441 462,433 459,426 C 456,419 451,413 447,406 C 443,399 439,392 436,385 C 433,378 431,371 430,363 C 429,355 429,347 430,339 C 431,331 433,323 436,315 C 439,307 443,299 447,292 C 451,285 455,278 460,271 C 465,264 470,257 475,251 C 480,245 485,239 490,233 C 495,227 500,221 504,215 C 508,209 511,202 514,196 C 517,190 519,183 521,177 C 523,171 524,164 524,158 C 524,152 523,146 521,140 C 519,134 516,128 512,123 C 508,118 503,114 498,110 C 493,106 487,102 481,99 C 475,96 469,94 462,92 C 455,90 448,89 441,88 C 434,87 427,87 420,87 C 413,87 406,88 399,89 C 392,90 385,92 378,94 C 371,96 364,99 358,102 C 352,105 346,108 341,112 C 336,116 331,120 326,124 C 321,128 316,132 312,136 C 308,140 304,144 300,148 C 296,152 292,157 288,161 C 284,165 279,169 275,173 C 271,177 267,181 263,185 C 259,189 255,193 251,197 C 247,201 243,205 239,208 C 235,211 231,214 228,217 C 225,220 223,224 220,227 C 217,230 214,233 212,236 C 210,239 208,242 207,245 C 206,248 205,251 205,254 C 205,257 206,260 207,263 C 208,266 210,269 212,272 C 214,275 217,278 219,281 C 221,284 223,287 225,290 C 227,293 229,296 230,299 C 231,302 232,305 232,308 C 232,311 231,314 230,317 C 229,320 227,323 225,325 C 223,327 221,329 219,331 C 217,333 215,334 213,336 C 211,338 209,340 208,342 C 207,344 206,346 206,349 C 206,352 207,355 208,358 C 209,361 211,364 213,367 C 215,370 218,372 220,375 C 222,378 224,381 226,384 C 228,387 230,390 231,393 C 232,396 232,399 232,402 C 232,405 231,408 230,411 C 229,414 227,417 225,420 C 223,423 221,425 219,427 C 217,429 215,431 213,433 C 211,435 208,437 207,440 C 206,443 206,446 207,449 C 208,452 210,455 213,458 C 216,461 220,463 224,465 C 228,467 233,469 238,470 C 243,471 248,471 253,471 C 258,471 263,470 268,469 C 273,468 278,466 283,464 C 288,462 293,459 298,456 C 303,453 308,450 312,446 C 316,442 320,438 323,433 C 326,428 328,423 330,418 C 332,413 333,407 334,402 C 335,397 335,391 334,386 C 333,381 331,376 328,371 C 325,366 321,362 317,358 C 313,354 309,350 305,346 C 301,342 297,338 294,334 C 291,330 289,325 287,320 C 285,315 284,310 284,305 C 284,300 285,295 287,290 C 289,285 292,281 295,277 C 298,273 302,270 306,267 C 310,264 314,261 318,258 C 322,255 326,252 330,249 C 334,246 338,243 342,241 C 346,239 350,237 354,236 C 358,235 362,234 366,234 C 370,234 374,235 378,237 C 382,239 386,242 389,245 C 392,248 394,252 396,256 C 398,260 399,264 400,268 C 401,272 401,276 400,280 C 399,284 397,288 394,292 C 391,296 388,299 384,302 C 380,305 376,308 372,310 C 368,312 364,314 360,315 C 356,316 352,317 348,317 C 344,317 340,316 336,314 C 332,312 328,309 325,305 C 322,301 319,297 317,292 C 315,287 314,282 313,277 C 312,272 312,267 313,262 C 314,257 316,252 319,247 C 322,242 325,238 329,234 C 333,230 337,226 341,223 C 345,220 349,217 353,215 C 357,213 361,211 365,210 C 369,209 373,209 377,209 C 381,209 385,210 388,212 C 391,214 393,217 395,221 C 397,225 398,229 398,233 C 398,237 397,241 395,244 C 393,247 390,250 386,252 C 382,254 378,255 374,255 C 370,255 366,254 363,252 C 360,250 357,247 355,244 C 353,241 352,237 352,233 C 352,229 353,225 355,222 C 357,219 360,216 363,214 C 366,212 370,211 373,211 C 376,211 379,212 382,214 C 385,216 387,219 388,222 C 389,225 389,228 388,231 C 387,234 385,237 382,239 C 379,241 376,242 373,242 C 370,242 367,241 365,239 C 363,237 362,234 362,231 C 362,228 363,225 365,223 C 367,221 370,220 373,220 Z";
-
+import { LeafEmblem } from "../components/Footer";
 const purposes = [
   "Tree Plantation Drive",
   "Education for Tribal Children",
@@ -24,12 +24,50 @@ export const Donate = () => {
   });
   const [activeAmount, setActiveAmount] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-
+  const [donorId, setDonorId] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/donations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: form.name,
+          email: form.email,
+          phoneNumber: form.phone,
+          amount: Number(form.amount),
+          currency: form.currency,
+          donationPurpose: form.purpose,
+          message: form.message,
+          isAnonymous: false,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong");
+
+      }
+
+      // ✅ STORE IDs IN STATE
+      setDonorId(result.data.donorId);
+      setTransactionId(result.data.transactionId);
+
+      setSubmitted(true);
+
+      console.log("Donor ID:", result.data.donorId);
+      console.log("Transaction ID:", result.data.transactionId);
+
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   };
 
   return (
@@ -137,7 +175,7 @@ export const Donate = () => {
 
       {/* Wavy divider */}
       <div style={{ marginTop: -2 }}>
-      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
           <path d="M0 0 C240 60 480 60 720 30 C960 0 1200 0 1440 40 L1440 0 Z" fill="#40916c" />
           <path d="M0 0 C360 50 720 50 1080 20 C1260 5 1380 15 1440 30 L1440 0 Z" fill="#2d6a4f" />
           <path d="M0 0 C480 40 960 40 1440 0 L1440 0 Z" fill="#f8faf8" />
@@ -152,7 +190,7 @@ export const Donate = () => {
           <div className="flex flex-col items-center gap-8 pt-4">
 
             {/* India Map Frame */}
-        
+
 
             {/* Left info block */}
             <div className="w-full rounded-3xl p-8 mt-4" style={{ background: "linear-gradient(135deg, #f0faf4, #e4f5eb)", border: "1px solid rgba(45,106,79,0.13)" }}>
@@ -206,18 +244,68 @@ export const Donate = () => {
 
               {submitted ? (
                 /* Success state */
-                <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-2" style={{ background: "linear-gradient(135deg, #e8f5ee, #d8efe0)", border: "3px solid #2d6a4f" }}>
-                    🙏
+                <div className="flex flex-col items-center justify-center py-16 text-center gap-4" style={{ minHeight: "100vh",  fontFamily: "'Sora', sans-serif", borderRadius: "100px" }}>
+                  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+    @keyframes cardIn { from{opacity:0;transform:translateY(32px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes popIn { from{opacity:0;transform:scale(0.4)} to{opacity:1;transform:scale(1)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .don-btn:hover { transform:translateY(-2px) !important; box-shadow:0 10px 28px rgba(45,106,79,0.45) !important; }
+    .don-btn:active { transform:scale(0.97) !important; }
+  `}</style>
+
+                  <div style={{ background: "#F2EDE9", borderRadius: 28, padding: "3.5rem 2.5rem 2.5rem", maxWidth: 460, width: "100%", textAlign: "center", position: "relative", overflow: "hidden", animation: "cardIn 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards" }}>
+
+                    {/* Blobs */}
+                    <div style={{ position: "absolute", top: -60, right: -60, width: 180, height: 180, borderRadius: "50%", background: "radial-gradient(circle,rgba(82,183,136,0.18) 0%,transparent 70%)", pointerEvents: "none" }} />
+                    <div style={{ position: "absolute", bottom: -40, left: -40, width: 140, height: 140, borderRadius: "50%", background: "radial-gradient(circle,rgba(45,106,79,0.12) 0%,transparent 70%)", pointerEvents: "none" }} />
+
+                    {/* Leaf deco */}
+                    <svg style={{ position: "absolute", top: 18, right: 22, opacity: 0.18 }} width="90" height="90" viewBox="0 0 90 90" fill="none">
+                      <ellipse cx="55" cy="35" rx="32" ry="20" fill="#2d6a4f" transform="rotate(-30 55 35)" />
+                      <line x1="55" y1="55" x2="30" y2="80" stroke="#2d6a4f" strokeWidth="2.5" strokeLinecap="round" />
+                    </svg>
+
+                    {/* Icon */}
+                    <div style={{ width: 84, height: 84, borderRadius: "50%", background: "linear-gradient(145deg,#e8f5ee,#c8ead8)", border: "3px solid rgba(82,183,136,0.4)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", fontSize: 38, boxShadow: "0 12px 32px rgba(45,106,79,0.2), 0 0 0 8px rgba(82,183,136,0.1)", animation: "popIn 0.5s 0.3s cubic-bezier(0.34,1.56,0.64,1) both" }}>
+                      <LeafEmblem/>
+                    </div>
+
+                    <h2 style={{ fontSize: 27, fontWeight: 800, color: "#1b4332", margin: "0 0 0.4rem", letterSpacing: "-0.5px", animation: "fadeUp 0.5s 0.5s both" }}>
+                      Thank You, {form.name.split(" ")[0] || "Friend"}!
+                    </h2>
+                    <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: "#52b788", fontWeight: 500, letterSpacing: "0.6px", margin: "0 0 1.1rem", animation: "fadeUp 0.5s 0.6s both" }}>
+                      Donation Received
+                    </p>
+                    <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14.5, color: "#4a7c63", lineHeight: 1.75, margin: "0 0 1.5rem", animation: "fadeUp 0.5s 0.7s both" }}>
+                      Your donation is submitted. You'll receive a confirmation on <strong style={{ color: "#1b4332", fontWeight: 600 }}>{form.email}</strong>.<br />
+                      Every rupee will find its purpose.
+                    </p>
+
+                    {/* ID Grid */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, margin: "0 0 2rem", animation: "fadeUp 0.5s 0.8s both" }}>
+                      {[{ label: "Donor ID", value: donorId }, { label: "Transaction ID", value: transactionId }].map(({ label, value }) => (
+                        <div key={label} style={{ background: "linear-gradient(135deg,#f0faf5,#e8f5ee)", border: "1.5px solid rgba(82,183,136,0.28)", borderRadius: 14, padding: "12px 14px", display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
+                          <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: 2, color: "#52b788", textTransform: "uppercase" }}>{label}</span>
+                          <span style={{ fontFamily: "monospace", fontSize: 11.5, fontWeight: 700, color: "#1b4332", letterSpacing: "0.3px", wordBreak: "break-all", lineHeight: 1.4 }}>{value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      className="don-btn"
+                      onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", amount: "", currency: "INR ₹", purpose: "", message: "" }); setActiveAmount(null); }}
+                      style={{ background: "linear-gradient(135deg,#2d6a4f,#40916c)", color: "white", border: "none", borderRadius: 30, padding: "14px 32px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Sora',sans-serif", letterSpacing: "0.3px", transition: "all 0.2s", boxShadow: "0 6px 20px rgba(45,106,79,0.35)", display: "inline-flex", alignItems: "center", gap: 8, animation: "fadeUp 0.5s 0.9s both" }}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                      Make Another Donation
+                    </button>
+
+                    <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: "1.75rem", animation: "fadeUp 0.5s 1s both" }}>
+                      <div style={{ width: 6, height: 6, borderRadius: 3, background: "#b7e4c7" }} />
+                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#b7e4c7" }} />
+                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#b7e4c7" }} />
+                    </div>
                   </div>
-                  <h3 style={{ fontFamily: "'Sora', sans-serif" }} className="text-2xl font-black text-[#1a2e1a]">Thank You, {form.name.split(" ")[0] || "Friend"}!</h3>
-                  <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
-                    Your donation is being processed. You'll receive a confirmation on <strong>{form.email}</strong>. Every rupee will find its purpose.
-                  </p>
-                  <button onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", amount: "", currency: "INR ₹", purpose: "", message: "" }); setActiveAmount(null); }}
-                    className="mt-4 px-6 py-2.5 rounded-full text-sm font-bold text-white submit-btn border-none cursor-pointer">
-                    Make Another Donation
-                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
