@@ -63,10 +63,10 @@ const ShieldIcon = () => (
 const navLinks = [
   { label: "Home", href: "https://swastikajankalyanfoundation.netlify.app/" },
   { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
-  { label: "Annual Report", href: "#" },
+  { label: "Annual Report", href: "https://swastikajankalyanfoundation.netlify.app/annualreport" },
   { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
   { label: "Get Involved", href: "https://swastikajankalyanfoundation.netlify.app/beapartofus" },
-  { label: "Track Your Impact", href: "#" },
+  { label: "Track Your Impact", href: "https://swastikajankalyanfoundation.netlify.app/trackyourimpact" },
   { label: "Donate", href: "https://swastikajankalyanfoundation.netlify.app/donatetous" },
   { label: "Contact Us", href: "https://swastikajankalyanfoundation.netlify.app/contactus" },
 ];
@@ -96,7 +96,7 @@ const BlobBottomRight = () => (
   </svg>
 );
 
-const LeafEmblem = () => (
+export const LeafEmblem = () => (
   <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="28" cy="28" r="27" stroke="#5FAF6B" strokeWidth="1" strokeDasharray="4 3" opacity="0.55" />
     <circle cx="28" cy="28" r="21" stroke="#8bf89b" strokeWidth="0.5" opacity="0.3" />
@@ -125,12 +125,33 @@ export default function FloatingFooter() {
   const [subscribed, setSubscribed] = useState(false);
   const [hoveredSocial, setHoveredSocial] = useState(null);
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email.trim()) {
+  
+    if (!email.trim()) return;
+  
+    try {
+      const res = await fetch("http://localhost:5000/api/newsletter/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      const data = await res.json();
+  
+      if (!res.ok) {
+        throw new Error(data.message || "Something went wrong");
+      }
+  
       setSubscribed(true);
       setEmail("");
       setTimeout(() => setSubscribed(false), 4000);
+  
+      console.log("Success:", data);
+    } catch (err) {
+      console.error("Error:", err.message);
     }
   };
 
