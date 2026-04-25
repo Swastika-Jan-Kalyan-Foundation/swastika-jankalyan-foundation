@@ -269,14 +269,7 @@ export const ContactUs = () => {
           <p className="fade-up" style={{ animationDelay:"0.25s", color:"#b7e4c7", fontSize:"clamp(14px,2vw,16px)", maxWidth:500, margin:"0 auto 2.5rem", lineHeight:1.8 }}>
             Whether you have a question, a suggestion, or just want to say hello — our team is always happy to connect.
           </p>
-          <div className="fade-up" style={{ animationDelay:"0.35s", display:"flex", justifyContent:"center", gap:12, flexWrap:"wrap", paddingBottom:"2.5rem" }}>
-            {[["📧","swastikajankalyanfoundation@gmail.com"],["📞","+91 92298 75702"],["📍","Ranchi, Jharkhand"]].map(([icon,val]) => (
-              <div key={val} style={{ display:"flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.1)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:30, padding:"8px 18px" }}>
-                <span style={{ fontSize:14 }}>{icon}</span>
-                <span style={{ color:"#d8f3dc", fontSize:13, fontWeight:500 }}>{val}</span>
-              </div>
-            ))}
-          </div>
+        
         </div>
         <WaveSVG />
       </div>
@@ -301,8 +294,8 @@ export const ContactUs = () => {
                 <div style={{ borderRadius:20, overflow:"hidden", border:"1.5px solid #c8e6c9", height:160, background:"linear-gradient(135deg,#d8f3dc,#b7e4c7)", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", position:"relative" }}>
                   <DotGridSVG style={{ position:"absolute", top:8, left:8, width:60, opacity:0.4 }} />
                   <span style={{ fontSize:32, marginBottom:8 }}>🗺️</span>
-                  <span style={{ color:"#1b4332", fontSize:13, fontWeight:600 }}>Ranchi, Jharkhand</span>
-                  <span style={{ color:"#52b788", fontSize:11, marginTop:4 }}>View on Google Maps →</span>
+                 
+                  <span style={{ color:"#52b788", fontSize:11, marginTop:4 }}>View on <span style={{color: '#1b4332'}} >Google Maps</span> →</span>
                 </div>
               </>
             ) : (
