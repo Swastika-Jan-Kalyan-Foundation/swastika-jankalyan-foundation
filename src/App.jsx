@@ -31,7 +31,7 @@ function App() {
         <Route path='/annualreport' element={<AnnualReport />} />
     
       </Routes>
-      <SwastikaChatbot/>
+     
      <Footer /> 
     </>
   )
