@@ -3,56 +3,270 @@ import img2 from "../assets/image2.jpg";
 import img3 from "../assets/image3.png";
 import img4 from "../assets/image4.jpg";
 import img5 from "../assets/image5.png";
-import { useState, useEffect, useMemo } from 'react'
-import logo from "../assets/logo.png"
+import { useState, useEffect, useMemo, useRef } from "react";
+import logo from "../assets/logo.png";
 
+/* ─────────────────────────────────────────────
+   SVG DECORATION COMPONENTS
+───────────────────────────────────────────── */
+
+const LeafSVG = ({ className = "", style = {} }) => (
+  <svg viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
+    <path d="M40 95 C40 95 5 65 5 35 C5 15 22 2 40 2 C58 2 75 15 75 35 C75 65 40 95 40 95Z" fill="#5FAF6B" fillOpacity="0.18" />
+    <path d="M40 95 C40 95 5 65 5 35 C5 15 22 2 40 2 C58 2 75 15 75 35 C75 65 40 95 40 95Z" stroke="#5FAF6B" strokeWidth="1.5" strokeOpacity="0.5" fill="none"/>
+    <line x1="40" y1="95" x2="40" y2="10" stroke="#5FAF6B" strokeWidth="1" strokeOpacity="0.4"/>
+    <line x1="40" y1="50" x2="18" y2="30" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.3"/>
+    <line x1="40" y1="60" x2="62" y2="40" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.3"/>
+    <line x1="40" y1="40" x2="15" y2="22" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.3"/>
+    <line x1="40" y1="70" x2="60" y2="55" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.3"/>
+  </svg>
+);
+
+const CircleRingSVG = ({ className = "", style = {} }) => (
+  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
+    <circle cx="100" cy="100" r="90" stroke="#5FAF6B" strokeWidth="1" strokeDasharray="6 4" strokeOpacity="0.4"/>
+    <circle cx="100" cy="100" r="72" stroke="#5FAF6B" strokeWidth="0.5" strokeOpacity="0.2"/>
+    <circle cx="100" cy="100" r="10" fill="#5FAF6B" fillOpacity="0.15"/>
+    <circle cx="100" cy="100" r="4" fill="#5FAF6B" fillOpacity="0.5"/>
+  </svg>
+);
+
+const WaveSVG = () => (
+  <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
+    <path d="M0 60 C200 10 400 110 600 60 C800 10 1000 100 1200 50 C1320 20 1380 70 1440 60 L1440 120 L0 120Z" fill="#e8f5ea"/>
+    <path d="M0 80 C300 30 600 130 900 70 C1100 30 1300 90 1440 80 L1440 120 L0 120Z" fill="#d4efd8" fillOpacity="0.6"/>
+  </svg>
+);
+
+const TreeSVG = ({ className = "", style = {} }) => (
+  <svg viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
+    <rect x="26" y="60" width="8" height="25" rx="3" fill="#5FAF6B" fillOpacity="0.3"/>
+    <ellipse cx="30" cy="45" rx="22" ry="28" fill="#5FAF6B" fillOpacity="0.15" stroke="#5FAF6B" strokeWidth="1" strokeOpacity="0.4"/>
+    <ellipse cx="20" cy="52" rx="14" ry="18" fill="#5FAF6B" fillOpacity="0.1"/>
+    <ellipse cx="40" cy="50" rx="14" ry="18" fill="#5FAF6B" fillOpacity="0.1"/>
+    <ellipse cx="30" cy="28" rx="16" ry="20" fill="#5FAF6B" fillOpacity="0.2" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.3"/>
+  </svg>
+);
+
+const GlobeSVG = ({ className = "", style = {} }) => (
+  <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
+    <circle cx="60" cy="60" r="50" stroke="#5FAF6B" strokeWidth="1.5" strokeOpacity="0.4"/>
+    <ellipse cx="60" cy="60" rx="25" ry="50" stroke="#5FAF6B" strokeWidth="1" strokeOpacity="0.3"/>
+    <ellipse cx="60" cy="60" rx="50" ry="20" stroke="#5FAF6B" strokeWidth="1" strokeOpacity="0.3"/>
+    <ellipse cx="60" cy="60" rx="50" ry="35" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.2"/>
+    <line x1="10" y1="60" x2="110" y2="60" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.2"/>
+    <line x1="60" y1="10" x2="60" y2="110" stroke="#5FAF6B" strokeWidth="0.8" strokeOpacity="0.2"/>
+  </svg>
+);
+
+const HandHeartSVG = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 12a3 3 0 0 1-3-3V5a3 3 0 0 1 6 0v4a3 3 0 0 1-3 3z"/>
+    <path d="M4 20v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>
+    <path d="M16 9s1-1 2 0 1 2 0 3l-3 3-3-3c-1-1-1-2 0-3s2 0 2 0"/>
+  </svg>
+);
+
+const SeedlingSVG = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22V12"/>
+    <path d="M12 12C12 12 7 11 5 7s3-7 7-5c4-2 9 1 7 5s-7 5-7 5z"/>
+  </svg>
+);
+
+const SunSVG = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+  </svg>
+);
+
+const DropSVG = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2z"/>
+  </svg>
+);
+
+const ArrowRightSVG = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+);
+
+const CloseSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="w-5 h-5">
+    <path d="M18 6 6 18M6 6l12 12"/>
+  </svg>
+);
+
+const QuoteSVG = ({ className = "" }) => (
+  <svg viewBox="0 0 40 30" fill="currentColor" className={className}>
+    <path d="M0 30V18.75Q0 12.5 3.375 7.5T12.5 0l2.5 3.75Q11 5.5 9.25 8.625T7.5 15H15V30H0zm22.5 0V18.75q0-6.25 3.375-11.25T35 0l2.5 3.75Q33.5 5.5 31.75 8.625T30 15h7.5V30H22.5z"/>
+  </svg>
+);
+
+/* ─────────────────────────────────────────────
+   STATS DATA
+───────────────────────────────────────────── */
+const stats = [
+  { icon: SeedlingSVG, value: "12K+", label: "Trees Planted" },
+  { icon: HandHeartSVG, value: "₹865M", label: "Total Raised" },
+  { icon: SunSVG, value: "340+", label: "Communities" },
+  { icon: DropSVG, value: "50K+", label: "Lives Touched" },
+];
+
+const causes = [
+  {
+    icon: SeedlingSVG,
+    title: "Forestation Drive",
+    desc: "Planting native species across Jharkhand to restore biodiversity and fight soil erosion.",
+    color: "#5FAF6B",
+    pct: 74,
+  },
+  {
+    icon: DropSVG,
+    title: "Clean Water Access",
+    desc: "Building sustainable water solutions for rural villages with no piped water supply.",
+    color: "#3d8f4a",
+    pct: 58,
+  },
+  {
+    icon: SunSVG,
+    title: "Climate Education",
+    desc: "Training youth as climate ambassadors to lead change in their own communities.",
+    color: "#8bf89b",
+    pct: 88,
+  },
+];
+
+/* ─────────────────────────────────────────────
+   MAIN COMPONENT
+───────────────────────────────────────────── */
 export const Home = () => {
-
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const heroRef = useRef(null);
 
   const slides = useMemo(() => [img1, img2, img3, img4, img5], []);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 2000);
+    }, 3000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navItems = ["Home", "About", "Causes", "Blog", "Pages", "Contact Us"];
 
   return (
-    <section className="relative min-h-screen bg-[#fdf8f4] overflow-hidden">
+    <div className="relative bg-[#f5fdf6] overflow-x-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
 
-      {/* World map watermark background */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none select-none">
-        <svg viewBox="0 0 1000 500" className="w-full h-full" fill="#555">
-          <ellipse cx="160" cy="180" rx="140" ry="100" />
-          <ellipse cx="460" cy="170" rx="190" ry="120" />
-          <ellipse cx="700" cy="210" rx="120" ry="100" />
-          <ellipse cx="840" cy="290" rx="75" ry="95" />
-          <ellipse cx="320" cy="350" rx="85" ry="65" />
-        </svg>
-      </div>
+      {/* ── Google Font ── */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
 
-      {/* Top-right decorative circles */}
-      <div className="absolute top-20 right-[20%] w-5 h-5 rounded-full bg-[#5FAF6B] opacity-80 z-10" />
-      <div className="absolute top-10 right-[13%] w-3 h-3 rounded-full border-2 border-[#5FAF6B] opacity-50 z-10" />
-      <div className="absolute top-32 right-[9%] w-10 h-10 rounded-full bg-[#5FAF6B] opacity-20 z-10" />
+        * { box-sizing: border-box; }
 
-      {/* ── NAVBAR ── */}
-      <nav className="relative z-20 flex items-center justify-between px-8 md:px-16 py-5">
+        @keyframes floatY {
+          0%,100% { transform: translateY(0px) rotate(0deg); }
+          50%      { transform: translateY(-18px) rotate(3deg); }
+        }
+        @keyframes floatX {
+          0%,100% { transform: translateX(0px); }
+          50%      { transform: translateX(12px); }
+        }
+        @keyframes spinSlow {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes spinReverse {
+          from { transform: rotate(360deg); }
+          to   { transform: rotate(0deg); }
+        }
+        @keyframes pulseRing {
+          0%   { transform: scale(1); opacity: 0.5; }
+          50%  { transform: scale(1.08); opacity: 0.2; }
+          100% { transform: scale(1); opacity: 0.5; }
+        }
+        @keyframes fadeInUp {
+          from { opacity:0; transform: translateY(30px); }
+          to   { opacity:1; transform: translateY(0); }
+        }
+        @keyframes slideInRight {
+          from { opacity:0; transform: translateX(40px); }
+          to   { opacity:1; transform: translateX(0); }
+        }
+        @keyframes ticker {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes progressFill {
+          from { width: 0%; }
+          to   { width: var(--pct); }
+        }
+
+        .float-y  { animation: floatY 6s ease-in-out infinite; }
+        .float-x  { animation: floatX 7s ease-in-out infinite; }
+        .spin-slow { animation: spinSlow 24s linear infinite; }
+        .spin-rev  { animation: spinReverse 18s linear infinite; }
+        .pulse-ring { animation: pulseRing 3s ease-in-out infinite; }
+
+        .hero-text   { animation: fadeInUp 0.9s ease both; }
+        .hero-sub    { animation: fadeInUp 0.9s 0.15s ease both; }
+        .hero-btns   { animation: fadeInUp 0.9s 0.3s ease both; }
+        .hero-img    { animation: slideInRight 1s 0.2s ease both; }
+
+        .nav-glass {
+          backdrop-filter: blur(16px);
+          background: rgba(245,253,246,0.85);
+          border-bottom: 1px solid rgba(95,175,107,0.12);
+          transition: box-shadow 0.3s;
+        }
+        .nav-glass.scrolled { box-shadow: 0 4px 32px rgba(95,175,107,0.1); }
+
+        .progress-bar {
+          width: 0%;
+          animation: progressFill 1.6s 0.4s ease forwards;
+        }
+
+        .cause-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(95,175,107,0.18); }
+        .cause-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+
+        .stat-item:hover .stat-icon { transform: scale(1.15) rotate(-5deg); }
+        .stat-icon { transition: transform 0.3s ease; }
+
+        .ticket-strip {
+          display: flex;
+          white-space: nowrap;
+          animation: ticker 28s linear infinite;
+        }
+        .ticket-strip:hover { animation-play-state: paused; }
+
+        .sora-nav-link {
+          font-family: "Sora"
+        }
+      `}</style>
+
+      {/* ══════════════════════════════════════════
+          NAVBAR
+      ══════════════════════════════════════════ */}
+       <nav className="relative z-20 flex items-center justify-between px-8 md:px-16 py-5">
         {/* Logo */}
         <div className="flex items-center">
           <img src={logo} alt="SJKF Logo" className="h-30 w-auto" />
@@ -62,7 +276,7 @@ export const Home = () => {
         <ul className="hidden md:flex items-center gap-8 text-[13.5px] font-medium text-gray-600 font-['DM_Sans',sans-serif]">
           {navItems.map((item) => (
             <li key={item} className="relative group cursor-pointer">
-              <a href="#" className="hover:text-[#5FAF6B] transition-colors duration-200">
+              <a href="#" className="sora-nav-link hover:text-[#5FAF6B] transition-colors duration-200">
                 {item}
               </a>
               <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 bg-[#5FAF6B] group-hover:w-full transition-all duration-300 rounded-full" />
@@ -111,48 +325,47 @@ export const Home = () => {
         </button>
       </nav>
 
-      {/* ── MOBILE MENU OVERLAY ── */}
-      {/* Backdrop */}
+      {/* ══════════════════════════════════════════
+          MOBILE MENU OVERLAY
+      ══════════════════════════════════════════ */}
       <div
         className="fixed inset-0 z-40 md:hidden transition-all duration-400"
         style={{
-          backdropFilter: menuOpen ? 'blur(6px)' : 'blur(0px)',
-          backgroundColor: menuOpen ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0)',
-          pointerEvents: menuOpen ? 'all' : 'none',
+          backdropFilter: menuOpen ? "blur(8px)" : "blur(0px)",
+          backgroundColor: menuOpen ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0)",
+          pointerEvents: menuOpen ? "all" : "none",
         }}
         onClick={() => setMenuOpen(false)}
       />
 
-      {/* Slide-down Panel */}
       <div
         className="fixed top-0 left-0 right-0 z-50 md:hidden"
         style={{
-          transform: menuOpen ? 'translateY(0)' : 'translateY(-110%)',
-          transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+          transform: menuOpen ? "translateY(0)" : "translateY(-110%)",
+          transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        {/* Panel card */}
-        <div className="mx-4 mt-4 rounded-3xl bg-white/95 backdrop-blur-xl shadow-2xl shadow-gray-300/60 border border-gray-100 overflow-hidden">
+        <div className="mx-3 mt-3 rounded-3xl bg-white/96 backdrop-blur-2xl shadow-2xl border border-green-100 overflow-hidden">
+          {/* accent bar */}
+          <div className="h-1.5 w-full" style={{ background: "linear-gradient(90deg,#5FAF6B,#8bf89b,#3d8f4a)" }} />
 
-          {/* Panel top accent bar */}
-          <div className="h-1 w-full bg-gradient-to-r from-[#5FAF6B] via-[#8bf89b] to-[#5FAF6B]" />
-
-          {/* Panel header */}
+          {/* header with close */}
           <div className="flex items-center justify-between px-6 pt-5 pb-4">
             <div>
-              <p className="text-[11px] font-bold tracking-[0.2em] text-[#5FAF6B] uppercase font-['DM_Sans',sans-serif]">
-                Navigation
-              </p>
-              <p className="text-[18px] font-extrabold text-gray-900 font-['Sora',sans-serif] leading-tight">
-                Where to go?
+              <p className="text-[10px] font-bold tracking-[0.22em] text-[#5FAF6B] uppercase">Navigation</p>
+              <p className="text-[17px] font-extrabold text-gray-900 leading-tight" style={{ fontFamily:"'DM Serif Display',serif" }}>
+                Where to&nbsp;<em>go?</em>
               </p>
             </div>
-            {/* Small leaf decoration */}
-            <div className="w-10 h-10 rounded-full bg-[#5FAF6B]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#5FAF6B]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2-5 8z" />
-              </svg>
-            </div>
+
+            {/* Close button */}
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="w-10 h-10 rounded-full bg-red-50 hover:bg-red-100 flex items-center justify-center text-red-400 transition-all duration-200 active:scale-90 border border-red-100"
+              aria-label="Close menu"
+            >
+              <CloseSVG />
+            </button>
           </div>
 
           {/* Divider */}
@@ -160,159 +373,382 @@ export const Home = () => {
 
           {/* Nav links */}
           <ul className="px-4 pt-3 pb-4 flex flex-col gap-1">
-            {navItems.map((item, index) => (
+            {navItems.map((item, i) => (
               <li key={item}>
                 <a
                   href="#"
-                  className="flex items-center justify-between px-4 py-3.5 rounded-2xl group transition-all duration-200 hover:bg-[#5FAF6B]/8 active:bg-[#5FAF6B]/15"
                   onClick={() => setMenuOpen(false)}
-                  style={{
-                    animationDelay: menuOpen ? `${index * 50}ms` : '0ms',
-                  }}
+                  className="flex items-center justify-between px-4 py-3.5 rounded-2xl group transition-all duration-200 hover:bg-[#5FAF6B]/10 active:bg-[#5FAF6B]/20"
+                  style={{ animationDelay: `${i * 50}ms` }}
                 >
                   <div className="flex items-center gap-3">
-                    {/* Dot indicator */}
                     <span className="w-1.5 h-1.5 rounded-full bg-[#5FAF6B] opacity-0 group-hover:opacity-100 transition-all duration-200 scale-0 group-hover:scale-100" />
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#5FAF6B] transition-colors duration-200 font-['DM_Sans',sans-serif]">
-                      {item}
-                    </span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#5FAF6B] transition-colors duration-200">{item}</span>
                   </div>
-                  <svg
-                    className="w-4 h-4 text-gray-300 group-hover:text-[#5FAF6B] group-hover:translate-x-0.5 transition-all duration-200"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
-                  >
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
+                  <ArrowRightSVG className="w-4 h-4 text-gray-300 group-hover:text-[#5FAF6B] group-hover:translate-x-0.5 transition-all duration-200"/>
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* Bottom CTA section */}
-          <div className="mx-4 mb-5 mt-1 p-4 rounded-2xl bg-gradient-to-br from-[#5FAF6B] to-[#3d8f4a] relative overflow-hidden">
-            {/* Background circles */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-white/10" />
-            <div className="absolute -bottom-6 -left-4 w-24 h-24 rounded-full bg-white/5" />
+          {/* Bottom CTA */}
+          <div className="mx-4 mb-5 mt-1 p-5 rounded-2xl relative overflow-hidden" style={{ background:"linear-gradient(135deg,#5FAF6B,#3d8f4a)" }}>
+            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10" />
+            <div className="absolute -bottom-8 -left-5 w-28 h-28 rounded-full bg-white/5" />
+            {/* decorative leaf */}
+            <LeafSVG className="absolute right-4 bottom-2 w-16 h-20 opacity-20"/>
 
-            <p className="text-white/80 text-[11.5px] font-medium font-['DM_Sans',sans-serif] mb-1 relative z-10">
-              Make a difference today
-            </p>
-            <p className="text-white text-[15px] font-bold font-['Sora',sans-serif] mb-3 relative z-10">
-              Support our causes 🌱
-            </p>
+            <p className="text-white/80 text-[11px] font-semibold uppercase tracking-widest mb-1 relative z-10">Make a difference</p>
+            <p className="text-white text-[16px] font-extrabold mb-3 relative z-10">Support our causes 🌱</p>
             <a
               href="https://swastikajankalyanfoundation.netlify.app/donatetous"
-              className="relative z-10 inline-flex items-center gap-2 bg-white text-[#5FAF6B] text-[13px] font-bold px-5 py-2.5 rounded-full shadow-lg transition-all duration-200 active:scale-95 font-['DM_Sans',sans-serif]"
               onClick={() => setMenuOpen(false)}
+              className="relative z-10 inline-flex items-center gap-2 bg-white text-[#5FAF6B] text-[13px] font-bold px-5 py-2.5 rounded-full shadow-lg transition-all duration-200 active:scale-95"
             >
-              Donate Now
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              Donate Now <ArrowRightSVG className="w-3.5 h-3.5"/>
             </a>
           </div>
         </div>
       </div>
 
-      {/* ── HERO BODY ── */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-8 md:px-16 pt-8 pb-16 gap-10">
+      {/* ══════════════════════════════════════════
+          HERO — SPLIT LAYOUT
+      ══════════════════════════════════════════ */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center pt-10 pb-12 overflow-hidden">
 
-        {/* LEFT */}
-        <div className="flex-1 max-w-[560px]">
-          <h1 className="text-[48px] md:text-[58px] font-extrabold text-gray-900 leading-[1.07] mb-6 font-['Sora',sans-serif]">
-            Need Your Big <br />
-            Hand For{" "}
-            <span className="relative inline-block text-[#5FAF6B]">
-              Change
-              <svg
-                viewBox="0 0 148 10"
-                className="absolute -bottom-1 left-0 w-full"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 7 C30 3, 70 3, 146 6"
-                  stroke="#5FAF6B"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  opacity="0.55"
-                />
-              </svg>
-            </span>{" "}
-            <br />
-            The World.
-          </h1>
-
-          <p className="text-gray-500 text-[14.5px] leading-relaxed mb-8 max-w-[430px] font-['DM_Sans',sans-serif]">
-            Swastika Jan Kalyan Foundation is committed to protecting and nurturing the
-            environment through forestation, climate action, and sustainable development —
-            empowering communities to become agents of positive change.
-          </p>
-
-          <div className="flex items-center gap-4 flex-wrap">
-            <button className="flex items-center gap-2 bg-[#5FAF6B] hover:bg-[#8bf89b] text-white text-[13.5px] font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-lg shadow-orange-200 hover:-translate-y-0.5 font-['DM_Sans',sans-serif]">
-              All Causes
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
-
-            <a
-              href="https://swastikajankalyanfoundation.netlify.app/donatetous"
-              className="flex items-center gap-2 text-gray-700 hover:text-[#5FAF6B] text-[13.5px] font-semibold px-5 py-3 rounded-full border border-gray-200 hover:border-[#5FAF6B] bg-white/70 backdrop-blur-sm transition-all duration-200 font-['DM_Sans',sans-serif]"
-            >
-              Donate Now
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+        {/* Background texture blobs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div style={{ position:"absolute", top:"-8%", right:"-5%", width:"520px", height:"520px", borderRadius:"60% 40% 50% 55% / 45% 55% 60% 40%", background:"radial-gradient(circle at 40% 40%,rgba(139,248,155,0.25) 0%,rgba(95,175,107,0.08) 100%)" }} className="float-y"/>
+          <div style={{ position:"absolute", bottom:"-10%", left:"-8%", width:"400px", height:"400px", borderRadius:"45% 55% 40% 60% / 60% 40% 55% 45%", background:"radial-gradient(circle,rgba(95,175,107,0.12) 0%,transparent 70%)" }} className="float-x"/>
+          {/* Grid dots */}
+          <svg viewBox="0 0 600 400" className="absolute right-0 top-0 w-[500px] opacity-[0.06]">
+            {Array.from({ length: 12 }).map((_, r) =>
+              Array.from({ length: 18 }).map((_, c) => (
+                <circle key={`${r}-${c}`} cx={c * 35 + 10} cy={r * 35 + 10} r="2.5" fill="#5FAF6B" />
+              ))
+            )}
+          </svg>
         </div>
 
-        {/* RIGHT */}
-        <div className="flex-1 flex justify-center items-center relative max-w-[450px] w-full min-h-[380px]">
-          <div
-            className="absolute w-[370px] h-[370px] md:w-[420px] md:h-[420px] rounded-full border-2 border-dashed border-[#5FAF6B] opacity-35"
-            style={{ animation: "spinSlow 20s linear infinite" }}
-          />
-          <div className="absolute w-[330px] h-[330px] md:w-[375px] md:h-[375px] rounded-full border-[2.5px] border-[#5FAF6B] opacity-15" />
+        {/* Floating SVG decorations */}
+        <LeafSVG className="absolute top-28 left-8 w-14 h-20 float-y opacity-60" style={{ animationDelay:"1s" }}/>
+        <LeafSVG className="absolute bottom-24 right-12 w-10 h-14 float-y opacity-40" style={{ animationDelay:"2.5s", transform:"scaleX(-1)" }}/>
+        <TreeSVG className="absolute bottom-10 left-[20%] w-12 h-16 float-y opacity-50" style={{ animationDelay:"1.8s" }}/>
+        <CircleRingSVG className="absolute top-32 right-[32%] w-20 h-20 opacity-50 spin-slow"/>
 
-          <div className="relative w-[290px] h-[290px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-100 z-10">
-            <div className="w-full h-full bg-gradient-to-br from-orange-100 via-amber-200 to-orange-400 flex flex-col items-center justify-center gap-2 text-white/70">
-              {slides.map((src, index) => (
-                <img
-                  key={index}
-                  src={src}
-                  alt={`Slide ${index + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
-                  style={{ opacity: index === currentSlide ? 1 : 0 }}
-                />
-              ))}
+        {/* Dotted arc line */}
+        <svg className="absolute left-0 top-1/2 -translate-y-1/2 w-64 opacity-10 pointer-events-none" viewBox="0 0 200 400" fill="none">
+          <path d="M-30 0 Q120 200 -30 400" stroke="#5FAF6B" strokeWidth="2" strokeDasharray="8 6"/>
+        </svg>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 gap-14 items-center relative z-10">
+
+          {/* ── LEFT TEXT ── */}
+          <div>
+            {/* Pill badge */}
+            <div className="hero-text inline-flex items-center gap-2 bg-[#5FAF6B]/10 border border-[#5FAF6B]/25 rounded-full px-4 py-1.5 text-[#3d8f4a] text-[12px] font-semibold mb-6 tracking-wider uppercase">
+              <span className="w-2 h-2 rounded-full bg-[#5FAF6B] animate-pulse"/>
+              Swastika Jan Kalyan Foundation
+            </div>
+
+            <h1 className="hero-text text-[50px] md:text-[64px] font-black text-gray-900 leading-[1.02] mb-5 tracking-tight">
+              Growing a{" "}
+              <span className="relative" style={{ color:"#5FAF6B" }}>
+                Greener
+                <svg viewBox="0 0 220 18" className="absolute -bottom-1 left-0 w-full" fill="none">
+                  <path d="M4 14 Q55 4 110 10 Q165 16 216 8" stroke="#5FAF6B" strokeWidth="3.5" strokeLinecap="round" strokeOpacity="0.5"/>
+                  <path d="M4 14 Q55 4 110 10 Q165 16 216 8" stroke="#8bf89b" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4 3"/>
+                </svg>
+              </span>
+              <br /> Tomorrow,<br />
+              <span style={{ fontFamily:"'DM Serif Display',serif", fontStyle:"italic", fontWeight:400, fontSize:"0.9em", color:"#3d8f4a" }}>
+                Together.
+              </span>
+            </h1>
+
+            <p className="hero-sub text-gray-500 text-[15px] leading-[1.8] mb-9 max-w-[450px]" style={{ fontFamily:"'Sora',sans-serif", fontWeight:400 }}>
+              We protect and nurture the environment through forestation, climate action &amp; sustainable development — empowering communities to become lasting agents of positive change.
+            </p>
+
+            <div className="hero-btns flex items-center gap-4 flex-wrap">
+              <a
+                href="https://swastikajankalyanfoundation.netlify.app/donatetous"
+                className="group flex items-center gap-2.5 bg-[#5FAF6B] hover:bg-[#3d8f4a] text-white text-[13.5px] font-bold px-7 py-3.5 rounded-full transition-all duration-250 shadow-xl shadow-green-200 hover:-translate-y-1"
+              >
+                Give Support
+                <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-200">
+                  <ArrowRightSVG className="w-3 h-3"/>
+                </span>
+              </a>
+
+              <button className="flex items-center gap-2.5 text-gray-700 hover:text-[#5FAF6B] text-[13.5px] font-semibold px-6 py-3.5 rounded-full border-2 border-gray-200 hover:border-[#5FAF6B] bg-white/80 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5">
+                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="2">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Watch Our Story
+              </button>
+            </div>
+
+            {/* Trust line */}
+            <div className="hero-sub mt-8 flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {["#a8d5ae","#7cc985","#5FAF6B","#3d8f4a"].map((c,i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white" style={{ background:c }}>
+                    {String.fromCharCode(65+i)}
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className="text-[12px] font-bold text-gray-800">50,000+ lives impacted</p>
+                <p className="text-[11px] text-gray-400">Trusted across Jharkhand &amp; beyond</p>
+              </div>
             </div>
           </div>
 
-          <div className="absolute bottom-2 right-2 md:bottom-6 md:right-0 z-20 w-28 h-28 rounded-full bg-[#5FAF6B] flex flex-col items-center justify-center shadow-xl shadow-orange-300">
-            <span className="text-[21px] font-extrabold text-white leading-tight font-['Sora',sans-serif]">
-              ₹865M
-            </span>
-            <div className="w-7 h-[1.5px] bg-white/40 rounded-full my-1" />
-            <span className="text-[10px] text-white/90 font-medium tracking-wide font-['DM_Sans',sans-serif]">
-              Total Raised
-            </span>
-          </div>
+          {/* ── RIGHT IMAGE CLUSTER ── */}
+          <div className="hero-img relative flex justify-center items-center min-h-[480px]">
 
-          <div className="absolute top-6 left-6 w-4 h-4 rounded-full bg-[#5FAF6B] opacity-75 z-20" />
+            {/* Spinning orbit rings */}
+            <div className="absolute w-[430px] h-[430px] rounded-full border-2 border-dashed border-[#5FAF6B]/25 spin-slow" style={{ top:"50%", left:"50%", transform:"translate(-50%,-50%)" }}/>
+            <div className="absolute w-[350px] h-[350px] rounded-full border border-[#5FAF6B]/15 spin-rev" style={{ top:"50%", left:"50%", transform:"translate(-50%,-50%)" }}/>
+
+            {/* Main image circle */}
+            <div className="relative w-[300px] h-[300px] md:w-[340px] md:h-[340px] rounded-[40%_60%_55%_45%/_50%_45%_55%_50%] overflow-hidden border-4 border-white shadow-2xl shadow-green-100/50 z-10" style={{ animation:"floatY 7s ease-in-out infinite" }}>
+              {slides.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`Slide ${i+1}`}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+                  style={{ opacity: i === currentSlide ? 1 : 0 }}
+                />
+              ))}
+              {/* overlay gradient */}
+              <div className="absolute inset-0" style={{ background:"linear-gradient(135deg,rgba(95,175,107,0.2) 0%,transparent 60%)" }}/>
+            </div>
+
+            {/* Slide indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{ width: i === currentSlide ? "20px" : "6px", height:"6px", background: i === currentSlide ? "#5FAF6B" : "#c8e6ca" }}
+                />
+              ))}
+            </div>
+
+            {/* Floating stat badge — top left */}
+            <div className="absolute top-4 -left-4 z-20 bg-white rounded-2xl px-4 py-3 shadow-xl border border-green-50 flex items-center gap-3" style={{ animation:"floatX 6s ease-in-out infinite" }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background:"linear-gradient(135deg,#e8f5ea,#c8e6ca)" }}>
+                <SeedlingSVG className="w-5 h-5 text-[#5FAF6B]"/>
+              </div>
+              <div>
+                <p className="text-[16px] font-black text-gray-900">12,000+</p>
+                <p className="text-[10px] text-gray-400 font-medium">Trees Planted</p>
+              </div>
+            </div>
+
+            {/* Floating raised badge — bottom right */}
+            <div className="absolute bottom-10 -right-4 z-20 bg-[#5FAF6B] rounded-2xl px-5 py-3.5 shadow-xl shadow-green-300/40" style={{ animation:"floatY 8s 1.5s ease-in-out infinite" }}>
+              <p className="text-[22px] font-black text-white leading-none">₹865M</p>
+              <div className="w-10 h-[1.5px] bg-white/30 rounded my-1"/>
+              <p className="text-[10px] text-white/80 font-semibold tracking-wide uppercase">Total Raised</p>
+            </div>
+
+            {/* Globe SVG floating */}
+            <GlobeSVG className="absolute top-0 right-0 w-20 h-20 spin-slow opacity-40"/>
+
+            {/* Small leaf floating */}
+            <LeafSVG className="absolute -top-4 left-1/3 w-10 h-14 float-y opacity-50" style={{ animationDelay:"2s" }}/>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          TICKER STRIP
+      ══════════════════════════════════════════ */}
+      <div className="relative overflow-hidden py-3 border-y border-[#5FAF6B]/15" style={{ background:"linear-gradient(90deg,#e8f5ea,#d4efd8,#e8f5ea)" }}>
+        <div className="flex ticket-strip">
+          {[...Array(2)].map((_, gi) => (
+            <div key={gi} className="flex items-center gap-8 pr-8">
+              {["Forestation Drive", "Climate Education", "Water Access", "Community Empowerment", "Sustainable Living", "Youth Leadership", "Green Future", "Carbon Neutral"].map((t, i) => (
+                <span key={i} className="flex items-center gap-2 text-[#3d8f4a] text-[12.5px] font-semibold tracking-wider uppercase whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#5FAF6B] inline-block"/>
+                  {t}
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
 
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
-        @keyframes spinSlow {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
-        }
-      `}</style>
+      {/* ══════════════════════════════════════════
+          STATS ROW
+      ══════════════════════════════════════════ */}
+      <section className="relative py-16 overflow-hidden">
+        {/* Subtle bg */}
+        <div className="absolute inset-0 pointer-events-none">
+          <svg viewBox="0 0 1440 200" className="w-full h-full" preserveAspectRatio="none">
+            <path d="M0 100 Q360 0 720 100 Q1080 200 1440 100 L1440 200 L0 200Z" fill="#e8f5ea" fillOpacity="0.5"/>
+          </svg>
+        </div>
 
-    </section>
-  )
-}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map(({ icon: Icon, value, label }, i) => (
+              <div key={i} className="stat-item flex flex-col items-center text-center group cursor-default">
+                <div className="stat-icon w-14 h-14 rounded-2xl flex items-center justify-center mb-3 shadow-md" style={{ background:"linear-gradient(135deg,#e8f5ea,#c8e6ca)", border:"1px solid rgba(95,175,107,0.2)" }}>
+                  <Icon className="w-6 h-6 text-[#5FAF6B]"/>
+                </div>
+                <p className="text-[32px] font-black text-gray-900 leading-none mb-1">{value}</p>
+                <p className="text-[12px] text-gray-400 font-semibold uppercase tracking-wider">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          WAVE DIVIDER
+      ══════════════════════════════════════════ */}
+      <WaveSVG />
+
+      {/* ══════════════════════════════════════════
+          CAUSES
+      ══════════════════════════════════════════ */}
+      <section className="bg-[#e8f5ea] py-20 relative overflow-hidden">
+        {/* Background decor */}
+        <CircleRingSVG className="absolute top-10 right-10 w-40 h-40 opacity-20 spin-slow"/>
+        <TreeSVG className="absolute bottom-10 left-10 w-24 h-32 opacity-20 float-y"/>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+
+          {/* Section header */}
+          <div className="text-center mb-14">
+            <span className="inline-flex items-center gap-2 bg-[#5FAF6B]/15 rounded-full px-4 py-1.5 text-[#3d8f4a] text-[11.5px] font-bold uppercase tracking-widest mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5FAF6B]"/>
+              Our Initiatives
+            </span>
+            <h2 className="text-[38px] md:text-[48px] font-black text-gray-900 leading-tight tracking-tight">
+              Causes We Fight For
+            </h2>
+            <p className="text-gray-500 text-[14.5px] mt-3 max-w-[500px] mx-auto leading-relaxed">
+              Each initiative is rooted in real community needs and driven by measurable, lasting impact.
+            </p>
+          </div>
+
+          {/* Cards grid */}
+          <div className="grid md:grid-cols-3 gap-7">
+            {causes.map(({ icon: Icon, title, desc, color, pct }, i) => (
+              <div
+                key={i}
+                className="cause-card bg-white rounded-3xl p-7 shadow-md border border-white relative overflow-hidden cursor-pointer"
+              >
+                {/* bg blob */}
+                <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-8" style={{ background:`radial-gradient(circle,${color}30,transparent)` }}/>
+                {/* leaf watermark */}
+                <LeafSVG className="absolute bottom-0 right-0 w-20 h-28 opacity-[0.06]"/>
+
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 relative z-10" style={{ background:`${color}18`, border:`1.5px solid ${color}30` }}>
+                  <Icon className="w-6 h-6" style={{ color }}/>
+                </div>
+
+                <h3 className="text-[18px] font-black text-gray-900 mb-2 relative z-10">{title}</h3>
+                <p className="text-[13.5px] text-gray-500 leading-relaxed mb-6 relative z-10">{desc}</p>
+
+                {/* Progress */}
+                <div className="relative z-10">
+                  <div className="flex justify-between text-[11.5px] text-gray-400 font-semibold mb-1.5">
+                    <span>Progress</span>
+                    <span style={{ color }}>{pct}%</span>
+                  </div>
+                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full progress-bar"
+                      style={{ "--pct": `${pct}%`, background:`linear-gradient(90deg,${color},${color}99)` }}
+                    />
+                  </div>
+                </div>
+
+                <a href="#" className="relative z-10 mt-5 inline-flex items-center gap-1.5 text-[12.5px] font-bold hover:-translate-x-[-2px] transition-all duration-200" style={{ color }}>
+                  Learn more <ArrowRightSVG className="w-3.5 h-3.5"/>
+                </a>
+              </div>
+            ))}
+          </div>
+
+          
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          QUOTE BAND
+      ══════════════════════════════════════════ */}
+    
+
+      {/* ══════════════════════════════════════════
+          CTA STRIP
+      ══════════════════════════════════════════ */}
+      <section className="py-20 relative overflow-hidden bg-[#f5fdf6]">
+        <div className="absolute inset-0 pointer-events-none">
+          <TreeSVG className="absolute right-12 bottom-0 w-28 h-40 opacity-15 float-y" style={{ animationDelay:"1s" }}/>
+          <CircleRingSVG className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 opacity-20 spin-rev"/>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="rounded-3xl p-10 md:p-14 relative overflow-hidden" style={{ background:"linear-gradient(120deg,#e8f5ea 0%,#d4efd8 100%)", border:"1.5px solid rgba(95,175,107,0.25)" }}>
+            {/* big leaf behind */}
+            <LeafSVG className="absolute -right-10 -bottom-10 w-56 h-72 opacity-[0.07]"/>
+
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+              <div className="text-center md:text-left max-w-[500px]">
+                <span className="inline-block bg-[#5FAF6B]/15 rounded-full px-4 py-1 text-[#3d8f4a] text-[11px] font-bold uppercase tracking-widest mb-4">Take Action</span>
+                <h2 className="text-[32px] md:text-[42px] font-black text-gray-900 leading-tight mb-3">
+                  Every Rupee Plants a<br />
+                  <span style={{ color:"#5FAF6B" }}>Seed of Change.</span>
+                </h2>
+                <p className="text-gray-500 text-[14px] leading-relaxed">
+                  Your contribution directly funds forestation, clean water, and climate education for the communities that need it most.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 items-center">
+                <a
+                  href="https://swastikajankalyanfoundation.netlify.app/donatetous"
+                  className="group flex items-center gap-2.5 bg-[#5FAF6B] hover:bg-[#3d8f4a] text-white text-[14px] font-black px-9 py-4 rounded-full transition-all duration-200 shadow-xl shadow-green-300/40 hover:-translate-y-1 whitespace-nowrap"
+                >
+                  Donate Now
+                  <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                    <ArrowRightSVG className="w-3.5 h-3.5"/>
+                  </span>
+                </a>
+                <p className="text-[11px] text-gray-400 font-medium">Secure · Transparent · Impactful</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          FOOTER STRIP
+      ══════════════════════════════════════════ */}
+      <footer className="border-t border-[#5FAF6B]/15 py-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="SJKF" className="h-8 w-auto opacity-80"/>
+            <span className="text-gray-400 text-[12px]">Swastika Jan Kalyan Foundation</span>
+          </div>
+          <p className="text-gray-400 text-[11.5px]">© 2025 SJKF · Built with 🌱 for a greener tomorrow</p>
+          <div className="flex gap-4">
+            {["Privacy", "Terms", "Contact"].map(t => (
+              <a key={t} href="#" className="text-[12px] text-gray-400 hover:text-[#5FAF6B] transition-colors font-medium">{t}</a>
+            ))}
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+};
