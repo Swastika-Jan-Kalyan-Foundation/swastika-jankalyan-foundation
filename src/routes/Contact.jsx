@@ -319,8 +319,8 @@ export const ContactUs = () => {
                 <div style={{ borderRadius:20, overflow:"hidden", border:"1.5px solid #c8e6c9", height:160, background:"linear-gradient(135deg,#d8f3dc,#b7e4c7)", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", position:"relative" }}>
                   <DotGridSVG style={{ position:"absolute", top:8, left:8, width:60, opacity:0.4 }} />
                   <span style={{ fontSize:32, marginBottom:8 }}>🗺️</span>
-                  <span style={{ color:"#1b4332", fontSize:13, fontWeight:600 }}>Ranchi, Jharkhand</span>
-                  <span style={{ color:"#52b788", fontSize:11, marginTop:4 }}>View on Google Maps →</span>
+                 
+                  <span style={{ color:"#1b4332", fontSize:11, marginTop:4 }}>View on Google Maps →</span>
                 </div>
               </>
             )}
