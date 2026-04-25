@@ -256,16 +256,53 @@ export const TrackImpact = () => {
   const [focused, setFocused] = useState("");
   const resultRef = useRef();
 
-  const handleSearch = () => {
-    if (!donorId.trim()) { setError("Please enter your Donor ID."); return; }
-    setError(""); setLoading(true); setResult(null);
-    setTimeout(() => {
-      const donor = donors[donorId.trim().toUpperCase()];
-      if (!donor) { setError("No donor found with this ID. Try NGO-1001, NGO-1002, NGO-1003, NGO-1004 or NGO-2025."); setLoading(false); return; }
-      setResult({ ...donor, tier: getTier(donor.amount), data: tierData[getTier(donor.amount)] });
+  const handleSearch = async () => {
+    const cleanedDonorId = donorId.trim().toUpperCase();
+  
+    if (!cleanedDonorId) {
+      setError("Please enter your Donor ID.");
+      return;
+    }
+  
+    setError("");
+    setLoading(true);
+    setResult(null);
+  
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/donations/${cleanedDonorId}`
+      );
+  
+      const data = await res.json();
+  
+      if (!res.ok) {
+        setError("No donor found with this ID.");
+        setLoading(false);
+        return;
+      }
+  
+      const donation = data.data;
+      const tier = getTier(donation.amount);
+  
+      setResult({
+        ...donation,
+        tier,
+        data: tierData[tier]
+      });
+  
       setLoading(false);
-      setTimeout(() => resultRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 100);
-    }, 1400);
+  
+      setTimeout(() => {
+        resultRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 100);
+    } catch (error) {
+      console.error(error);
+      setError("Something went wrong. Please try again.");
+      setLoading(false);
+    }
   };
 
   const inp = (name) => ({
@@ -347,7 +384,7 @@ export const TrackImpact = () => {
                   onFocus={() => setFocused("id")} onBlur={() => setFocused("")}
                   onKeyDown={e => e.key === "Enter" && handleSearch()}
                   placeholder="e.g. NGO-1001"
-                  style={{ ...inp("id"), paddingLeft:44, textTransform:"uppercase" }} />
+                  style={{ ...inp("id"), paddingLeft:44, }} />
               </div>
             </div>
 
