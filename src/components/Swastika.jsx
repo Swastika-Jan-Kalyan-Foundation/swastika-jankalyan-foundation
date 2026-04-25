@@ -196,6 +196,36 @@ function Typewriter({ text, speed = 18, onDone }) {
   return <span style={{ whiteSpace:"pre-wrap" }}>{displayed}</span>;
 }
 
+function TriggerTypewriter() {
+  const full = "Hi! I'm Swastika, how may I help you?";
+  const [displayed, setDisplayed] = useState("");
+
+  useEffect(() => {
+    setDisplayed("");
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setDisplayed(full.slice(0, i));
+      if (i >= full.length) clearInterval(id);
+    }, 38);
+    return () => clearInterval(id);
+  }, []);
+
+  // Split to bold "Swastika"
+  const swastikaIdx = displayed.indexOf("Swastika");
+  const before = displayed.slice(0, swastikaIdx === -1 ? displayed.length : swastikaIdx);
+  const name   = swastikaIdx !== -1 ? displayed.slice(swastikaIdx, swastikaIdx + 8) : "";
+  const after  = swastikaIdx !== -1 ? displayed.slice(swastikaIdx + 8) : "";
+
+  return (
+    <>
+      <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>{before}</span>
+      {name && <span style={{ color:"#1b4332", fontSize:13, fontWeight:800 }}>{name}</span>}
+      <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>{after}</span>
+    </>
+  );
+}
+
 /* ══════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════ */
@@ -493,9 +523,8 @@ export default function SwastikaChatbot() {
           onClick={() => setOpen(o => !o)}>
           {!open && (
             <div style={{ background:"white", borderRadius:"16px 16px 4px 16px", padding:"10px 16px", marginRight:10, boxShadow:"0 4px 20px rgba(45,106,79,0.18)", border:"1.5px solid #c8e6c9", animation:"msgIn 0.4s ease", whiteSpace:"nowrap" }}>
-              <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>Hi! I'm </span>
-              <span style={{ color:"#1b4332", fontSize:13, fontWeight:800 }}>Swastika</span>
-              <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>, how may I help you?</span>
+             
+              <TriggerTypewriter />
             </div>
           )}
           <div className="trigger-inner" style={{ width:58, height:58, borderRadius:"50%", background:"linear-gradient(135deg,#1b4332,#40916c)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 6px 24px rgba(45,106,79,0.4)", transition:"transform 0.2s", animation: open ? "none" : "glow 2.5s infinite", flexShrink:0 }}>

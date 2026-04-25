@@ -63,7 +63,7 @@ const ShieldIcon = () => (
 const navLinks = [
   { label: "Home", href: "https://swastikajankalyanfoundation.netlify.app/" },
   { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
-  { label: "Annual Report", href: "https://swastikajankalyanfoundation.netlify.app/annualreport" },
+  
   { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
   { label: "Get Involved", href: "https://swastikajankalyanfoundation.netlify.app/beapartofus" },
   { label: "Track Your Impact", href: "https://swastikajankalyanfoundation.netlify.app/trackyourimpact" },

@@ -481,21 +481,21 @@ export const Home = () => {
 
             <div className="hero-btns flex items-center gap-4 flex-wrap">
               <a
-                href="https://swastikajankalyanfoundation.netlify.app/donatetous"
+                href="https://swastikajankalyanfoundation.netlify.app/trackyourimpact"
                 className="group flex items-center gap-2.5 bg-[#5FAF6B] hover:bg-[#3d8f4a] text-white text-[13.5px] font-bold px-7 py-3.5 rounded-full transition-all duration-250 shadow-xl shadow-green-200 hover:-translate-y-1"
               >
-                Give Support
+                Track Your Impact
                 <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-200">
                   <ArrowRightSVG className="w-3 h-3"/>
                 </span>
               </a>
 
-              <button className="flex items-center gap-2.5 text-gray-700 hover:text-[#5FAF6B] text-[13.5px] font-semibold px-6 py-3.5 rounded-full border-2 border-gray-200 hover:border-[#5FAF6B] bg-white/80 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5">
+              <a href="https://swastikajankalyanfoundation.netlify.app/projects" className="flex items-center gap-2.5 text-gray-700 hover:text-[#5FAF6B] text-[13.5px] font-semibold px-6 py-3.5 rounded-full border-2 border-gray-200 hover:border-[#5FAF6B] bg-white/80 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5">
                 <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="2">
                   <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
                 Watch Our Story
-              </button>
+              </a>
             </div>
 
             {/* Trust line */}
