@@ -10,9 +10,10 @@ import { Volunteer } from './routes/Volunteer'
 import { ContactUs } from './routes/Contact'
 import { TrackImpact } from './routes/TrackImpact'
 import { AnnualReport } from './routes/AnualReport'
+import { AdminDashboard } from './routes/Admin'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
-
+import SwastikaChatbot from './components/Swastika'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -28,7 +29,9 @@ function App() {
         <Route path='/contactus' element={<ContactUs />} />
         <Route path='/trackyourimpact' element={<TrackImpact />} />
         <Route path='/annualreport' element={<AnnualReport />} />
+        <Route path='/admin' element={<AdminDashboard />} />
       </Routes>
+      <SwastikaChatbot/>
      <Footer /> 
     </>
   )
