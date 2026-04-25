@@ -109,30 +109,30 @@ const QuoteSVG = ({ className = "" }) => (
    STATS DATA
 ───────────────────────────────────────────── */
 const stats = [
-  { icon: SeedlingSVG, value: "12K+", label: "Trees Planted" },
-  { icon: HandHeartSVG, value: "₹865M", label: "Total Raised" },
-  { icon: SunSVG, value: "340+", label: "Communities" },
-  { icon: DropSVG, value: "50K+", label: "Lives Touched" },
+  { icon: SeedlingSVG, value: "500+", label: "Trees Planted" },
+ 
+  { icon: SunSVG, value: "50+", label: "Supporters" },
+  { icon: DropSVG, value: "15+", label: "Events" },
 ];
 
 const causes = [
   {
     icon: SeedlingSVG,
-    title: "Forestation Drive",
+    title: "Education & Awareness",
     desc: "Planting native species across Jharkhand to restore biodiversity and fight soil erosion.",
     color: "#5FAF6B",
     pct: 74,
   },
   {
     icon: DropSVG,
-    title: "Clean Water Access",
+    title: "Health, Lifestyle & Social Status",
     desc: "Building sustainable water solutions for rural villages with no piped water supply.",
     color: "#3d8f4a",
     pct: 58,
   },
   {
     icon: SunSVG,
-    title: "Climate Education",
+    title: "Environment",
     desc: "Training youth as climate ambassadors to lead change in their own communities.",
     color: "#8bf89b",
     pct: 88,
@@ -191,7 +191,9 @@ export const Home = () => {
         @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
 
         * { box-sizing: border-box; }
-
+        .sora-font {
+          font-family: "Sora"
+        }
         @keyframes floatY {
           0%,100% { transform: translateY(0px) rotate(0deg); }
           50%      { transform: translateY(-18px) rotate(3deg); }
@@ -461,17 +463,17 @@ export const Home = () => {
             </div>
 
             <h1 className="hero-text text-[50px] md:text-[64px] font-black text-gray-900 leading-[1.02] mb-5 tracking-tight">
-              Growing a{" "}
+              Rooting ways for{" "}
               <span className="relative" style={{ color:"#5FAF6B" }}>
-                Greener
+                Greener,
                 <svg viewBox="0 0 220 18" className="absolute -bottom-1 left-0 w-full" fill="none">
                   <path d="M4 14 Q55 4 110 10 Q165 16 216 8" stroke="#5FAF6B" strokeWidth="3.5" strokeLinecap="round" strokeOpacity="0.5"/>
                   <path d="M4 14 Q55 4 110 10 Q165 16 216 8" stroke="#8bf89b" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4 3"/>
                 </svg>
               </span>
-              <br /> Tomorrow,<br />
-              <span style={{ fontFamily:"'DM Serif Display',serif", fontStyle:"italic", fontWeight:400, fontSize:"0.9em", color:"#3d8f4a" }}>
-                Together.
+              <br /> Healthier and <br />
+              <span  className="sora-font" style={{ fontFamily:"'DM Serif Display',serif", fontStyle:"italic", fontWeight:400, fontSize:"0.9em", color:"#3d8f4a" }}>
+                Educated India.
               </span>
             </h1>
 
@@ -498,20 +500,7 @@ export const Home = () => {
               </a>
             </div>
 
-            {/* Trust line */}
-            <div className="hero-sub mt-8 flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {["#a8d5ae","#7cc985","#5FAF6B","#3d8f4a"].map((c,i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white" style={{ background:c }}>
-                    {String.fromCharCode(65+i)}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-[12px] font-bold text-gray-800">50,000+ lives impacted</p>
-                <p className="text-[11px] text-gray-400">Trusted across Jharkhand &amp; beyond</p>
-              </div>
-            </div>
+          
           </div>
 
           {/* ── RIGHT IMAGE CLUSTER ── */}
@@ -554,17 +543,13 @@ export const Home = () => {
                 <SeedlingSVG className="w-5 h-5 text-[#5FAF6B]"/>
               </div>
               <div>
-                <p className="text-[16px] font-black text-gray-900">12,000+</p>
+                <p className="text-[16px] font-black text-gray-900">500+</p>
                 <p className="text-[10px] text-gray-400 font-medium">Trees Planted</p>
               </div>
             </div>
 
             {/* Floating raised badge — bottom right */}
-            <div className="absolute bottom-10 -right-4 z-20 bg-[#5FAF6B] rounded-2xl px-5 py-3.5 shadow-xl shadow-green-300/40" style={{ animation:"floatY 8s 1.5s ease-in-out infinite" }}>
-              <p className="text-[22px] font-black text-white leading-none">₹865M</p>
-              <div className="w-10 h-[1.5px] bg-white/30 rounded my-1"/>
-              <p className="text-[10px] text-white/80 font-semibold tracking-wide uppercase">Total Raised</p>
-            </div>
+          
 
             {/* Globe SVG floating */}
             <GlobeSVG className="absolute top-0 right-0 w-20 h-20 spin-slow opacity-40"/>
@@ -582,7 +567,7 @@ export const Home = () => {
         <div className="flex ticket-strip">
           {[...Array(2)].map((_, gi) => (
             <div key={gi} className="flex items-center gap-8 pr-8">
-              {["Forestation Drive", "Climate Education", "Water Access", "Community Empowerment", "Sustainable Living", "Youth Leadership", "Green Future", "Carbon Neutral"].map((t, i) => (
+              {["Bridging Future Readiness Gap", "Climate Education", "Curating Greenery", "Community Empowerment", "Sustainable Living", "Youth Leadership", "Green Future", "Beautifying Society"].map((t, i) => (
                 <span key={i} className="flex items-center gap-2 text-[#3d8f4a] text-[12.5px] font-semibold tracking-wider uppercase whitespace-nowrap">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#5FAF6B] inline-block"/>
                   {t}
@@ -668,22 +653,7 @@ export const Home = () => {
                 <p className="text-[13.5px] text-gray-500 leading-relaxed mb-6 relative z-10">{desc}</p>
 
                 {/* Progress */}
-                <div className="relative z-10">
-                  <div className="flex justify-between text-[11.5px] text-gray-400 font-semibold mb-1.5">
-                    <span>Progress</span>
-                    <span style={{ color }}>{pct}%</span>
-                  </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full rounded-full progress-bar"
-                      style={{ "--pct": `${pct}%`, background:`linear-gradient(90deg,${color},${color}99)` }}
-                    />
-                  </div>
-                </div>
-
-                <a href="#" className="relative z-10 mt-5 inline-flex items-center gap-1.5 text-[12.5px] font-bold hover:-translate-x-[-2px] transition-all duration-200" style={{ color }}>
-                  Learn more <ArrowRightSVG className="w-3.5 h-3.5"/>
-                </a>
+               
               </div>
             ))}
           </div>
@@ -719,7 +689,7 @@ export const Home = () => {
                   <span style={{ color:"#5FAF6B" }}>Seed of Change.</span>
                 </h2>
                 <p className="text-gray-500 text-[14px] leading-relaxed">
-                  Your contribution directly funds forestation, clean water, and climate education for the communities that need it most.
+                  Your contribution directly funds education & awareness, forestation, sustainable development, health & lifestyle and uplifting social status for the communities that need it most.
                 </p>
               </div>
 
@@ -743,20 +713,8 @@ export const Home = () => {
       {/* ══════════════════════════════════════════
           FOOTER STRIP
       ══════════════════════════════════════════ */}
-      <footer className="border-t border-[#5FAF6B]/15 py-8">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="SJKF" className="h-8 w-auto opacity-80"/>
-            <span className="text-gray-400 text-[12px]">Swastika Jan Kalyan Foundation</span>
-          </div>
-          <p className="text-gray-400 text-[11.5px]">© 2025 SJKF · Built with 🌱 for a greener tomorrow</p>
-          <div className="flex gap-4">
-            {["Privacy", "Terms", "Contact"].map(t => (
-              <a key={t} href="#" className="text-[12px] text-gray-400 hover:text-[#5FAF6B] transition-colors font-medium">{t}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      
+     
 
     </div>
   );
