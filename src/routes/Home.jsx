@@ -172,8 +172,17 @@ export const Home = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = ["Home", "About", "Causes", "Blog", "Pages", "Contact Us"];
+ 
+  const navItems = [
+    { label: "Home", href: "https://swastikajankalyanfoundation.netlify.app/" },
+    { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
+   
+    { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
+    { label: "Get Involved", href: "https://swastikajankalyanfoundation.netlify.app/beapartofus" },
 
+   
+    { label: "Contact Us", href: "https://swastikajankalyanfoundation.netlify.app/contactus" },
+  ];
   return (
     <div className="relative bg-[#f5fdf6] overflow-x-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
 
@@ -275,9 +284,9 @@ export const Home = () => {
         {/* Desktop Links */}
         <ul className="hidden md:flex items-center gap-8 text-[13.5px] font-medium text-gray-600 font-['DM_Sans',sans-serif]">
           {navItems.map((item) => (
-            <li key={item} className="relative group cursor-pointer">
-              <a href="#" className="sora-nav-link hover:text-[#5FAF6B] transition-colors duration-200">
-                {item}
+            <li key={item.label} className="relative group cursor-pointer">
+              <a href={item.href} className="sora-nav-link hover:text-[#5FAF6B] transition-colors duration-200">
+                {item.label}
               </a>
               <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 bg-[#5FAF6B] group-hover:w-full transition-all duration-300 rounded-full" />
             </li>
@@ -376,14 +385,14 @@ export const Home = () => {
             {navItems.map((item, i) => (
               <li key={item}>
                 <a
-                  href="#"
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-between px-4 py-3.5 rounded-2xl group transition-all duration-200 hover:bg-[#5FAF6B]/10 active:bg-[#5FAF6B]/20"
                   style={{ animationDelay: `${i * 50}ms` }}
                 >
                   <div className="flex items-center gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#5FAF6B] opacity-0 group-hover:opacity-100 transition-all duration-200 scale-0 group-hover:scale-100" />
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#5FAF6B] transition-colors duration-200">{item}</span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#5FAF6B] transition-colors duration-200">{item.label}</span>
                   </div>
                   <ArrowRightSVG className="w-4 h-4 text-gray-300 group-hover:text-[#5FAF6B] group-hover:translate-x-0.5 transition-all duration-200"/>
                 </a>

@@ -35,7 +35,7 @@ export const Donate = () => {
 
     try {
       // 1. Create Razorpay order first
-      const orderResponse = await fetch("http://localhost:5000/api/donations/create-order", {
+      const orderResponse = await fetch("https://sjkf-backend-api.vercel.app/api/donations/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const Donate = () => {
         handler: async function (razorpayResponse) {
           try {
             // 3. Verify payment and save donation only after successful payment
-            const response = await fetch("http://localhost:5000/api/donations/verify-payment", {
+            const response = await fetch("https://sjkf-backend-api.vercel.app/api/donations/verify-payment", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

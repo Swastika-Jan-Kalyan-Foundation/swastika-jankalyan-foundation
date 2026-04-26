@@ -270,7 +270,7 @@ export const TrackImpact = () => {
   
     try {
       const res = await fetch(
-        `http://localhost:5000/api/donations/${cleanedDonorId}`
+        `https://sjkf-backend-api.vercel.app/api/donations/${cleanedDonorId}`
       );
   
       const data = await res.json();
