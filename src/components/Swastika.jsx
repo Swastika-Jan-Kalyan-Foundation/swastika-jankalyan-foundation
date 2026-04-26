@@ -91,6 +91,18 @@ const CONTACT_FLOW = [
   { key:"__done__",  type:"done",    bot:"✅ Thank you! We've received your message and will get back to you within **24–48 hours**. 🌿" },
 ];
 
+/* ─── Razorpay script loader ─── */
+function loadRazorpay() {
+  return new Promise((resolve) => {
+    if (window.Razorpay) return resolve(true);
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
+
 /* ─── Markdown-lite: bold ** ─── */
 function BotText({ text }) {
   const parts = text.split(/\*\*(.*?)\*\*/g);
@@ -126,15 +138,25 @@ export default function SwastikaChatbot() {
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState("");
   const [inputEnabled, setInputEnabled] = useState(false);
-  const [options, setOptions] = useState(null);          // {list, multi, selected}
-  const [flow, setFlow] = useState(null);                // current flow array
+  const [options, setOptions] = useState(null);
+  const [flow, setFlow] = useState(null);
   const [flowStep, setFlowStep] = useState(0);
   const [flowData, setFlowData] = useState({});
   const [multiSelected, setMultiSelected] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [showMain, setShowMain] = useState(false);
-  const [phase, setPhase] = useState("idle");            // idle | main | flow | done
+  const [phase, setPhase] = useState("idle");
   const [inputType, setInputType] = useState("text");
+
+  // ── Backend state ──
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  // Donation result
+  const [donorId, setDonorId] = useState(null);
+  const [transactionId, setTransactionId] = useState(null);
+  // Volunteer result
+  const [applicantId, setApplicantId] = useState(null);
+
   const bottomRef = useRef();
   const inputRef = useRef();
 
@@ -158,11 +180,9 @@ export default function SwastikaChatbot() {
     const id = Date.now() + Math.random();
     setMessages(m => [...m, { id, role:"bot", text, typing: true, isTypewriter }]);
     if (isTypewriter) {
-      // typewriter handled in render; done is called from Typewriter component
       setIsTyping(false);
       return;
     }
-    // simulate typing delay
     const delay = Math.min(600 + text.length * 12, 2200);
     setTimeout(() => {
       setMessages(m => m.map(msg => msg.id === id ? { ...msg, typing:false } : msg));
@@ -270,17 +290,174 @@ export default function SwastikaChatbot() {
     setMultiSelected([]);
     setInputEnabled(false);
     setInputVal("");
+    setInputType("text");
     setPhase("idle");
     setShowMain(false);
+    setSubmitError(null);
+    setIsSubmitting(false);
+    setDonorId(null);
+    setTransactionId(null);
+    setApplicantId(null);
     setTimeout(() => addBotMsg("👋 Namaste! I'm **Swastika**, your guide to our NGO.\n\nHow may I help you today?", () => {
       setShowMain(true);
       setPhase("main");
     }), 300);
   };
 
-  /* summary for confirm/submit */
+  /* ══════════════════════════════════════════
+     🔴 DONATION: Razorpay Integration
+  ══════════════════════════════════════════ */
+  const handleDonationConfirm = async (data) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // 1. Load Razorpay SDK
+      const loaded = await loadRazorpay();
+      if (!loaded) throw new Error("Failed to load Razorpay. Please check your internet connection.");
+
+      // 2. Create order on backend
+      const orderRes = await fetch("https://swastikajankalyanfoundation.netlify.app/api/donations/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: Number(data.amount) }),
+      });
+      const orderResult = await orderRes.json();
+      if (!orderRes.ok) throw new Error(orderResult.message || "Failed to create payment order.");
+
+      setIsSubmitting(false);
+
+      // 3. Open Razorpay checkout
+      const razorpayOptions = {
+        key: orderResult.keyId,
+        amount: orderResult.order.amount,
+        currency: orderResult.order.currency,
+        name: "Swastika Jan Kalyan Foundation",
+        description: "Donation",
+        order_id: orderResult.order.id,
+        prefill: {
+          name: data.fullName,
+          email: data.email,
+          contact: data.phone,
+        },
+        theme: { color: "#2e7d32" },
+        modal: {
+          ondismiss: () => {
+            addBotMsg("💛 Payment was cancelled. Your details are saved — feel free to try again!", () => {
+              setPhase("done");
+            });
+          },
+        },
+        handler: async (razorpayResponse) => {
+          try {
+            setIsSubmitting(true);
+
+            // 4. Verify payment & save donation
+            const verifyRes = await fetch("https://swastikajankalyanfoundation.netlify.app/api/donations/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id: razorpayResponse.razorpay_order_id,
+                razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+                razorpay_signature: razorpayResponse.razorpay_signature,
+                fullName: data.fullName,
+                email: data.email,
+                phoneNumber: data.phone,
+                amount: Number(data.amount),
+                currency: "INR",
+                donationPurpose: data.purpose,
+                message: data.message || "",
+                isAnonymous: false,
+              }),
+            });
+            const verifyResult = await verifyRes.json();
+            if (!verifyRes.ok) throw new Error(verifyResult.message || "Payment verification failed.");
+
+            setDonorId(verifyResult.data.donorId);
+            setTransactionId(verifyResult.data.transactionId);
+            setIsSubmitting(false);
+
+            addBotMsg(
+              `🎉 Thank you for your donation of ₹${data.amount}, ${data.fullName}! You're a true Earth Guardian! 🌳💚\n\n📬 A receipt has been sent to ${data.email}.\n\n🆔 **Donor ID:** ${verifyResult.data.donorId}\n📋 **Transaction ID:** ${verifyResult.data.transactionId}`,
+              () => { setPhase("done"); setShowMain(false); }
+            );
+          } catch (err) {
+            setIsSubmitting(false);
+            setSubmitError(err.message);
+            addBotMsg(`⚠️ Payment verification failed: ${err.message}\n\nPlease contact us if your amount was deducted.`, () => {
+              setPhase("done");
+            });
+          }
+        },
+      };
+
+      const rzp = new window.Razorpay(razorpayOptions);
+      rzp.open();
+
+    } catch (err) {
+      setIsSubmitting(false);
+      setSubmitError(err.message);
+      addBotMsg(`⚠️ Something went wrong: ${err.message}\n\nPlease try again or contact us directly.`, () => {
+        setPhase("done");
+      });
+    }
+  };
+
+  /* ══════════════════════════════════════════
+     🟢 VOLUNTEER: API Submission
+  ══════════════════════════════════════════ */
+  const handleVolunteerSubmit = async (data) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const payload = {
+      name: data.fullName,
+      gender: data.gender,
+      dateOfBirth: data.dob,
+      phoneNumber: data.phone,
+      email: data.email,
+      instagramId: data.instagram || "",
+      address: data.address,
+      highestEducationalQualification: data.education,
+      currentCareerStatus: data.career,
+      skillsAndInterest: data.skills,
+      interestedTeams: data.teams ? data.teams.split(", ") : [],
+      leadershipPreference: data.leadership,
+      previousVolunteerExperience: data.experience,
+      whyJoinUs: data.whyJoin,
+    };
+
+    try {
+      const res = await fetch("https://swastikajankalyanfoundation.netlify.app/api/volunteers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.message || "Submission failed. Please try again.");
+
+      const appId = result.data?.applicantId;
+      setApplicantId(appId);
+      setIsSubmitting(false);
+
+      addBotMsg(
+        `🎊 Welcome to the Swastika family, ${data.fullName}! 🌿\n\nYour volunteer application has been received. Our team will reach out to you at ${data.email} soon!\n\n🆔 **Applicant ID:** ${appId}`,
+        () => { setPhase("done"); }
+      );
+    } catch (err) {
+      setIsSubmitting(false);
+      setSubmitError(err.message);
+      addBotMsg(`⚠️ Submission failed: ${err.message}\n\nPlease try again or reach out to us directly.`, () => {
+        setPhase("done");
+      });
+    }
+  };
+
+  /* ─── Summary card renderer ─── */
   const renderSummary = (flowArr, data, type) => {
-    const color = type === "confirm" ? "#2d6a4f" : type === "submit" ? "#1b4332" : "#40916c";
+    const isDonation = type === "confirm";
+    const isVolunteer = type === "submit";
+
     return (
       <div style={{ background:"#f0faf4", borderRadius:12, padding:"12px 14px", marginTop:10, border:"1.5px solid #c8e6c9" }}>
         {flowArr.filter(s => !s.key.startsWith("__") && data[s.key]).map(s => (
@@ -291,44 +468,75 @@ export default function SwastikaChatbot() {
             <span style={{ color:"#1b4332", fontWeight:600, wordBreak:"break-word" }}>{data[s.key]}</span>
           </div>
         ))}
-        <div style={{ display:"flex", gap:10, marginTop:12, flexWrap:"wrap" }}>
-          {type === "confirm" && (
-            <button onClick={() => {
-              addUserMsg("✅ Donation Confirmed!");
-              setOptions(null);
-              addBotMsg("🎉 Thank you for your donation! You'll receive a receipt on your email shortly. You're a true Earth Guardian! 🌳💚", () => {
-                setPhase("done");
-                setShowMain(false);
-              });
-            }} style={{ background:`linear-gradient(90deg,#2d6a4f,#52b788)`, color:"white", border:"none", borderRadius:20, padding:"9px 20px", fontSize:13, fontWeight:700, cursor:"pointer", fontFamily:"Sora,sans-serif", display:"flex", alignItems:"center", gap:6 }}>
-              <CheckIcon /> Confirm Donation
+
+        {/* Error banner */}
+        {submitError && (
+          <div style={{ background:"#fff0f0", border:"1px solid #ffcdd2", borderRadius:8, padding:"8px 12px", marginTop:8, fontSize:12, color:"#c62828" }}>
+            ⚠️ {submitError}
+          </div>
+        )}
+
+        <div style={{ display:"flex", gap:10, marginTop:12, flexWrap:"wrap", alignItems:"center" }}>
+          {isDonation && (
+            <button
+              onClick={() => {
+                addUserMsg("✅ Proceed to Payment");
+                setOptions(null);
+                handleDonationConfirm(data);
+              }}
+              disabled={isSubmitting}
+              style={{
+                background: isSubmitting ? "#c8e6c9" : "linear-gradient(90deg,#2d6a4f,#52b788)",
+                color:"white", border:"none", borderRadius:20,
+                padding:"9px 20px", fontSize:13, fontWeight:700,
+                cursor: isSubmitting ? "wait" : "pointer",
+                fontFamily:"Sora,sans-serif", display:"flex", alignItems:"center", gap:6,
+              }}>
+              {isSubmitting ? "⏳ Processing…" : <><CheckIcon /> Pay ₹{data.amount}</>}
             </button>
           )}
-          {type === "submit" && (
-            <button onClick={() => {
-              addUserMsg("📨 Application Submitted!");
-              setOptions(null);
-              addBotMsg("🎊 Your volunteer application has been received! Our team will reach out to you soon. Welcome to the Swastika family! 🌿", () => {
-                setPhase("done");
-              });
-            }} style={{ background:`linear-gradient(90deg,#1b4332,#40916c)`, color:"white", border:"none", borderRadius:20, padding:"9px 20px", fontSize:13, fontWeight:700, cursor:"pointer", fontFamily:"Sora,sans-serif", display:"flex", alignItems:"center", gap:6 }}>
-              <CheckIcon /> Submit Application
+
+          {isVolunteer && (
+            <button
+              onClick={() => {
+                addUserMsg("📨 Application Submitted!");
+                setOptions(null);
+                handleVolunteerSubmit(data);
+              }}
+              disabled={isSubmitting}
+              style={{
+                background: isSubmitting ? "#c8e6c9" : "linear-gradient(90deg,#1b4332,#40916c)",
+                color:"white", border:"none", borderRadius:20,
+                padding:"9px 20px", fontSize:13, fontWeight:700,
+                cursor: isSubmitting ? "wait" : "pointer",
+                fontFamily:"Sora,sans-serif", display:"flex", alignItems:"center", gap:6,
+              }}>
+              {isSubmitting ? "⏳ Submitting…" : <><CheckIcon /> Submit Application</>}
             </button>
           )}
+
           {type === "done" && (
-            <button onClick={handleRestart} style={{ background:"linear-gradient(90deg,#52b788,#95d5b2)", color:"#1b4332", border:"none", borderRadius:20, padding:"9px 20px", fontSize:13, fontWeight:700, cursor:"pointer", fontFamily:"Sora,sans-serif" }}>
+            <button onClick={handleRestart} style={{
+              background:"linear-gradient(90deg,#52b788,#95d5b2)", color:"#1b4332",
+              border:"none", borderRadius:20, padding:"9px 20px",
+              fontSize:13, fontWeight:700, cursor:"pointer", fontFamily:"Sora,sans-serif",
+            }}>
               🔄 Back to Menu
             </button>
           )}
-          <button onClick={handleRestart} style={{ background:"transparent", color:"#74b69a", border:"1.5px solid #c8e6c9", borderRadius:20, padding:"9px 16px", fontSize:12, fontWeight:600, cursor:"pointer", fontFamily:"Sora,sans-serif" }}>
-            ↩ Restart
-          </button>
+
+          {!isSubmitting && (
+            <button onClick={handleRestart} style={{
+              background:"transparent", color:"#74b69a",
+              border:"1.5px solid #c8e6c9", borderRadius:20,
+              padding:"9px 16px", fontSize:12, fontWeight:600,
+              cursor:"pointer", fontFamily:"Sora,sans-serif",
+            }}>↩ Restart</button>
+          )}
         </div>
       </div>
     );
   };
-
-  const currentStep = flow && flow[flowStep];
 
   return (
     <>
@@ -353,7 +561,6 @@ export default function SwastikaChatbot() {
 
         {/* ── Trigger bar ── */}
         <div className="trigger-btn" style={{ position:"fixed", bottom:28, right:28, display:"flex", alignItems:"center", gap:0, zIndex:9999, cursor:"pointer" }} onClick={() => setOpen(o => !o)}>
-          {/* Speech bubble teaser */}
           {!open && (
             <div style={{
               background:"white", borderRadius:"16px 16px 4px 16px",
@@ -368,7 +575,6 @@ export default function SwastikaChatbot() {
               <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>, how may I help you? 🌿</span>
             </div>
           )}
-          {/* Button */}
           <div className="trigger-inner" style={{
             width:58, height:58, borderRadius:"50%",
             background:"linear-gradient(135deg,#1b4332,#40916c)",
@@ -417,7 +623,7 @@ export default function SwastikaChatbot() {
             {/* Messages */}
             <div style={{ flex:1, overflowY:"auto", padding:"16px 14px", display:"flex", flexDirection:"column", gap:10, background:"#fafffe" }}>
 
-              {messages.map((msg, mi) => (
+              {messages.map((msg) => (
                 <div key={msg.id} className="msg-in" style={{ display:"flex", flexDirection: msg.role==="bot" ? "row" : "row-reverse", gap:8, alignItems:"flex-end" }}>
                   {msg.role === "bot" && (
                     <div style={{ width:28, height:28, borderRadius:"50%", background:"linear-gradient(135deg,#2d6a4f,#52b788)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:13, flexShrink:0, marginBottom:2 }}>🌿</div>
@@ -457,14 +663,17 @@ export default function SwastikaChatbot() {
                 </div>
               ))}
 
-              {/* Typing indicator */}
-              {isTyping && (
+              {/* Typing / Submitting indicator */}
+              {(isTyping || isSubmitting) && (
                 <div className="msg-in" style={{ display:"flex", gap:8, alignItems:"flex-end" }}>
                   <div style={{ width:28, height:28, borderRadius:"50%", background:"linear-gradient(135deg,#2d6a4f,#52b788)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:13, flexShrink:0 }}>🌿</div>
                   <div style={{ background:"white", borderRadius:"16px 16px 16px 4px", padding:"12px 16px", border:"1.5px solid #e8f5e9", display:"flex", gap:5, alignItems:"center" }}>
-                    {[0,1,2].map(i => (
-                      <div key={i} style={{ width:7, height:7, borderRadius:"50%", background:"#52b788", animation:`dotBounce 1.2s ease ${i*0.2}s infinite` }} />
-                    ))}
+                    {isSubmitting
+                      ? <span style={{ fontSize:12, color:"#52b788", fontWeight:600 }}>⏳ Processing…</span>
+                      : [0,1,2].map(i => (
+                          <div key={i} style={{ width:7, height:7, borderRadius:"50%", background:"#52b788", animation:`dotBounce 1.2s ease ${i*0.2}s infinite` }} />
+                        ))
+                    }
                   </div>
                 </div>
               )}
@@ -524,7 +733,6 @@ export default function SwastikaChatbot() {
                         ✅ Confirm Selection ({multiSelected.length})
                       </button>
                     )}
-                    {/* Next / skip */}
                     <button onClick={() => {
                       const skipVal = options.multi
                         ? (multiSelected.length ? multiSelected.join(", ") : "Skipped")
@@ -544,7 +752,7 @@ export default function SwastikaChatbot() {
               )}
 
               {/* done CTA */}
-              {phase === "done" && !isTyping && (
+              {phase === "done" && !isTyping && !isSubmitting && (
                 <div className="msg-in" style={{ marginLeft:36, marginTop:4 }}>
                   <button onClick={handleRestart} style={{
                     background:"linear-gradient(90deg,#52b788,#95d5b2)", color:"#1b4332",
