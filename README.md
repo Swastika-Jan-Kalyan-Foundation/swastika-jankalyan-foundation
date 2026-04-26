@@ -42,12 +42,12 @@ This repository contains the official website of Swastika Jan — built to share
 |---|---|
 | 🏠 Hero / Home Section | ✅ Complete |
 | 📜 Footer | ✅ Complete |
-| 🙋 About Page | 🔄 In Progress |
+| 🙋 About Page | ✅ Complete  |
 | 💚 Causes Page | 🔄 In Progress |
 | 📝 Blog | 🔄 In Progress |
-| 📬 Contact Page | 🔄 In Progress |
+| 📬 Contact Page | ✅ Complete |
 | 📱 Mobile Responsiveness | ✅ Complete |
-| 🎨 Animations & Polish | 🔄 In Progress |
+| 🎨 Animations & Polish | ✅ Complete  |
 
 ---
 
