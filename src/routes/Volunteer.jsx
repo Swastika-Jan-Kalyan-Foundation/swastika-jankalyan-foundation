@@ -91,7 +91,8 @@ export const Volunteer = () => {
   const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const  [applicantID, setApplicantID] = useState("")
+  const [applicantID, setApplicantID] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,6 +108,7 @@ export const Volunteer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
   
     const payload = {
       name: form.name,
@@ -136,6 +138,7 @@ export const Volunteer = () => {
   
       const data = await res.json();
       setSubmitted(true)
+      setIsLoading(false);
       console.log("Your Applicant ID:", data.data.applicantId);
       setApplicantID(data.data.applicantId)
   
@@ -143,6 +146,7 @@ export const Volunteer = () => {
   
       console.log("Success:", data);
     } catch (err) {
+      setIsLoading(false);
       console.error(err.message);
     }
   };
@@ -233,8 +237,9 @@ export const Volunteer = () => {
         ::placeholder { color: #a8d5be; font-family: Sora, sans-serif; }
         select option { color: #1b4332; background: white; }
         .team-chip:hover { background: #d8f3dc !important; border-color: #52b788 !important; }
-        .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(52,183,120,0.35); }
-        .submit-btn:active { transform: translateY(0); }
+        .submit-btn:not(:disabled):hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(52,183,120,0.35); }
+        .submit-btn:not(:disabled):active { transform: translateY(0); }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         textarea:focus, input:focus, select:focus { outline: none; }
         .stat-card { transition: transform 0.2s; }
         .stat-card:hover { transform: translateY(-3px); }
@@ -628,17 +633,34 @@ export const Volunteer = () => {
               </Field>
 
               {/* Submit */}
-              <button  type="submit" className="submit-btn"
+              <button type="submit" className="submit-btn" disabled={isLoading}
                 style={{
                   width: "100%", padding: "15px", borderRadius: 14, border: "none",
-                  background: "linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",
-                  color: "white", fontSize: 16, fontWeight: 700, cursor: "pointer",
+                  background: isLoading
+                    ? "linear-gradient(90deg,#2d4a3e 0%,#3a6b54 50%,#4a7a65 100%)"
+                    : "linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",
+                  color: "white", fontSize: 16, fontWeight: 700,
+                  cursor: isLoading ? "not-allowed" : "pointer",
                   fontFamily: "Sora, sans-serif", letterSpacing: "0.02em",
                   display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                   transition: "all 0.2s",
+                  opacity: isLoading ? 0.85 : 1,
                 }}>
-                <LeafSVG style={{ width: 20, filter: "brightness(3)" }} />
-                Submit My Application
+                {isLoading ? (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      style={{ animation: "spin 0.9s linear infinite", flexShrink: 0 }}>
+                      <circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5"/>
+                      <path d="M10 2a8 8 0 0 1 8 8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                    </svg>
+                    Submitting your application…
+                  </>
+                ) : (
+                  <>
+                    <LeafSVG style={{ width: 20, filter: "brightness(3)" }} />
+                    Submit My Application
+                  </>
+                )}
               </button>
 
               <p style={{ textAlign: "center", color: "#a8d5be", fontSize: 12, marginTop: 14 }}>
