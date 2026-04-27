@@ -87,6 +87,66 @@ const DropSVG = ({ className = "" }) => (
   </svg>
 );
 
+const BookSvg = ({ className = ""}) => (
+  <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+ 
+  <path d="M30 50 
+           Q80 25 110 50 
+           L110 150 
+           Q80 125 30 150 
+           Z"
+        stroke="#5FAF6B"
+        stroke-width="3"
+        fill="none"
+        stroke-linejoin="round"/>
+
+
+  <path d="M110 50 
+           Q140 25 190 50 
+           L190 150 
+           Q140 125 110 150 
+           Z"
+        stroke="#5FAF6B"
+        stroke-width="3"
+        fill="none"
+        stroke-linejoin="round"/>
+
+  
+  <path d="M110 45 
+           Q112 100 110 155"
+        stroke="#5FAF6B"
+        stroke-width="2"
+        fill="none"
+        stroke-linecap="round"/>
+
+ 
+  <path d="M50 80 Q75 70 95 80" 
+        stroke="#5FAF6B" 
+        stroke-width="1.5" 
+        fill="none" 
+        opacity="0.7"/>
+  <path d="M50 105 Q75 95 95 105" 
+        stroke="#5FAF6B" 
+        stroke-width="1.5" 
+        fill="none" 
+        opacity="0.7"/>
+
+ 
+  <path d="M125 80 Q150 70 170 80" 
+        stroke="#5FAF6B" 
+        stroke-width="1.5" 
+        fill="none" 
+        opacity="0.7"/>
+  <path d="M125 105 Q150 95 170 105" 
+        stroke="#5FAF6B" 
+        stroke-width="1.5" 
+        fill="none" 
+        opacity="0.7"/>
+
+</svg>
+)
+
 const ArrowRightSVG = ({ className = "" }) => (
   <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -113,6 +173,8 @@ const stats = [
  
   { icon: SunSVG, value: "50+", label: "Supporters" },
   { icon: DropSVG, value: "15+", label: "Events" },
+  { icon: BookSvg, value: "5+", label: "Upcoming Projects" },
+
 ];
 
 const causes = [
@@ -590,7 +652,7 @@ export const Home = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className=" grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map(({ icon: Icon, value, label }, i) => (
               <div key={i} className="stat-item flex flex-col items-center text-center group cursor-default">
                 <div className="stat-icon w-14 h-14 rounded-2xl flex items-center justify-center mb-3 shadow-md" style={{ background:"linear-gradient(135deg,#e8f5ea,#c8e6ca)", border:"1px solid rgba(95,175,107,0.2)" }}>
@@ -626,7 +688,7 @@ export const Home = () => {
               Our Initiatives
             </span>
             <h2 className="text-[38px] md:text-[48px] font-black text-gray-900 leading-tight tracking-tight">
-              Causes We Fight For
+              Causes We Strive For
             </h2>
             <p className="text-gray-500 text-[14.5px] mt-3 max-w-[500px] mx-auto leading-relaxed">
               Each initiative is rooted in real community needs and driven by measurable, lasting impact.

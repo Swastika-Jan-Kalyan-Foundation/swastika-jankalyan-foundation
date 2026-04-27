@@ -90,7 +90,7 @@ const FIELD_ICONS = {
 /* ══════════════════════════════════════════════════════
    CONTENT
 ══════════════════════════════════════════════════════ */
-const NGO_ABOUT = `Welcome to Swastika Foundation!
+const NGO_ABOUT = `Welcome to Swastika Jan Kalyan Foundation!
 
 We are a grassroots NGO based in Ranchi, Jharkhand, dedicated to healing the earth and empowering its people.
 
@@ -197,7 +197,7 @@ function Typewriter({ text, speed = 18, onDone }) {
 }
 
 function TriggerTypewriter() {
-  const full = "Hi! I'm Swastika, how may I help you?";
+  const full = "Hi! I'm S.E.V.A, how may I help you?";
   const [displayed, setDisplayed] = useState("");
 
   useEffect(() => {
@@ -545,7 +545,7 @@ export default function SwastikaChatbot() {
                 <div style={{ position:"absolute", bottom:1, right:1, width:11, height:11, borderRadius:"50%", background:"#52b788", border:"2px solid #1b4332" }} />
               </div>
               <div style={{ flex:1 }}>
-                <div style={{ color:"white", fontSize:15, fontWeight:800 }}>Swastika</div>
+                <div style={{ color:"white", fontSize:15, fontWeight:800 }}>S.E.V.A</div>
                 <div style={{ color:"#95d5b2", fontSize:11, fontWeight:500 }}>NGO Assistant · Online</div>
               </div>
               <button onClick={handleRestart} style={{ background:"rgba(255,255,255,0.1)", border:"none", borderRadius:20, padding:"5px 10px", color:"#95d5b2", fontSize:11, fontWeight:600, cursor:"pointer", fontFamily:"Sora,sans-serif", display:"flex", alignItems:"center", gap:5 }}>
