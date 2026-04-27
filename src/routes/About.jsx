@@ -352,7 +352,7 @@ export const About = () => {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginTop: 56 }}>
           <div style={{ height: 1, width: 60, background: "linear-gradient(to right, transparent, rgba(45,106,79,0.3))" }} />
           <span style={{ fontSize: 20 }}>🌿</span>
-          <span style={{ fontSize: 13, color: "#9ca3af", fontStyle: "italic" }}>Swastika Jan Kalyan Foundation — Est. Ranchi, Jharkhand</span>
+          <span style={{ fontSize: 13, color: "#9ca3af", fontStyle: "italic" }}>Swastika Jan Kalyan Foundation — Est. 2025 in Ranchi, Jharkhand</span>
           <span style={{ fontSize: 20 }}>🌿</span>
           <div style={{ height: 1, width: 60, background: "linear-gradient(to left, transparent, rgba(45,106,79,0.3))" }} />
         </div>
@@ -700,19 +700,20 @@ export const About = () => {
                                 accent: "#2d6a4f",
                             },
                             {
+                                name: "Ayush Kumar Sinha",
+                                designation: "Managing Director",
+                                memberImage: memberdirector,
+                                gradient: "linear-gradient(135deg, #fde9d9 0%, #fcd1b0 100%)",
+                                accent: "#c2410c",
+                            },
+                            {
                                 name: "Ashish Yash",
                                 designation: "Director",
                                 memberImage: director,
                                 gradient: "linear-gradient(135deg, #dff0ff 0%, #bfdfff 100%)",
                                 accent: "#2563eb",
                             },
-                            {
-                                name: "Ayush Kumar Sinha",
-                                designation: "Member Director",
-                                memberImage: memberdirector,
-                                gradient: "linear-gradient(135deg, #fde9d9 0%, #fcd1b0 100%)",
-                                accent: "#c2410c",
-                            },
+                            
                             {
                                 name: "Apoorv Harsh",
                                 designation: "Head of Finance",
