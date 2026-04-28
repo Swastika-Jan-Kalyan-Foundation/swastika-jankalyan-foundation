@@ -124,10 +124,10 @@ export default function FloatingFooter() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [hoveredSocial, setHoveredSocial] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubscribe = async (e) => {
     e.preventDefault();
-  
+    setIsLoading(true)
     if (!email.trim()) return;
   
     try {
@@ -146,6 +146,7 @@ export default function FloatingFooter() {
       }
   
       setSubscribed(true);
+      setIsLoading(false)
       setEmail("");
       setTimeout(() => setSubscribed(false), 4000);
   
@@ -372,13 +373,35 @@ export default function FloatingFooter() {
                       required
                       className="ngo-input w-full text-sm rounded-xl px-4 py-2.5"
                     />
-                    <button
-                      type="submit"
-                      className="ngo-sub-btn flex items-center justify-center gap-2 text-sm font-semibold text-white rounded-xl px-4 py-2.5"
-                    >
-                      <SendIcon />
-                      Subscribe Now
-                    </button>
+                    <button type="submit" className="submit-btn" disabled={isLoading}
+                style={{
+                  width: "100%", padding: "15px", borderRadius: 14, border: "none",
+                  background: isLoading
+                    ? "linear-gradient(90deg,#2d4a3e 0%,#3a6b54 50%,#4a7a65 100%)"
+                    : "linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",
+                  color: "white", fontSize: 16, fontWeight: 700,
+                  cursor: isLoading ? "not-allowed" : "pointer",
+                  fontFamily: "Sora, sans-serif", letterSpacing: "0.02em",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                  transition: "all 0.2s",
+                  opacity: isLoading ? 0.85 : 1,
+                }}>
+                {isLoading ? (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      style={{ animation: "spin 0.9s linear infinite", flexShrink: 0 }}>
+                      <circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5"/>
+                      <path d="M10 2a8 8 0 0 1 8 8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                    </svg>
+                    Subscribing…
+                  </>
+                ) : (
+                  <>
+                    <SendIcon style={{ width: 20, filter: "brightness(3)" }} />
+                    Subscribe to Newsletter
+                  </>
+                )}
+              </button>
                   </form>
                 ) : (
                   <div
