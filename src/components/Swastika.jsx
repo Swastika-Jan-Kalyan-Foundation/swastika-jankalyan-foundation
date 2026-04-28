@@ -356,7 +356,7 @@ export default function SwastikaChatbot() {
       const loaded = await loadRazorpay();
       if (!loaded) throw new Error("Failed to load Razorpay. Check your internet connection.");
 
-      const orderRes = await fetch("https://sjkf-backend-api.vercel.app/api/donations/create-order", {
+      const orderRes = await fetch("https://sjkf-backend-api-production.up.railway.app/api/donations/create-order", {
         method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({ amount: Number(data.amount) }),
       });
@@ -380,7 +380,7 @@ export default function SwastikaChatbot() {
         handler: async (rzpRes) => {
           try {
             setIsSubmitting(true);
-            const verifyRes = await fetch("https://sjkf-backend-api.vercel.app/api/donations/verify-payment", {
+            const verifyRes = await fetch("https://sjkf-backend-api-production.up.railway.app/api/donations/verify-payment", {
               method:"POST", headers:{"Content-Type":"application/json"},
               body: JSON.stringify({
                 razorpay_order_id: rzpRes.razorpay_order_id,
@@ -416,7 +416,7 @@ export default function SwastikaChatbot() {
   const handleVolunteerSubmit = async (data) => {
     setIsSubmitting(true); setSubmitError(null);
     try {
-      const res = await fetch("https://sjkf-backend-api.vercel.app/api/volunteers", {
+      const res = await fetch("https://sjkf-backend-api-production.up.railway.app/api/volunteers", {
         method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
           name: data.fullName, gender: data.gender, dateOfBirth: data.dob,
