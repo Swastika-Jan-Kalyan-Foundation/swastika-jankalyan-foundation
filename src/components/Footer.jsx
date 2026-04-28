@@ -131,7 +131,7 @@ export default function FloatingFooter() {
     if (!email.trim()) return;
   
     try {
-      const res = await fetch("http://localhost:5000/api/newsletter/subscribe", {
+      const res = await fetch("https://sjkf-backend-api-production.up.railway.app/api/newsletter/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
