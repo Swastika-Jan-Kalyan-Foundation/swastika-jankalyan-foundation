@@ -28,7 +28,7 @@ function App() {
         <Route path='/aboutus' element={<About />} />
         <Route path='/projects' element={<Projects />} />
         <Route path='/donatetous' element={<Donate />} />
-        <Route path='/beapartofus' element={<Volunteer />} />
+        <Route path='/volunteerwus' element={<Volunteer />} />
         <Route path='/contactus' element={<ContactUs />} />
         <Route path='/trackyourimpact' element={<TrackImpact />} />
         <Route path='/annualreport' element={<AnnualReport />} />

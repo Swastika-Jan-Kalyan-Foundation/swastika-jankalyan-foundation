@@ -35,7 +35,7 @@ export default function NavBar() {
         { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
     
         { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
-        { label: "Get Involved", href: "https://swastikajankalyanfoundation.netlify.app/beapartofus" },
+        { label: "Become a Volunteer", href: "https://swastikajankalyanfoundation.netlify.app/volunteerwus" },
     
     
         { label: "Contact Us", href: "https://swastikajankalyanfoundation.netlify.app/contactus" },

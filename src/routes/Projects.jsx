@@ -447,7 +447,7 @@ export const Projects =  () => {
                             }}>
                                 Donate Now →
                             </a>
-                            <a href="https://swastikajankalyanfoundation.netlify.app/beapartofus" style={{
+                            <a href="https://swastikajankalyanfoundation.netlify.app/volunteerwus" style={{
                                 padding: "14px 32px",
                                 background: "transparent",
                                 border: "2px solid #2d6a4f",

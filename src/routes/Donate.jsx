@@ -282,7 +282,7 @@ export const Donate = () => {
 
               {/* Trust badges */}
               <div className="flex flex-wrap gap-2 mt-6 pt-5" style={{ borderTop: "1px solid rgba(45,106,79,0.1)" }}>
-                {["80G Certified", "12A Registered", "100% Transparent", "CSR Eligible"].map((b) => (
+                {["80G Certified", "12A Registered", "100% Transparent"].map((b) => (
                   <span key={b} className="text-xs font-semibold px-3 py-1 rounded-full"
                     style={{ background: "#e8f5ee", color: "#2d6a4f", border: "1px solid rgba(45,106,79,0.18)" }}>
                     ✓ {b}
@@ -542,7 +542,7 @@ export const Donate = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col gap-3 flex-shrink-0">
-              <a href="https://swastikajankalyanfoundation.netlify.app/beapartofus" className="volunteer-btn px-8 py-4 rounded-2xl font-bold text-sm text-[#2d6a4f] cursor-pointer"
+              <a href="https://swastikajankalyanfoundation.netlify.app/volunteerwus" className="volunteer-btn px-8 py-4 rounded-2xl font-bold text-sm text-[#2d6a4f] cursor-pointer"
                 style={{ background: "#ffffff", border: "2px solid #2d6a4f", letterSpacing: "0.03em" }}>
                 Register as Volunteer →
               </a>
