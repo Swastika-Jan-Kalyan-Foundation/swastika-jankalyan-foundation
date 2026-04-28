@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import chairman from '../assets/chairman.png'
 import director from '../assets/director.png'
 import memberdirector from '../assets/memberdirector.png'
 import headoffin from '../assets/headoffin.png'
+import ngoLogo from '../assets/logo.png'
 const statutoryDetails = [
     { label: "Organization Name", value: "Swastika Jan Kalyan Foundation", icon: "🏛️" },
-    { label: "Registration Number", value: "U88900JH2025NPL025146", icon: "🔖" },
-    { label: "Type", value: "Non-Governmental Organization (NGO)", icon: "📋" },
+    { label: "Registration Number (CIN)", value: "U88900JH2025NPL025146", icon: "🔖" },
+    { label: "Registration Type", value: "Non-Governmental Organization (NGO)", icon: "📋" },
     { label: "Darpan ID (NITI Aayog)", value: "JH/2025/0693291", icon: "📅" },
     { label: "Registered Under", value: "Section 8 of Companies Act, 2013", icon: "⚖️" },
+    { label: "Section 8 License Number", value: "1****9", icon: "📑"},
     { label: "PAN Number", value: "AB******4H", icon: "🪪" },
-    { label: "12A Registration", value: "ABQC********0251", icon: "📄" },
-    { label: "80G Registration", value: "ABQC********0261", icon: "📝" },
+    { label: "12A Registration", value: "ABQC**********51", icon: "📄" },
+    { label: "80G Registration", value: "ABQC**********61", icon: "📝" },
     { label: "Tax Deduction Account Number(TAN)", value: "RC*****5E", icon: "💸" },
-    { label: "GSTIN", value: "20ABQ******1ZF", icon: "📊" },
+    { label: "GSTIN", value: "20ABQ******1Z*", icon: "📊" },
+
 ];
 const pastProjects = [
     {
@@ -114,12 +117,15 @@ const pillars = [
       icon: "🌱",
       title: "Our Mission",
       shortText:
-        "To create sustainable ecological and social change by empowering communities through forestation, education, and inclusive development programs across Jharkhand.",
+        "We bridge the gap between potential and opportunity through dedicated, community-driven action. From restoring our ecology and providing accessible education to promoting life-changing health awareness, our mission is to create tangible, lasting impact.",
       fullText: [
-        "Swastika Jan Kalyan Foundation was born from a simple but powerful belief — that lasting change begins at the grassroots. Our mission is to create sustainable ecological and social transformation by working directly with the communities that need it most.",
-        "We operate at the intersection of three critical areas: environmental restoration, quality education, and inclusive economic development. Whether it's planting native trees that restore biodiversity, running digital literacy camps for tribal youth, or building water harvesting systems in drought-prone villages — every action we take is guided by the principle that people and planet must grow together.",
-        "We don't impose solutions from the outside. We listen, collaborate, and co-create with local leaders, panchayats, and community elders to design programs that are rooted in context and built to last. Our mission is not just to help communities survive — it is to help them thrive, with dignity and self-reliance.",
+        "Our mission is to translate our organizational objectives into measurable, on-ground impact. We bridge the gap between need and provision through the following strategic pillars:",
+        "Environmental Stewardship: We act as active protectors of our ecology. From organizing cleanup drives for our rivers and public spaces to running awareness programs that tackle the roots of global warming, we work to secure a cleaner, greener home for both current and future generations.",
+        "Educational Empowerment: We believe education is the primary catalyst for change. Our mission is to proactively seek out those in rural and underserved areas—the illiterate, the marginalized, and the underprivileged—to provide them with access to quality education, literacy programs, and intellectual resources.",
+        "Holistic Social Support: We are committed to uplifting the standard of life for all people. This includes the implementation of health-centric initiatives, such as ensuring access to safe drinking water, promoting healthy lifestyle habits, and providing dedicated support for individuals with disabilities to ensure they have the agency to thrive.",
+        "Community Awareness: We serve as a conduit for information. By designing and executing advocacy programs, we create a ripple effect of awareness, empowering communities to take charge of their own health, environment, and social status."
       ],
+      aboutWhat: "Our Mission",
       accent: "#2d6a4f",
       lightBg: "linear-gradient(135deg, #f0faf4 0%, #e4f5eb 100%)",
       modalBg: "linear-gradient(160deg, #f0faf4, #e0f2e9)",
@@ -129,12 +135,15 @@ const pillars = [
       icon: "🔭",
       title: "Our Vision",
       shortText:
-        "A world where ecological balance is restored, every individual has access to quality education, and communities thrive in harmony with nature and each other.",
+        "We envision a future where environmental health, social equity, and intellectual growth are fundamental rights rather than privileges. We strive for a world where every community thrives in harmony with nature, empowered by knowledge and holistic well-being.",
       fullText: [
-        "We envision a Jharkhand — and eventually an India — where the forests are dense, the rivers run clean, the children go to school, and no family goes to bed hungry. A world where ecological balance is not a luxury but a lived reality for every citizen, regardless of their economic status or geography.",
-        "Our vision extends beyond just planting trees or running camps. We see a future where the communities we work with become self-sustaining guardians of their own environment — equipped with knowledge, tools, and networks to solve their own challenges without dependency.",
-        "By 2030, we aim to have directly impacted 50,000 lives, restored 500 hectares of degraded land, and built a network of 1,000 trained community climate advocates across eastern India. This is not idealism. This is our roadmap.",
+        "We envision a world where environmental health, social equity, and intellectual growth are not privileges, but fundamental constants of daily life. Our dream is to create a society where:",
+        "Ecological Balance is Restored: We see a future where rural and urban environments thrive side-by-side, characterized by breathable air, clean, flowing rivers, and habitats that support sustainable living.",
+        "Knowledge is Universal: We strive for a reality where the lack of literacy is a thing of the past. We imagine a landscape where every marginalized and underprivileged individual has access to the tools of education, fostering a culture of informed, critical thinkers.",
+        "Well-being is Holistic: We look toward a society where safe drinking water and quality health awareness are accessible to all, and where individuals with special needs are integrated, supported, and celebrated as equal contributors to our collective progress.",
+        `"Our vision is not just the absence of problems, but the presence of vibrant, sustainable, and inclusive opportunity."`
       ],
+      aboutWhat: "Our Vision",
       accent: "#40916c",
       lightBg: "linear-gradient(135deg, #f2fbf6 0%, #dff0e7 100%)",
       modalBg: "linear-gradient(160deg, #f2fbf6, #d8eedf)",
@@ -144,12 +153,16 @@ const pillars = [
       icon: "⭐",
       title: "Our Values",
       shortText:
-        "Integrity, inclusivity, sustainability, and compassion — four pillars that guide every initiative, every partnership, and every single decision we make.",
+        "Integrity, empathy, and sustainability form the heartbeat of our foundation. We believe in the dignity of every individual and are committed to transparency and inclusivity in every project we undertake. See the principles that guide our service.",
       fullText: [
         "Our values are not words on a wall. They are the principles that shape every conversation we have, every partnership we forge, and every rupee we spend.",
-        "Integrity means we are transparent about where funds go, honest about what we can and cannot achieve, and accountable to the communities we serve — not just to our donors. Inclusivity means every program we design actively centres the voices of women, tribal communities, and historically marginalised groups.",
-        "Sustainability means we think in decades, not quarters. We choose methods that build local capacity rather than create dependency. A forest planted must be one the community will protect long after we leave. And Compassion means we show up — not as experts dispensing advice, but as fellow human beings who care deeply about the people and the planet we share.",
+        "Empowerment: We don’t just provide aid; we provide the tools, awareness, and agency for people to lift themselves and their communities.",
+        "Sustainability: We act as stewards of our planet, ensuring that our environmental initiatives—from air quality to water conservation—are long-term, restorative, and impactful.",
+        "Inclusivity: We believe in the inherent dignity of every human being. We actively advocate for the marginalized, the underprivileged, and those with special needs, ensuring no one is left behind.",
+        "Integrity: As a foundation, we hold ourselves accountable to the highest standards of transparency and service, ensuring every resource is dedicated to public welfare (Jan Kalyan).",
+        "Empathy: We lead with compassion, recognizing that genuine social change is born from understanding the lived realities of those we serve."
       ],
+      aboutWhat: "Our Values",
       accent: "#1b4332",
       lightBg: "linear-gradient(135deg, #f8fffe 0%, #e0f2e9 100%)",
       modalBg: "linear-gradient(160deg, #f8fffe, #d8efe0)",
@@ -159,6 +172,676 @@ const pillars = [
    
   
    
+
+/* ─────────────────────────────────────────────────────────
+   TEAM CAROUSEL COMPONENT
+───────────────────────────────────────────────────────── */
+function TeamCarousel({ members, renderCard }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
+    const visibleCount = isMobile ? 1 : 3;
+    const total = members.length;
+
+    const next = () => setCurrentIndex(prev => (prev + 1) % total);
+    const prev = () => setCurrentIndex(prev => (prev - 1 + total) % total);
+
+    const visibleMembers = Array.from({ length: visibleCount }, (_, i) =>
+        members[(currentIndex + i) % total]
+    );
+
+    return (
+        <div style={{ position: "relative" }}>
+            {/* Arrow Left — floats on the left edge */}
+            <button
+                onClick={prev}
+                style={{
+                    position: "absolute", left: -20, top: "50%",
+                    transform: "translateY(-60%)",
+                    zIndex: 10,
+                    width: 40, height: 40, borderRadius: "50%",
+                    background: "#ffffff",
+                    border: "1.5px solid rgba(45,106,79,0.25)",
+                    cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "0 2px 12px rgba(45,106,79,0.15)",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#2d6a4f"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#fff"); }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#ffffff"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#2d6a4f"); }}
+            >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            {/* Cards */}
+            <div style={{
+                display: "grid",
+                gridTemplateColumns: `repeat(${visibleCount}, 1fr)`,
+                gap: 24,
+                padding: "0 28px",
+            }}>
+                {visibleMembers.map((member, i) => (
+                    <div key={`${currentIndex}-${i}`}>
+                        {renderCard(member, (currentIndex + i) % total)}
+                    </div>
+                ))}
+            </div>
+
+            {/* Arrow Right — floats on the right edge */}
+            <button
+                onClick={next}
+                style={{
+                    position: "absolute", right: -20, top: "50%",
+                    transform: "translateY(-60%)",
+                    zIndex: 10,
+                    width: 40, height: 40, borderRadius: "50%",
+                    background: "#ffffff",
+                    border: "1.5px solid rgba(45,106,79,0.25)",
+                    cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "0 2px 12px rgba(45,106,79,0.15)",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#2d6a4f"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#fff"); }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#ffffff"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#2d6a4f"); }}
+            >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    );
+}
+
+function TeamSection({ memberdirector, chairman, director, headoffin }) {
+    const boardMembers = [
+        {
+            name: "Ayush Kumar Sinha",
+            designation: "Managing Director cum Founder",
+            secondaryDesignation: "(Member Director)",
+            memberImage: memberdirector,
+            gradient: "linear-gradient(135deg, #fde9d9 0%, #fcd1b0 100%)",
+            accent: "#c2410c",
+            crown: true,
+        },
+        {
+            name: "Ajay Kumar Sinha",
+            designation: "Chairman cum Co-Founder",
+            secondaryDesignation: "(Member Director)",
+            memberImage: chairman,
+            gradient: "linear-gradient(135deg, #d8f3e3 0%, #b7e4c7 100%)",
+            accent: "#2d6a4f",
+            crown: false,
+        },
+        {
+            name: "Ashish Yash",
+            designation: "Director cum Co-Founder",
+            secondaryDesignation: "(Dept. of Human Resources)",
+            memberImage: director,
+            gradient: "linear-gradient(135deg, #dff0ff 0%, #bfdfff 100%)",
+            accent: "#2563eb",
+            crown: false,
+        },
+        {
+            name: "Apoorv Harsh",
+            designation: "Director cum Co-Founder",
+            secondaryDesignation: "(Dept. of Finance, Accounts & Legal)",
+            memberImage: headoffin,
+            gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
+            accent: "#7c3aed",
+            crown: false,
+        },
+        {
+            name: "Aashika Sinha",
+            designation: "Director",
+            secondaryDesignation: "(Dept. of IT, Social Media and Information)",
+            memberImage: headoffin,
+            gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
+            accent: "#7c3aed",
+            crown: false,
+        },
+        {
+            name: "Prince Singhania",
+            designation: "Director",
+            secondaryDesignation: "(Dept. of Public Relations & Marketing)",
+            memberImage: headoffin,
+            gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
+            accent: "#7c3aed",
+            crown: false,
+        },
+    ];
+
+    const teamMembers = [
+        {
+            name: "Sanyukta Giri",
+            designation: "Head of Graphics Designing",
+            gradient: "linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)",
+            accent: "#db2777",
+            initials: "SG",
+        },
+        {
+            name: "Piyush Bhusan Sharma",
+            designation: "Head of Operations",
+            gradient: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
+            accent: "#d97706",
+            initials: "PS",
+        },
+        {
+            name: "Shubham Gupta",
+            designation: "Co-Lead of Operations",
+            gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
+            accent: "#3b82f6",
+            initials: "SG",
+        },
+        {
+            name: "Shruti Sinha",
+            designation: "Co-Lead of Operations",
+            gradient: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+            accent: "#16a34a",
+            initials: "SS",
+        },
+    ];
+
+    const renderBoardCard = (member, i) => (
+        <div className="team-card" style={{
+            background: "#ffffff",
+            borderRadius: 24,
+            padding: "40px 24px 28px",
+            boxShadow: "0 6px 32px rgba(45,106,79,0.12), 0 1px 4px rgba(0,0,0,0.05)",
+            border: `1px solid ${member.accent}22`,
+            display: "flex", flexDirection: "column", alignItems: "center",
+            textAlign: "center", position: "relative", overflow: "hidden",
+            height: "100%",
+        }}>
+            <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 5,
+                background: member.crown
+                    ? "linear-gradient(90deg, #b7791f, #d4a817, #b7791f)"
+                    : `linear-gradient(90deg, ${member.accent}99, ${member.accent})`,
+                borderRadius: "24px 24px 0 0",
+            }} />
+            {member.crown && (
+                <div style={{
+                    position: "absolute", top: 14, right: 16,
+                    background: "linear-gradient(135deg, #fef9c3, #fde68a)",
+                    border: "1px solid #d4a81766",
+                    borderRadius: 20, padding: "2px 8px",
+                    fontSize: 9, fontWeight: 700,
+                    color: "#92400e", letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                }}>
+                    ♛ Founder
+                </div>
+            )}
+            <div className="team-img-ring" style={{
+                width: 108, height: 108, borderRadius: "50%",
+                border: member.crown ? "3px solid #d4a817" : `3px solid ${member.accent}55`,
+                background: member.gradient,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: 18,
+                boxShadow: member.crown
+                    ? "0 6px 24px rgba(212,168,23,0.28)"
+                    : `0 6px 20px ${member.accent}22`,
+                overflow: "hidden",
+            }}>
+                <img src={member.memberImage} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+            <p className="team-name" style={{
+                fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 15.5,
+                color: "#1a2e1a", margin: "0 0 8px", lineHeight: 1.3,
+            }}>{member.name}</p>
+            <span style={{
+                display: "inline-block",
+                background: `${member.accent}14`, color: member.accent,
+                fontSize: 11, fontWeight: 600, letterSpacing: "0.08em",
+                padding: "5px 14px", borderRadius: 20,
+                border: `1px solid ${member.accent}28`,
+            }}>{member.designation}<br />{member.secondaryDesignation}</span>
+            <div style={{
+                position: "absolute", bottom: 16, right: 20,
+                width: 8, height: 8, borderRadius: "50%",
+                background: `${member.accent}40`,
+            }} />
+        </div>
+    );
+
+    const renderTeamCard = (member, i) => (
+        <div className="team-card" style={{
+            background: "#ffffff",
+            borderRadius: 20,
+            padding: "32px 20px 24px",
+            boxShadow: "0 4px 20px rgba(64,145,108,0.09), 0 1px 4px rgba(0,0,0,0.04)",
+            border: `1px solid ${member.accent}18`,
+            display: "flex", flexDirection: "column", alignItems: "center",
+            textAlign: "center", position: "relative", overflow: "hidden",
+            height: "100%",
+        }}>
+            <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 3,
+                background: `linear-gradient(90deg, ${member.accent}88, ${member.accent})`,
+                borderRadius: "20px 20px 0 0",
+            }} />
+            <div className="team-img-ring" style={{
+                width: 88, height: 88, borderRadius: "50%",
+                border: `2.5px solid ${member.accent}44`,
+                background: member.gradient,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: 16,
+                boxShadow: `0 4px 16px ${member.accent}1a`,
+                fontFamily: "'Sora', sans-serif",
+                fontWeight: 800, fontSize: 22,
+                color: member.accent,
+            }}>
+                {member.initials}
+            </div>
+            <p className="team-name" style={{
+                fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 14.5,
+                color: "#1a2e1a", margin: "0 0 7px", lineHeight: 1.3,
+            }}>{member.name}</p>
+            <span style={{
+                display: "inline-block",
+                background: `${member.accent}12`, color: member.accent,
+                fontSize: 10.5, fontWeight: 600, letterSpacing: "0.07em",
+                padding: "4px 12px", borderRadius: 20,
+                border: `1px solid ${member.accent}22`,
+            }}>{member.designation}</span>
+            <div style={{
+                position: "absolute", bottom: 14, right: 16,
+                width: 6, height: 6, borderRadius: "50%",
+                background: `${member.accent}35`,
+            }} />
+        </div>
+    );
+
+    return (
+        <section style={{
+            background: "linear-gradient(160deg, #f8faf8 0%, #edf7f1 50%, #e0f2e9 100%)",
+            padding: "96px 24px",
+            position: "relative",
+            overflow: "hidden",
+        }}>
+            <style>{`
+                .team-card {
+                    transition: transform 0.35s cubic-bezier(0.34,1.25,0.64,1), box-shadow 0.35s ease;
+                    cursor: default;
+                }
+                .team-card:hover {
+                    transform: translateY(-10px) scale(1.025);
+                    box-shadow: 0 24px 56px rgba(45,106,79,0.18), 0 4px 16px rgba(0,0,0,0.06) !important;
+                }
+                .team-card:hover .team-img-ring {
+                    border-color: #2d6a4f !important;
+                    box-shadow: 0 0 0 6px rgba(45,106,79,0.12) !important;
+                }
+                .team-card:hover .team-name {
+                    color: #2d6a4f !important;
+                }
+                .team-img-ring {
+                    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+                }
+                .team-name {
+                    transition: color 0.3s ease;
+                }
+            `}</style>
+
+            {/* BG decorations */}
+            <div style={{ position: "absolute", top: -80, left: -80, width: 340, height: 340, borderRadius: "50%", background: "radial-gradient(circle, rgba(82,183,136,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", bottom: -60, right: -60, width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+            <svg style={{ position: "absolute", bottom: 60, left: 80, opacity: 0.09, pointerEvents: "none" }} width="180" height="180" viewBox="0 0 180 180" fill="none">
+                <circle cx="90" cy="90" r="80" stroke="#2d6a4f" strokeWidth="1.5" strokeDasharray="7 5" />
+                <circle cx="90" cy="90" r="55" stroke="#40916c" strokeWidth="1" strokeDasharray="4 4" />
+            </svg>
+
+            <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+                {/* Label */}
+                <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center", marginBottom: 16 }}>
+                    <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
+                    <span className="section-label">The People Behind The Mission</span>
+                    <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
+                </div>
+
+                {/* Heading */}
+                <h2 style={{
+                    fontFamily: "'Sora', sans-serif", fontWeight: 800,
+                    fontSize: "clamp(26px, 4vw, 40px)", color: "#1a2e1a",
+                    textAlign: "center", marginBottom: 12, lineHeight: 1.2,
+                }}>
+                    Meet Our <span style={{ color: "#5FAF6B" }}>Team</span>
+                </h2>
+                <p style={{ textAlign: "center", color: "#6b7280", fontSize: 15, maxWidth: 520, margin: "0 auto 56px", lineHeight: 1.7 }}>
+                    Passionate changemakers dedicated to building a greener, more equitable Jharkhand — one community at a time.
+                </p>
+
+                {/* ── BOARD OF DIRECTORS ── */}
+                <div style={{ marginBottom: 64 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 36 }}>
+                        <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, transparent, #2d6a4f55)" }} />
+                        <div style={{
+                            display: "flex", alignItems: "center", gap: 8,
+                            background: "linear-gradient(135deg, #1b4332, #2d6a4f)",
+                            color: "#fff", padding: "8px 22px", borderRadius: 40,
+                            fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
+                            textTransform: "uppercase",
+                            boxShadow: "0 4px 18px rgba(45,106,79,0.35)",
+                        }}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M7 12h10M10 18h4" /></svg>
+                            Board of Directors
+                        </div>
+                        <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, #2d6a4f55)" }} />
+                    </div>
+                    <TeamCarousel members={boardMembers} renderCard={renderBoardCard} />
+                </div>
+
+                {/* ── HIERARCHY CONNECTOR ── */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 48, gap: 0 }}>
+                    <div style={{ width: 2, height: 28, background: "linear-gradient(to bottom, #2d6a4f, #52b78888)" }} />
+                    <div style={{
+                        width: 32, height: 32, borderRadius: "50%",
+                        background: "linear-gradient(135deg, #2d6a4f, #52b788)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        boxShadow: "0 4px 14px rgba(45,106,79,0.30)",
+                    }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div style={{ width: 2, height: 28, background: "linear-gradient(to bottom, #52b78888, #40916c)" }} />
+                </div>
+
+                {/* ── TEAM MEMBERS ── */}
+                <div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 36 }}>
+                        <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, transparent, #40916c55)" }} />
+                        <div style={{
+                            display: "flex", alignItems: "center", gap: 8,
+                            background: "linear-gradient(135deg, #40916c, #52b788)",
+                            color: "#fff", padding: "8px 22px", borderRadius: 40,
+                            fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
+                            textTransform: "uppercase",
+                            boxShadow: "0 4px 18px rgba(64,145,108,0.30)",
+                        }}>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="9" cy="7" r="4"/><path strokeLinecap="round" d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path strokeLinecap="round" d="M16 3.13a4 4 0 0 1 0 7.75"/><path strokeLinecap="round" d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                            Team Members
+                        </div>
+                        <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, #40916c55)" }} />
+                    </div>
+                    <TeamCarousel members={teamMembers} renderCard={renderTeamCard} />
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function AboutLogoSection({ ngoLogo }) {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
+    const pillarsData = [
+        {
+            label: "Education & Awareness",
+            color: "#1b6b3a", bg: "#f0faf4", border: "#74c69d",
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="4" width="18" height="14" rx="2" stroke="#2d6a4f" strokeWidth="1.5" fill="#c8e6c9" />
+                    <path d="M7 9h10M7 12h7" stroke="#2d6a4f" strokeWidth="1.4" strokeLinecap="round" />
+                    <path d="M12 18v3M9 21h6" stroke="#2d6a4f" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+            ),
+        },
+        {
+            label: "Environment",
+            color: "#1b6b3a", bg: "#f0faf4", border: "#74c69d",
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3C7 3 3 8 3 13c0 3 1.5 5.5 4 7 0-4 2-7.5 5-9-1.5 3-1.5 6 0 9 2.5-1.5 4-4 4-7 0-5-4-10-4-10z" fill="#52b788" opacity="0.6" />
+                    <path d="M12 3C17 3 21 8 21 13c0 3-1.5 5.5-4 7 0-4-2-7.5-5-9 1.5 3 1.5 6 0 9" stroke="#2d6a4f" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                    <line x1="12" y1="20" x2="12" y2="22" stroke="#2d6a4f" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+            ),
+        },
+        {
+            label: "Health, Lifestyle & Social Status",
+            color: "#1b6b3a", bg: "#f0faf4", border: "#74c69d",
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21C12 21 4 15 4 9a4 4 0 0 1 8 0 4 4 0 0 1 8 0c0 6-8 12-8 12z" fill="#b7e4c7" stroke="#2d6a4f" strokeWidth="1.3" />
+                    <path d="M9 10h2v2h2v2h2M9 14h2" stroke="#2d6a4f" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            ),
+        },
+    ];
+
+    const logoSize = isMobile ? 160 : 220;
+    const outerRingSize = isMobile ? 240 : 340;
+    const middleRingSize = isMobile ? 200 : 290;
+
+    return (
+        <section style={{
+            background: "linear-gradient(150deg, #e8f5ee 0%, #d4eedd 40%, #c6e8d5 100%)",
+            padding: isMobile ? "64px 20px" : "96px 24px",
+            position: "relative",
+            overflow: "hidden",
+        }}>
+            {/* SVG background decorations */}
+            <svg style={{ position: "absolute", top: 0, right: 0, opacity: 0.13, pointerEvents: "none" }} width={isMobile ? 200 : 420} height={isMobile ? 200 : 420} viewBox="0 0 420 420" fill="none">
+                <ellipse cx="320" cy="100" rx="180" ry="140" fill="#2d6a4f" transform="rotate(-25 320 100)" />
+            </svg>
+            <svg style={{ position: "absolute", bottom: 0, left: 0, opacity: 0.10, pointerEvents: "none" }} width={isMobile ? 180 : 340} height={isMobile ? 180 : 340} viewBox="0 0 340 340" fill="none">
+                <ellipse cx="60" cy="280" rx="160" ry="120" fill="#40916c" transform="rotate(20 60 280)" />
+            </svg>
+            <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.07, pointerEvents: "none" }}>
+                <defs>
+                    <pattern id="logoDots" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1.5" fill="#2d6a4f" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#logoDots)" />
+            </svg>
+            {!isMobile && (
+                <svg style={{ position: "absolute", top: 24, left: 24, opacity: 0.15, pointerEvents: "none" }} width="160" height="160" viewBox="0 0 160 160" fill="none">
+                    <path d="M 10 150 Q 10 10 150 10" stroke="#2d6a4f" strokeWidth="1.5" fill="none" strokeDasharray="6 5" />
+                    <path d="M 30 150 Q 30 30 150 30" stroke="#2d6a4f" strokeWidth="1" fill="none" strokeDasharray="4 6" />
+                    <path d="M 50 150 Q 50 50 150 50" stroke="#2d6a4f" strokeWidth="0.8" fill="none" strokeDasharray="3 7" />
+                </svg>
+            )}
+
+            <div style={{ maxWidth: 1060, margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+                {/* Section label */}
+                <div style={{ display: "flex", alignItems: "center", gap: 14, justifyContent: "center", marginBottom: isMobile ? 36 : 60 }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6 2 2 8 2 14c0 4 2.5 7 7 8 0-6 3-10 7-12-2 4-2 8 0 12 4-1.5 6-4.5 6-8 0-6-4-12-10-12z" fill="#2d6a4f" opacity="0.7" />
+                    </svg>
+                    <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "#2d6a4f", fontFamily: "'Sora', sans-serif" }}>About Our Logo</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ transform: "scaleX(-1)" }}>
+                        <path d="M12 2C6 2 2 8 2 14c0 4 2.5 7 7 8 0-6 3-10 7-12-2 4-2 8 0 12 4-1.5 6-4.5 6-8 0-6-4-12-10-12z" fill="#2d6a4f" opacity="0.7" />
+                    </svg>
+                </div>
+
+                {/* Headline */}
+                <div style={{ textAlign: "center", marginBottom: isMobile ? 36 : 56 }}>
+                    <h2 style={{
+                        fontFamily: "'Sora', sans-serif", fontWeight: 800,
+                        fontSize: isMobile ? "28px" : "clamp(28px, 4vw, 44px)",
+                        color: "#1a2e1a", lineHeight: 1.2, marginBottom: 14,
+                    }}>
+                        A Symbol of{" "}
+                        <span style={{ color: "#2d6a4f", position: "relative", display: "inline-block" }}>
+                            Purpose & Life
+                            <svg style={{ position: "absolute", bottom: -6, left: 0, width: "100%", height: 8 }} viewBox="0 0 200 8" preserveAspectRatio="none" fill="none">
+                                <path d="M0 6 Q50 1 100 5 Q150 9 200 4" stroke="#52b788" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                            </svg>
+                        </span>
+                    </h2>
+                    <p style={{ fontSize: isMobile ? 14 : 15, color: "#4b6e57", maxWidth: 560, margin: "0 auto", lineHeight: 1.7, fontStyle: "italic", padding: isMobile ? "0 8px" : 0 }}>
+                        Rooted in the five elements of life, this emblem reflects the soul of our mission.
+                    </p>
+                </div>
+
+                {/* MAIN LAYOUT — stacked on mobile, 2-col on desktop */}
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                    gap: isMobile ? 36 : 48,
+                    alignItems: "start",
+                }}>
+
+                    {/* LEFT / TOP: Logo + credit */}
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: isMobile ? 20 : 28 }}>
+
+                        {/* Animated logo rings */}
+                        <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", width: outerRingSize, height: outerRingSize }}>
+                            <svg style={{ position: "absolute", width: outerRingSize, height: outerRingSize, animation: "logoSpin 28s linear infinite", top: 0, left: 0 }} viewBox="0 0 340 340" fill="none">
+                                <circle cx="170" cy="170" r="158" stroke="#2d6a4f" strokeWidth="1" strokeDasharray="12 8" opacity="0.3" />
+                                {[0, 90, 180, 270].map(deg => {
+                                    const rad = (deg * Math.PI) / 180;
+                                    const x = 170 + 158 * Math.cos(rad);
+                                    const y = 170 + 158 * Math.sin(rad);
+                                    return <rect key={deg} x={x - 4} y={y - 4} width="8" height="8" fill="#2d6a4f" opacity="0.4" transform={`rotate(45 ${x} ${y})`} />;
+                                })}
+                            </svg>
+                            <svg style={{ position: "absolute", width: middleRingSize, height: middleRingSize, animation: "logoSpinRev 20s linear infinite", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} viewBox="0 0 290 290" fill="none">
+                                <circle cx="145" cy="145" r="133" stroke="#52b788" strokeWidth="0.8" strokeDasharray="5 10" opacity="0.4" />
+                            </svg>
+                            <div style={{
+                                width: logoSize, height: logoSize, borderRadius: "50%",
+                                background: "linear-gradient(145deg, #ffffff 0%, #f0faf4 100%)",
+                                border: "2px solid rgba(45,106,79,0.18)",
+                                boxShadow: "0 12px 48px rgba(45,106,79,0.18), 0 2px 8px rgba(45,106,79,0.10)",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                position: "relative", zIndex: 2,
+                            }}>
+                                <img src={ngoLogo} alt="Swastika Jan Kalyan Foundation Logo" style={{ width: "78%", height: "78%", objectFit: "contain" }} />
+                            </div>
+                        </div>
+
+                        {/* Designer credit */}
+                        <div style={{
+                            background: "#ffffff",
+                            border: "1px solid rgba(45,106,79,0.15)",
+                            borderRadius: 16,
+                            padding: "14px 24px",
+                            boxShadow: "0 4px 20px rgba(45,106,79,0.08)",
+                            display: "flex", alignItems: "center", gap: 14,
+                        }}>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" fill="#e8f5ee" stroke="#2d6a4f" strokeWidth="1.2" />
+                                <circle cx="8.5" cy="10" r="1.5" fill="#2d6a4f" />
+                                <circle cx="12" cy="8" r="1.5" fill="#52b788" />
+                                <circle cx="15.5" cy="10" r="1.5" fill="#d4a817" />
+                                <circle cx="15.5" cy="14" r="1.5" fill="#40916c" />
+                                <circle cx="8.5" cy="14" r="1.5" fill="#74c69d" />
+                                <path d="M12 16.5c1.5 0 2.5-0.7 2.5-1.5H9.5c0 0.8 1 1.5 2.5 1.5z" fill="#2d6a4f" />
+                            </svg>
+                            <div>
+                                <p style={{ margin: 0, fontSize: 10, color: "#6b7280", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 3 }}>Designed & Created by</p>
+                                <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "#2d6a4f", fontFamily: "'Sora', sans-serif" }}>Sanyukta Giri</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* RIGHT / BOTTOM: Text content */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 16 : 20 }}>
+
+                        {/* Intro */}
+                        <div style={{
+                            background: "#ffffff", borderRadius: 18,
+                            padding: isMobile ? "20px" : "24px 28px",
+                            boxShadow: "0 4px 24px rgba(45,106,79,0.08)",
+                            border: "1px solid rgba(45,106,79,0.10)",
+                            position: "relative",
+                        }}>
+                            <svg style={{ position: "absolute", top: 16, right: 16, opacity: 0.12 }} width="44" height="44" viewBox="0 0 24 24" fill="#2d6a4f">
+                                <path d="M12 2L8 8H5l7 7-2 5h4l-2-5 7-7h-3z" />
+                                <rect x="11" y="17" width="2" height="5" fill="#2d6a4f" />
+                            </svg>
+                            <p style={{ margin: 0, fontSize: isMobile ? 14 : 14.5, color: "#374151", lineHeight: 1.85 }}>
+                                The <strong style={{ color: "#2d6a4f" }}>tree stands tall</strong>, branching into the core areas we work in — each branch a testament to our commitment, our reach, and our resolve to serve.
+                            </p>
+                        </div>
+
+                        {/* Three pillar cards */}
+                        {pillarsData.map((item, i) => (
+                            <div key={i} style={{
+                                display: "flex", alignItems: "center", gap: isMobile ? 12 : 16,
+                                background: item.bg, border: `1.5px solid ${item.border}`,
+                                borderRadius: 14, padding: isMobile ? "12px 16px" : "14px 20px",
+                            }}>
+                                <div style={{
+                                    width: isMobile ? 40 : 48, height: isMobile ? 40 : 48, borderRadius: 12,
+                                    background: "#ffffff", border: `1px solid ${item.border}`,
+                                    display: "flex", alignItems: "center", justifyContent: "center",
+                                    flexShrink: 0, boxShadow: "0 2px 8px rgba(45,106,79,0.10)",
+                                }}>
+                                    {item.icon}
+                                </div>
+                                <span style={{ fontSize: isMobile ? 13 : 13.5, fontWeight: 700, color: item.color, fontFamily: "'Sora', sans-serif", lineHeight: 1.4 }}>
+                                    {item.label}
+                                </span>
+                               
+                            </div>
+                        ))}
+
+                        {/* Swastika block */}
+                        <div style={{
+                            background: "linear-gradient(135deg, #ffffff 0%, #f0faf4 100%)",
+                            border: "1px solid rgba(45,106,79,0.14)",
+                            borderRadius: 16, padding: isMobile ? "16px" : "20px 24px",
+                            display: "flex", gap: isMobile ? 12 : 16, alignItems: "flex-start",
+                            boxShadow: "0 4px 20px rgba(45,106,79,0.07)",
+                        }}>
+                            <div style={{
+                                flexShrink: 0, width: 44, height: 44,
+                                background: "#e8f5ee", borderRadius: 10,
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                border: "1px solid #b7e0c9",
+                            }}>
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                                    <rect x="11" y="3" width="2" height="18" rx="1" fill="#2d6a4f" />
+                                    <rect x="3" y="11" width="18" height="2" rx="1" fill="#2d6a4f" />
+                                    <rect x="11" y="3" width="2" height="4" rx="1" fill="#d4a817" />
+                                    <rect x="17" y="11" width="4" height="2" rx="1" fill="#d4a817" />
+                                    <rect x="11" y="17" width="2" height="4" rx="1" fill="#d4a817" />
+                                    <rect x="3" y="11" width="4" height="2" rx="1" fill="#d4a817" />
+                                    <circle cx="12" cy="12" r="2.5" fill="#2d6a4f" />
+                                </svg>
+                            </div>
+                            <p style={{ margin: 0, fontSize: isMobile ? 13.5 : 14, color: "#374151", lineHeight: 1.8 }}>
+                                At its heart lies the <strong style={{ color: "#2d6a4f" }}>Swastika</strong> — gracefully symbolizing our name and our belief in <em>positive change and well-being for all</em>.
+                            </p>
+                        </div>
+
+                    
+                    </div>
+                </div>
+            </div>
+
+            <style>{`
+                @keyframes logoSpin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes logoSpinRev {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(-360deg); }
+                }
+            `}</style>
+        </section>
+    );
+}
 
 export const About = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -239,7 +922,7 @@ export const About = () => {
        <section
       style={{
         background: "#ffffff",
-        padding: "96px 24px",
+        padding: "50px 24px",
         position: "relative",
         overflow: "hidden",
         fontFamily: "'DM Sans', sans-serif",
@@ -339,7 +1022,7 @@ export const About = () => {
                 {pillar.shortText}
               </p>
               <button className="readmore-btn" onClick={() => setActiveCard(i)} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 22px", background: pillar.accent, color: "#ffffff", border: "none", borderRadius: 40, fontSize: 13, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", cursor: "pointer", letterSpacing: "0.04em", boxShadow: `0 4px 14px ${pillar.accent}35` }}>
-                Read More
+                Read More About {pillar.aboutWhat}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
@@ -440,45 +1123,13 @@ export const About = () => {
                 <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center", marginBottom: 16 }}>
                         <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.5 }} />
-                        <span className="section-label">Our Impact & Legal Details</span>
+                        <span className="section-label">Our  Legal Details</span>
                         <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.5 }} />
                     </div>
-                    <h2 style={{
-                        fontFamily: "'Sora', sans-serif", fontWeight: 800,
-                        fontSize: "clamp(26px, 4vw, 38px)", color: "#1a2e1a",
-                        textAlign: "center", marginBottom: 56, lineHeight: 1.25,
-                    }}>
-                        Numbers That <span style={{ color: "#5FAF6B" }}>Speak</span>
-                    </h2>
+                    
 
-                    {/* Stats */}
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 20, marginBottom: 64 }}>
-                        {[
-                            { num: "5000+", label: "Trees Planted", icon: "🌳" },
-                            { num: "120+", label: "Communities Reached", icon: "🏘️" },
-                            { num: "3000+", label: "Lives Impacted", icon: "❤️" },
-                            { num: "8+", label: "Years of Service", icon: "🏅" },
-                        ].map((stat) => (
-                            <div key={stat.label} className="stat-card" style={{
-                                background: "#ffffff",
-                                borderRadius: 20,
-                                padding: "28px 20px",
-                                textAlign: "center",
-                                border: "1px solid rgba(45,106,79,0.15)",
-                                boxShadow: "0 4px 20px rgba(45,106,79,0.08)",
-                                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                            }}>
-                                <div style={{ fontSize: 32, marginBottom: 8 }}>{stat.icon}</div>
-                                <p style={{
-                                    fontFamily: "'Sora', sans-serif", fontWeight: 800,
-                                    fontSize: 32, color: "#2d6a4f", margin: "0 0 4px",
-                                }}>{stat.num}</p>
-                                <p style={{ fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.1em", margin: 0 }}>
-                                    {stat.label}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
+                   
+                    
 
                     {/* ── STATUTORY DROPDOWN ── */}
                     <div style={{ maxWidth: 680, margin: "0 auto" }}>
@@ -626,182 +1277,12 @@ export const About = () => {
             {/* ────────────────────────────────────────────────────
           SECTION: MEET OUR TEAM
       ──────────────────────────────────────────────────── */}
-            <section style={{
-                background: "linear-gradient(160deg, #f8faf8 0%, #edf7f1 50%, #e0f2e9 100%)",
-                padding: "96px 24px",
-                position: "relative",
-                overflow: "hidden",
-            }}>
-                <style>{`
-                    .team-card {
-                        transition: transform 0.35s cubic-bezier(0.34,1.25,0.64,1), box-shadow 0.35s ease;
-                        cursor: default;
-                    }
-                    .team-card:hover {
-                        transform: translateY(-10px) scale(1.025);
-                        box-shadow: 0 24px 56px rgba(45,106,79,0.18), 0 4px 16px rgba(0,0,0,0.06) !important;
-                    }
-                    .team-card:hover .team-img-ring {
-                        border-color: #2d6a4f !important;
-                        box-shadow: 0 0 0 6px rgba(45,106,79,0.12) !important;
-                    }
-                    .team-card:hover .team-name {
-                        color: #2d6a4f !important;
-                    }
-                    .team-img-ring {
-                        transition: border-color 0.35s ease, box-shadow 0.35s ease;
-                    }
-                    .team-name {
-                        transition: color 0.3s ease;
-                    }
-                `}</style>
-
-                {/* BG decorations */}
-                <div style={{ position: "absolute", top: -80, left: -80, width: 340, height: 340, borderRadius: "50%", background: "radial-gradient(circle, rgba(82,183,136,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
-                <div style={{ position: "absolute", bottom: -60, right: -60, width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
-                <svg style={{ position: "absolute", bottom: 60, left: 80, opacity: 0.09, pointerEvents: "none" }} width="180" height="180" viewBox="0 0 180 180" fill="none">
-                    <circle cx="90" cy="90" r="80" stroke="#2d6a4f" strokeWidth="1.5" strokeDasharray="7 5" />
-                    <circle cx="90" cy="90" r="55" stroke="#40916c" strokeWidth="1" strokeDasharray="4 4" />
-                </svg>
-
-                <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
-
-                    {/* Label */}
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center", marginBottom: 16 }}>
-                        <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
-                        <span className="section-label">The People Behind The Mission</span>
-                        <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
-                    </div>
-
-                    {/* Heading */}
-                    <h2 style={{
-                        fontFamily: "'Sora', sans-serif", fontWeight: 800,
-                        fontSize: "clamp(26px, 4vw, 40px)", color: "#1a2e1a",
-                        textAlign: "center", marginBottom: 12, lineHeight: 1.2,
-                    }}>
-                        Meet Our <span style={{ color: "#5FAF6B" }}>Team</span>
-                    </h2>
-                    <p style={{ textAlign: "center", color: "#6b7280", fontSize: 15, maxWidth: 520, margin: "0 auto 56px", lineHeight: 1.7 }}>
-                        Passionate changemakers dedicated to building a greener, more equitable Jharkhand — one community at a time.
-                    </p>
-
-                    {/* Team Cards Grid */}
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                        gap: 28,
-                    }}>
-                        {[
-                            {
-                                name: "Ajay Kumar Sinha",
-                                designation: "Chairman",
-                                memberImage: chairman,
-                                gradient: "linear-gradient(135deg, #d8f3e3 0%, #b7e4c7 100%)",
-                                accent: "#2d6a4f",
-                            },
-                            {
-                                name: "Ayush Kumar Sinha",
-                                designation: "Managing Director",
-                                memberImage: memberdirector,
-                                gradient: "linear-gradient(135deg, #fde9d9 0%, #fcd1b0 100%)",
-                                accent: "#c2410c",
-                            },
-                            {
-                                name: "Ashish Yash",
-                                designation: "Director",
-                                memberImage: director,
-                                gradient: "linear-gradient(135deg, #dff0ff 0%, #bfdfff 100%)",
-                                accent: "#2563eb",
-                            },
-                            
-                            {
-                                name: "Apoorv Harsh",
-                                designation: "Head of Finance",
-                                memberImage: headoffin,
-                                gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
-                                accent: "#7c3aed",
-                            },
-                        ].map((member, i) => (
-                            <div
-                                key={i}
-                                className="team-card"
-                                style={{
-                                    background: "#ffffff",
-                                    borderRadius: 24,
-                                    padding: "36px 24px 28px",
-                                    boxShadow: "0 4px 24px rgba(45,106,79,0.09), 0 1px 4px rgba(0,0,0,0.04)",
-                                    border: "1px solid rgba(45,106,79,0.10)",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    textAlign: "center",
-                                    position: "relative",
-                                    overflow: "hidden",
-                                }}
-                            >
-                                {/* Top accent bar */}
-                                <div style={{
-                                    position: "absolute", top: 0, left: 0, right: 0, height: 5,
-                                    background: `linear-gradient(90deg, ${member.accent}99, ${member.accent})`,
-                                    borderRadius: "24px 24px 0 0",
-                                }} />
-
-                                {/* Avatar */}
-                                <div
-                                    className="team-img-ring"
-                                    style={{
-                                        width: 104, height: 104, borderRadius: "50%",
-                                        border: `3px solid ${member.accent}55`,
-                                        background: member.gradient,
-                                        display: "flex", alignItems: "center", justifyContent: "center",
-                                        marginBottom: 18,
-                                        boxShadow: `0 6px 20px ${member.accent}22`,
-                                        overflow: "hidden",
-                                        fontSize: 44,
-                                    }}
-                                >
-                                   <img src={member.memberImage} style={{width:"100%",height:"100%",objectFit:"cover"}} />
-                                   
-                                </div>
-
-                                {/* Name */}
-                                <p
-                                    className="team-name"
-                                    style={{
-                                        fontFamily: "'Sora', sans-serif",
-                                        fontWeight: 700, fontSize: 15.5,
-                                        color: "#1a2e1a", margin: "0 0 6px",
-                                        lineHeight: 1.3,
-                                    }}
-                                >
-                                    {member.name}
-                                </p>
-
-                                {/* Designation badge */}
-                                <span style={{
-                                    display: "inline-block",
-                                    background: `${member.accent}14`,
-                                    color: member.accent,
-                                    fontSize: 11, fontWeight: 600,
-                                    letterSpacing: "0.08em",
-                                    padding: "5px 14px",
-                                    borderRadius: 20,
-                                    border: `1px solid ${member.accent}28`,
-                                }}>
-                                    {member.designation}
-                                </span>
-
-                                {/* Subtle decorative dot */}
-                                <div style={{
-                                    position: "absolute", bottom: 16, right: 20,
-                                    width: 8, height: 8, borderRadius: "50%",
-                                    background: `${member.accent}40`,
-                                }} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <TeamSection
+                memberdirector={memberdirector}
+                chairman={chairman}
+                director={director}
+                headoffin={headoffin}
+            />
 
             {/* ────────────────────────────────────────────────────
           SECTION: MESSAGE FROM LEADERSHIP
@@ -865,19 +1346,19 @@ export const About = () => {
                             <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
                                 <div style={{
                                     width: 112, height: 112, borderRadius: "50%",
-                                    border: "3px solid #5FAF6B",
+                                    border: "3px solid #d4a817",
                                     background: "linear-gradient(135deg, #e8f5ee, #d8f3e3)",
                                     display: "flex", alignItems: "center", justifyContent: "center",
                                     boxShadow: "0 8px 24px rgba(45,106,79,0.18)",
                                     overflow: "hidden",
                                 }}>
-                                    <img src={chairman} />
+                                    <img src={memberdirector} />
                                 </div>
                                 <div style={{ textAlign: "center" }}>
                                     <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 14, color: "#1a2e1a", margin: "0 0 2px" }}>
-                                        Ajay Kumar Sinha
+                                        Ayush Kumar Sinha
                                     </p>
-                                    <p style={{ fontSize: 12, color: "#6b7280", margin: "0 0 2px" }}>Chairman & Founder</p>
+                                    <p style={{ fontSize: 12, color: "#6b7280", margin: "0 0 2px" }}>Founder & Managing Director</p>
                                     {/**<span style={{
                                         display: "inline-block", background: "#e8f5ee", color: "#2d6a4f",
                                         fontSize: 10, fontWeight: 700, letterSpacing: "0.12em",
@@ -893,27 +1374,32 @@ export const About = () => {
                                     fontSize: "clamp(22px, 3vw, 30px)", color: "#1a2e1a",
                                     marginBottom: 20, lineHeight: 1.3,
                                 }}>
-                                    A Message of{" "}
-                                    <span style={{ color: "#5FAF6B" }}>Hope & Purpose</span>
+                                    A Message from{" "}
+                                    <span style={{ color: "#5FAF6B" }}>Our Founder</span>
                                 </h2>
                                 {[
-                                    "When we founded Swastika Jan Kalyan Foundation, we had a singular vision — to build a world where every tree planted is a promise kept, and every community uplifted is a future secured. The challenges our planet faces today are immense, but so is our collective will to change.",
-                                    "Over the years, we have walked alongside farmers, students, and families — learning from them as much as we have contributed. Our work in forestation, climate awareness, and education is not charity; it is a partnership built on mutual respect and shared responsibility.",
-                                    "I invite you to join us — not merely as a donor or a visitor, but as a fellow guardian of the earth we all share. Together, we can turn hope into action and action into legacy.",
+                                    "Welcome to the Swastika Jan Kalyan Foundation",
+                                    "When we embarked on this journey, it was born out of a simple but profound belief: that the strength of a society is measured by the quality of life of its most vulnerable members. We recognized that true progress is not a single-track pursuit but a holistic endeavor—one that requires us to breathe clean air, nurture our environment, educate the marginalized, and ensure the well-being of every individual.",
+                                    `At our foundation, we don’t just see "projects", we see potential. Whether it is our efforts to restore ecological balance, our drive to improve literacy rates, or our commitment to enhancing the health and social status of those in both rural and urban areas, everything we do is guided by a singular purpose: to leave the world better than we found it.`,
+                                    "Thank you for believing in our mission. I invite you to explore our initiatives, join our efforts, and walk with us as we strive to build a more sustainable, educated, and compassionate society.",
                                 ].map((para, i) => (
                                     <p key={i} style={{ color: "#4b5563", fontSize: 14.5, lineHeight: 1.8, marginBottom: 14 }}>{para}</p>
                                 ))}
                                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20 }}>
                                     <div style={{ height: 2, width: 32, background: "#2d6a4f", borderRadius: 2 }} />
                                     <span style={{ fontSize: 11, fontWeight: 700, color: "#2d6a4f", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-                                        Chairman, SWASTIKA JAN KALYAN FOUNDATION
+                                        Founder, SWASTIKA JAN KALYAN FOUNDATION
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+               
             </section>
+
+       
+            <AboutLogoSection ngoLogo={ngoLogo} />
 
         </div>
     );
