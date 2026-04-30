@@ -45,7 +45,7 @@ export default function NavBar() {
             <nav className="relative z-20 flex items-center justify-between px-8 md:px-16 py-5">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="SJKF Logo" className="h-30 w-auto" />
+          <a href="https://swastikajankalyanfoundation.netlify.app/" ><img src={logo} alt="SJKF Logo" className="h-30 w-auto" /> </a>
         </div>
         <div className=" sjkf-pill-badge hero-text mt-6 inline-flex items-center gap-2 bg-[#5FAF6B]/10 border border-[#5FAF6B]/25 rounded-full px-4 py-1.5 text-[#3d8f4a] text-[12px] font-semibold mb-6 tracking-wider uppercase">
           <span className="w-2 h-2 rounded-full bg-[#5FAF6B] animate-pulse" />
