@@ -28,11 +28,12 @@ export const Donate = () => {
   const [submitted, setSubmitted] = useState(false);
   const [donorId, setDonorId] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       // 1. Create Razorpay order first
       const orderResponse = await fetch("https://sjkf-backend-api-production.up.railway.app/api/donations/create-order", {
@@ -95,7 +96,7 @@ export const Donate = () => {
             if (!response.ok) {
               throw new Error(result.message || "Something went wrong");
             }
-
+            setIsLoading(false);
             // ✅ STORE IDs IN STATE
             setDonorId(result.data.donorId);
             setTransactionId(result.data.transactionId);
@@ -474,13 +475,37 @@ export const Donate = () => {
                   )}
 
                   {/* Submit */}
-                  <button type="submit"
-                    className="submit-btn w-full py-4 rounded-2xl text-white font-bold text-base border-none cursor-pointer flex items-center justify-center gap-2 mt-1">
+                  <button type="submit" className="submit-btn" disabled={isLoading}
+                style={{
+                  width: "100%", padding: "15px", borderRadius: 14, border: "none",
+                  background: isLoading
+                    ? "linear-gradient(90deg,#2d4a3e 0%,#3a6b54 50%,#4a7a65 100%)"
+                    : "linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",
+                  color: "white", fontSize: 16, fontWeight: 700,
+                  cursor: isLoading ? "not-allowed" : "pointer",
+                  fontFamily: "Sora, sans-serif", letterSpacing: "0.02em",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                  transition: "all 0.2s",
+                  opacity: isLoading ? 0.85 : 1,
+                }}>
+                {isLoading ? (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      style={{ animation: "spin 0.9s linear infinite", flexShrink: 0 }}>
+                      <circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5"/>
+                      <path d="M10 2a8 8 0 0 1 8 8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                    </svg>
+                    Donating…
+                  </>
+                ) : (
+                  <>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                     Donate Now
-                  </button>
+                  </>
+                )}
+              </button>
 
                   <p className="text-center text-xs text-gray-400">
                     🔒 Secured with 256-bit SSL encryption. Tax receipt will be emailed automatically.
@@ -491,6 +516,8 @@ export const Donate = () => {
           </div>
         </div>
       </div>
+
+   
 
       {/* ── VOLUNTEER CTA SECTION ── */}
       <div className="max-w-6xl mx-auto px-4 mt-16 pb-16">
