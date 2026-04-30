@@ -495,7 +495,7 @@ export const Donate = () => {
                       <circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5"/>
                       <path d="M10 2a8 8 0 0 1 8 8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
                     </svg>
-                    Donating…
+                    Donating ...
                   </>
                 ) : (
                   <>
