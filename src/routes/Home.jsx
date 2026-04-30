@@ -334,14 +334,14 @@ export const Home = () => {
         .sora-nav-link {
           font-family: "Sora"
         }
-        .india-gradient {
+        .india-gradient-main {
           
             background: linear-gradient(
-              135deg,
-              #FF9933 0%,
+              180deg,
               #FF9933 30%,
-              #ffffff 45%,
+              #FF9933 50%,
               #ffffff 55%,
+              #ffffff 60%,
               #138808 70%,
               #138808 100%
             );
@@ -350,6 +350,22 @@ export const Home = () => {
             background-clip: text;
             display: inline-block;
        
+        }
+
+        .india-gradient-blue {
+          background: linear-gradient(
+            180deg,
+            #FF9933 30%,
+            #FF9933 50%,
+            #1616DE 55%,
+            #1616DE 60%,
+            #138808 70%,
+            #138808 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          display: inline-block;
         }
       `}</style>
 
@@ -407,7 +423,7 @@ export const Home = () => {
               </span>
               <br /> Healthier and <br />
               <span className="sora-font" style={{ fontFamily: "'DM Serif Display',serif", fontStyle: "italic", fontWeight: 400, fontSize: "0.9em", color: "#3d8f4a" }}>
-                Educated <span className="india-gradient" >India</span>.
+                Educated <span className="india-gradient-main" >India</span>
               </span>
             </h1>
 
