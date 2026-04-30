@@ -249,7 +249,7 @@ function TriggerTypewriter({ onClose }) {
         onMouseEnter={e => e.currentTarget.style.background="rgba(45,106,79,0.18)"}
         onMouseLeave={e => e.currentTarget.style.background="rgba(45,106,79,0.08)"}
       >
-        <CloseIcon color="#2d6a4f" size={9} />
+        <CloseIcon color="#fc3535" size={9} />
       </button>
     </span>
   );
