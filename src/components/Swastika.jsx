@@ -196,40 +196,69 @@ function Typewriter({ text, speed = 18, onDone }) {
   return <span style={{ whiteSpace:"pre-wrap" }}>{displayed}</span>;
 }
 
-function TriggerTypewriter() {
+function TriggerTypewriter({ onClose }) {
   const full = "Hi! I'm S.E.V.A, how may I help you?";
   const [displayed, setDisplayed] = useState("");
+  const [closing, setClosing]     = useState(false);
+  const [visible, setVisible]     = useState(true);
+  const intervalRef               = useRef(null);
 
+  // Forward typewriter on mount
   useEffect(() => {
-    setDisplayed("");
     let i = 0;
-    const id = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       i++;
       setDisplayed(full.slice(0, i));
-      if (i >= full.length) clearInterval(id);
+      if (i >= full.length) clearInterval(intervalRef.current);
     }, 38);
-    return () => clearInterval(id);
+    return () => clearInterval(intervalRef.current);
   }, []);
 
-  // Split to bold "Swastika"
-  const swastikaIdx = displayed.indexOf("Swastika");
-  const before = displayed.slice(0, swastikaIdx === -1 ? displayed.length : swastikaIdx);
-  const name   = swastikaIdx !== -1 ? displayed.slice(swastikaIdx, swastikaIdx + 8) : "";
-  const after  = swastikaIdx !== -1 ? displayed.slice(swastikaIdx + 8) : "";
+  const handleClose = (e) => {
+    e.stopPropagation();
+    clearInterval(intervalRef.current);
+    setClosing(true);
+    // Reverse typewriter: erase letter by letter
+    let cur = displayed.length || full.length;
+    intervalRef.current = setInterval(() => {
+      cur--;
+      setDisplayed(full.slice(0, cur));
+      if (cur <= 0) {
+        clearInterval(intervalRef.current);
+        setVisible(false);
+        onClose?.();
+      }
+    }, 22);
+  };
+
+  if (!visible) return null;
 
   return (
-    <>
-      <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>{before}</span>
-      {name && <span style={{ color:"#1b4332", fontSize:13, fontWeight:800 }}>{name}</span>}
-      <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600 }}>{after}</span>
-    </>
+    <span style={{ display:"flex", alignItems:"center", gap:8 }}>
+      <span style={{ color:"#2d6a4f", fontSize:13, fontWeight:600, whiteSpace:"nowrap" }}>
+        {displayed}
+        {/* blinking cursor while typing / erasing */}
+        {(displayed.length < full.length || closing) && (
+          <span style={{ display:"inline-block", width:2, height:13, background:"#40916c", borderRadius:1, marginLeft:1, verticalAlign:"middle", animation:"cursorBlink 0.7s steps(1) infinite" }} />
+        )}
+      </span>
+      <button
+        onClick={handleClose}
+        title="Dismiss"
+        style={{ background:"rgba(45,106,79,0.08)", border:"1px solid #c8e6c9", borderRadius:"50%", width:18, height:18, display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", flexShrink:0, padding:0, lineHeight:1, transition:"background 0.15s" }}
+        onMouseEnter={e => e.currentTarget.style.background="rgba(45,106,79,0.18)"}
+        onMouseLeave={e => e.currentTarget.style.background="rgba(45,106,79,0.08)"}
+      >
+        <CloseIcon color="#2d6a4f" size={9} />
+      </button>
+    </span>
   );
 }
 
 /* ══════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════ */
-export default function SwastikaChatbot() {
+export default function Swastika() {
   const [open, setOpen]               = useState(false);
   const [messages, setMessages]       = useState([]);
   const [inputVal, setInputVal]       = useState("");
@@ -245,6 +274,7 @@ export default function SwastikaChatbot() {
   const [inputType, setInputType]     = useState("text");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [triggerVisible, setTriggerVisible] = useState(true);
 
   const bottomRef = useRef();
   const inputRef  = useRef();
@@ -502,6 +532,7 @@ export default function SwastikaChatbot() {
         @keyframes dotBounce   { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
         @keyframes glow        { 0%,100%{box-shadow:0 0 0 0 rgba(82,183,136,0.4)} 50%{box-shadow:0 0 0 8px rgba(82,183,136,0)} }
         @keyframes spin        { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
         .chat-open  { animation: chatSlideUp 0.35s cubic-bezier(.22,1,.36,1) both; }
         .msg-in     { animation: msgIn 0.3s ease both; }
         .opt-btn    { transition:all 0.18s; }
@@ -521,10 +552,10 @@ export default function SwastikaChatbot() {
         <div className="trigger-btn"
           style={{ position:"fixed", bottom:28, right:28, display:"flex", alignItems:"center", zIndex:9999, cursor:"pointer" }}
           onClick={() => setOpen(o => !o)}>
-          {!open && (
+          {!open && triggerVisible && (
             <div style={{ background:"white", borderRadius:"16px 16px 4px 16px", padding:"10px 16px", marginRight:10, boxShadow:"0 4px 20px rgba(45,106,79,0.18)", border:"1.5px solid #c8e6c9", animation:"msgIn 0.4s ease", whiteSpace:"nowrap" }}>
              
-              <TriggerTypewriter />
+              <TriggerTypewriter onClose={() => setTriggerVisible(false)} />
             </div>
           )}
           <div className="trigger-inner" style={{ width:58, height:58, borderRadius:"50%", background:"linear-gradient(135deg,#1b4332,#40916c)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 6px 24px rgba(45,106,79,0.4)", transition:"transform 0.2s", animation: open ? "none" : "glow 2.5s infinite", flexShrink:0 }}>
