@@ -115,6 +115,7 @@ export const Donate = () => {
         modal: {
           ondismiss: function () {
             console.log("Payment popup closed by user");
+            setIsLoading(false);
           },
         },
 
