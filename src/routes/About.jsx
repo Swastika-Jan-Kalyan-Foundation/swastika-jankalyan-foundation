@@ -3,6 +3,8 @@ import chairman from '../assets/chairman.png'
 import director from '../assets/director.png'
 import memberdirector from '../assets/memberdirector.png'
 import headoffin from '../assets/headoffin.png'
+import cohopr from '../assets/cohopr.jpeg'
+import hodedesign from '../assets/hodedesign.jpeg'
 import ngoLogo from '../assets/logo.png'
 const statutoryDetails = [
     { label: "Organization Name", value: "Swastika Jan Kalyan Foundation", icon: "🏛️" },
@@ -308,7 +310,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             crown: false,
         },
         {
-            name: "Prince Singhania",
+            name: "Prince Kumar",
             designation: "Director",
             secondaryDesignation: "(Dept. of Public Relations & Marketing)",
             memberImage: headoffin,
@@ -325,6 +327,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             gradient: "linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)",
             accent: "#db2777",
             initials: "SG",
+            image: hodedesign  
         },
         {
             name: "Piyush Bhusan Sharma",
@@ -332,6 +335,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             gradient: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
             accent: "#d97706",
             initials: "PS",
+            image: cohopr,
         },
         {
             name: "Shubham Gupta",
@@ -339,6 +343,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
             accent: "#3b82f6",
             initials: "SG",
+            image: cohopr,
         },
         {
             name: "Shruti Sinha",
@@ -346,6 +351,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             gradient: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
             accent: "#16a34a",
             initials: "SS",
+            image: cohopr
         },
     ];
 
@@ -429,17 +435,17 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
                 borderRadius: "20px 20px 0 0",
             }} />
             <div className="team-img-ring" style={{
-                width: 88, height: 88, borderRadius: "50%",
-                border: `2.5px solid ${member.accent}44`,
+                width: 108, height: 108, borderRadius: "50%",
+                border: member.crown ? "3px solid #d4a817" : `3px solid ${member.accent}55`,
                 background: member.gradient,
                 display: "flex", alignItems: "center", justifyContent: "center",
-                marginBottom: 16,
-                boxShadow: `0 4px 16px ${member.accent}1a`,
-                fontFamily: "'Sora', sans-serif",
-                fontWeight: 800, fontSize: 22,
-                color: member.accent,
+                marginBottom: 18,
+                boxShadow: member.crown
+                    ? "0 6px 24px rgba(212,168,23,0.28)"
+                    : `0 6px 20px ${member.accent}22`,
+                overflow: "hidden",
             }}>
-                {member.initials}
+                <img src={member.image} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <p className="team-name" style={{
                 fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 14.5,
