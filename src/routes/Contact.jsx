@@ -293,9 +293,9 @@ export const ContactUs = () => {
 
                 <div style={{ borderRadius:20, overflow:"hidden", border:"1.5px solid #c8e6c9", height:160, background:"linear-gradient(135deg,#d8f3dc,#b7e4c7)", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", position:"relative" }}>
                   <DotGridSVG style={{ position:"absolute", top:8, left:8, width:60, opacity:0.4 }} />
-               <span style={{ fontSize:32, marginBottom:8 }}><img className="h-12 w-12" src={gmap} /></span>
+               <a href="https://maps.app.goo.gl/TJkQd5yLrQAw7c9v8" style={{ fontSize:32, marginBottom:8 }}><img className="h-12 w-12" src={gmap} /></a>
                  
-                <span style={{ color:"#52b788", fontSize:11, marginTop:4 }}>View on <span style={{color: '#1b4332'}} >Google Maps</span> →</span> 
+              <a href="https://maps.app.goo.gl/TJkQd5yLrQAw7c9v8" style={{ color:"#52b788", fontSize:11, marginTop:4 }}>View on <span style={{color: '#1b4332'}} >Google Maps </span> →</a>
                 </div>
               </>
             ) : (
@@ -318,9 +318,9 @@ export const ContactUs = () => {
 
                 <div style={{ borderRadius:20, overflow:"hidden", border:"1.5px solid #c8e6c9", height:160, background:"linear-gradient(135deg,#d8f3dc,#b7e4c7)", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", position:"relative" }}>
                   <DotGridSVG style={{ position:"absolute", top:8, left:8, width:60, opacity:0.4 }} />
-                  <span style={{ fontSize:32, marginBottom:8 }}><img className="w-12 h-12" src={gmap} /></span>
+                  <a href="https://maps.app.goo.gl/TJkQd5yLrQAw7c9v8"  style={{ fontSize:32, marginBottom:8 }}><img className="w-12 h-12" src={gmap} /></a>
                  
-                  <span style={{ color:"#1b4332", fontSize:11, marginTop:4 }}>View on Google Maps →</span>
+                  <a href="https://maps.app.goo.gl/TJkQd5yLrQAw7c9v8" style={{ color:"#1b4332", fontSize:11, marginTop:4 }}>View on Google Maps →</a>
                 </div>
               </>
             )}
