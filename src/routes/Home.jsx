@@ -357,8 +357,9 @@ export const Home = () => {
             180deg,
             #FF9933 30%,
             #FF9933 50%,
-            #1616DE 55%,
+            #ffffff 50%,
             #1616DE 60%,
+            #ffffff 65%,
             #138808 70%,
             #138808 100%
           );
@@ -423,7 +424,7 @@ export const Home = () => {
               </span>
               <br /> Healthier and <br />
               <span className="sora-font" style={{ fontFamily: "'DM Serif Display',serif", fontStyle: "italic", fontWeight: 400, fontSize: "0.9em", color: "#3d8f4a" }}>
-                Educated <span className="india-gradient-main" >India</span>
+                Educated <span className="india-gradient-main" >In</span><span className="india-gradient-blue" >d</span><span className="india-gradient-main" >ia</span>
               </span>
             </h1>
 
