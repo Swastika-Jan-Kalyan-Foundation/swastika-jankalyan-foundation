@@ -6,6 +6,7 @@ import headoffin from '../assets/headoffin.png'
 import cohopr from '../assets/cohopr.jpeg'
 import hodedesign from '../assets/hodedesign.jpeg'
 import ngoLogo from '../assets/logo.png'
+import headofit from '../assets/headofit.png'
 const statutoryDetails = [
     { label: "Organization Name", value: "Swastika Jan Kalyan Foundation", icon: "🏛️" },
     { label: "Registration Number (CIN)", value: "U88900JH2025NPL025146", icon: "🔖" },
@@ -304,7 +305,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             name: "Aashika Sinha",
             designation: "Director",
             secondaryDesignation: "(Dept. of IT, Social Media and Information)",
-            memberImage: headoffin,
+            memberImage: headofit,
             gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
             accent: "#7c3aed",
             crown: false,
