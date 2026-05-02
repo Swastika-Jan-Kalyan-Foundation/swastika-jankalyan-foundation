@@ -69,13 +69,19 @@ export const Donate = () => {
     setIsLoading(true);
     try {
       // 1. Create Razorpay order first
+      // If a foreign currency is selected, convert to INR for the Razorpay order
+      const currencyCode = form.currency.split(" ")[0];
+      const inrAmount = currencyCode === "INR"
+        ? Number(form.amount)
+        : Math.round(Number(form.amount) / exchangeRates[currencyCode]);
+
       const orderResponse = await fetch("https://sjkf-backend-api-production.up.railway.app/api/donations/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: Number(form.amount),
+          amount: inrAmount,
         }),
       });
 
@@ -116,7 +122,8 @@ export const Donate = () => {
                 fullName: form.name,
                 email: form.email,
                 phoneNumber: form.phone,
-                amount: Number(form.amount),
+                amount: inrAmount,
+                originalAmount: Number(form.amount),
                 currency: form.currency,
                 donationPurpose: form.purpose,
                 message: form.message,
