@@ -29,7 +29,40 @@ export const Donate = () => {
   const [donorId, setDonorId] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [exchangeRates, setExchangeRates] = useState({}); 
+  const [rateLoading, setRateLoading] = useState(false);
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  // Fetch exchange rate when currency changes
+  const handleCurrencyChange = async (currencyValue) => {
+    set("currency", currencyValue);
+    const code = currencyValue.split(" ")[0]; 
+    if (code === "INR") return;
+    if (exchangeRates[code]) return; 
+
+    setRateLoading(true);
+    try {
+      const res = await fetch(`https://api.frankfurter.dev/v1/latest?from=INR&to=${code}`);
+      const data = await res.json();
+      
+      const rate = data.rates[code];
+      setExchangeRates(prev => ({ ...prev, [code]: rate }));
+    } catch (e) {
+      console.error("Exchange rate fetch failed", e);
+    } finally {
+      setRateLoading(false);
+    }
+  };
+
+  // Convert entered foreign amount → INR
+  const getINRValue = () => {
+    const code = form.currency.split(" ")[0];
+    if (code === "INR" || !form.amount) return null;
+    const rate = exchangeRates[code];
+    if (!rate) return null;
+    const inr = Number(form.amount) / rate;
+    return Math.round(inr);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -436,7 +469,7 @@ export const Donate = () => {
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-[#374151] uppercase tracking-wider">Currency</label>
-                      <select value={form.currency} onChange={e => set("currency", e.target.value)}
+                      <select value={form.currency} onChange={e => handleCurrencyChange(e.target.value)}
                         className="input-field w-full px-4 py-3 rounded-xl text-sm text-[#1a2e1a] font-medium cursor-pointer"
                         style={{ border: "1.5px solid #e5e7eb", background: "#fafff9", appearance: "none" }}>
                         {currencies.map(c => <option key={c}>{c}</option>)}
@@ -470,7 +503,28 @@ export const Donate = () => {
                     <div className="flex items-center justify-between px-5 py-3 rounded-2xl" style={{ background: "linear-gradient(135deg,#f0faf4,#e4f5eb)", border: "1px solid rgba(45,106,79,0.15)" }}>
                       <span className="text-sm text-gray-600">You are donating</span>
                       <span style={{ fontFamily: "'Sora', sans-serif" }} className="text-xl font-black text-[#2d6a4f]">
-                        {form.currency.split(" ")[1] || "₹"}{Number(form.amount).toLocaleString("en-IN")}
+                        {(() => {
+                          const code = form.currency.split(" ")[0];
+                          const symbol = form.currency.split(" ")[1] || "₹";
+                          const amount = Number(form.amount).toLocaleString("en-IN");
+                          if (code === "INR") {
+                            return `${symbol}${amount}`;
+                          }
+                          const inrVal = getINRValue();
+                          return (
+                            <>
+                              {code} {symbol}{amount}
+                              {rateLoading && (
+                                <span className="text-xs font-normal text-gray-400 ml-2">(fetching rate…)</span>
+                              )}
+                              {!rateLoading && inrVal !== null && (
+                                <span className="text-sm font-semibold text-[#40916c] ml-2">
+                                  (≈ ₹{inrVal.toLocaleString("en-IN")})
+                                </span>
+                              )}
+                            </>
+                          );
+                        })()}
                       </span>
                     </div>
                   )}
