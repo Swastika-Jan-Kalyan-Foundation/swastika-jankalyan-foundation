@@ -382,7 +382,7 @@ export const Volunteer = () => {
           </p>
 
           <div className="stats-row" style={{ display: "flex", justifyContent: "center", gap: "clamp(20px,4vw,56px)", flexWrap: "wrap", paddingBottom: "2.5rem" }}>
-            {[["₹8.6M+","Total Raised"],["12,000+","Lives Impacted"],["5,000+","Trees Planted"],["200+","Active Volunteers"]].map(([val,label]) => (
+            {[["500+","Tree Planted"],["50+","Supporters"],["10+","Active Volunteers"],["3+","Upcoming Projects"]].map(([val,label]) => (
               <div key={label} className="stat-card" style={{ textAlign: "center" }}>
                 <div style={{ color: "#95d5b2", fontSize: "clamp(1.3rem,3vw,2rem)", fontWeight: 800 }}>{val}</div>
                 <div style={{ color: "#b7e4c7", fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3 }}>{label}</div>
