@@ -54,7 +54,7 @@ export const Donate = () => {
     }
   };
 
-  // Convert entered foreign amount → INR
+  
   const getINRValue = () => {
     const code = form.currency.split(" ")[0];
     if (code === "INR" || !form.amount) return null;
