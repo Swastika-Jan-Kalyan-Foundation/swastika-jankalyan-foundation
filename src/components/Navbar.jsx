@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../App.css"
 import "../index.css"
 import logo from "../assets/logo.png";
-
+import {useNavigate} from 'react-router-dom'
 const CloseSVG = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="w-5 h-5">
       <path d="M18 6 6 18M6 6l12 12" />
@@ -29,16 +29,16 @@ const CloseSVG = () => (
 export default function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-
+    const navigate = useNavigate()
     const navItems = [
-        { label: "Home", href: "https://swastikajankalyanfoundation.netlify.app/" },
-        { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
+        { label: "Home", href: "/" },
+        { label: "About Us", href: "/aboutus" },
     
-        { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
-        { label: "Become a Volunteer", href: "https://swastikajankalyanfoundation.netlify.app/volunteerwus" },
+        { label: "Projects", href: "/projects" },
+        { label: "Become a Volunteer", href: "/volunteerwus" },
     
     
-        { label: "Contact Us", href: "https://swastikajankalyanfoundation.netlify.app/contactus" },
+        { label: "Contact Us", href: "/contactus" },
       ];
     return(
         <>
@@ -47,15 +47,12 @@ export default function NavBar() {
         <div className="flex items-center">
           <a href="https://swastikajankalyanfoundation.netlify.app/" ><img src={logo} alt="SJKF Logo" className="h-30 w-auto" /> </a>
         </div>
-        <div className=" sjkf-pill-badge hero-text mt-6 inline-flex items-center gap-2 bg-[#5FAF6B]/10 border border-[#5FAF6B]/25 rounded-full px-4 py-1.5 text-[#3d8f4a] text-[12px] font-semibold mb-6 tracking-wider uppercase">
-          <span className="w-2 h-2 rounded-full bg-[#5FAF6B] animate-pulse" />
-          Swastika Jan Kalyan Foundation
-        </div>
+        
         {/* Desktop Links */}
         <ul className="hidden md:flex items-center gap-8 text-[13.5px] font-medium text-gray-600 font-['DM_Sans',sans-serif]">
           {navItems.map((item) => (
             <li key={item.label} className="relative group cursor-pointer">
-              <a href={item.href} className="sora-nav-link hover:text-[#5FAF6B] transition-colors duration-200">
+              <a onClick={() => navigate(`${item.href}`)} className="sora-nav-link hover:text-[#5FAF6B] transition-colors duration-200">
                 {item.label}
               </a>
               <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 bg-[#5FAF6B] group-hover:w-full transition-all duration-300 rounded-full" />
@@ -65,7 +62,7 @@ export default function NavBar() {
 
         {/* Desktop CTA */}
         <a
-          href="https://swastikajankalyanfoundation.netlify.app/donatetous"
+          onClick={()=> navigate('/donatetous')}
           className="hidden md:flex items-center gap-2 bg-[#5FAF6B] hover:bg-[#8bf89b] text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-md shadow-orange-200 hover:-translate-y-0.5 font-['DM_Sans',sans-serif]"
         >
           Give Support
@@ -131,10 +128,7 @@ export default function NavBar() {
           {/* header with close */}
           <div className="flex items-center justify-between px-6 pt-5 pb-4">
             <div>
-              <p className="text-[10px] font-bold tracking-[0.22em] text-[#5FAF6B] uppercase">Navigation</p>
-              <p className="text-[17px] font-extrabold text-gray-900 leading-tight" style={{ fontFamily: "'DM Serif Display',serif" }}>
-                Where to&nbsp;<em>go?</em>
-              </p>
+              <img  className="h-20 w-20" src={logo} />
             </div>
 
             {/* Close button */}
@@ -155,8 +149,8 @@ export default function NavBar() {
             {navItems.map((item, i) => (
               <li key={item}>
                 <a
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
+               
+                  onClick={() => {setMenuOpen(false); navigate(`${item.href}`)}}
                   className="flex items-center justify-between px-4 py-3.5 rounded-2xl group transition-all duration-200 hover:bg-[#5FAF6B]/10 active:bg-[#5FAF6B]/20"
                   style={{ animationDelay: `${i * 50}ms` }}
                 >
@@ -180,8 +174,8 @@ export default function NavBar() {
             <p className="text-white/80 text-[11px] font-semibold uppercase tracking-widest mb-1 relative z-10">Make a difference</p>
             <p className="text-white text-[16px] font-extrabold mb-3 relative z-10">Support our causes 🌱</p>
             <a
-              href="https://swastikajankalyanfoundation.netlify.app/donatetous"
-              onClick={() => setMenuOpen(false)}
+            
+              onClick={() => {setMenuOpen(false); navigate('/donatetous')}}
               className="relative z-10 inline-flex items-center gap-2 bg-white text-[#5FAF6B] text-[13px] font-bold px-5 py-2.5 rounded-full shadow-lg transition-all duration-200 active:scale-95"
             >
               Donate Now <ArrowRightSVG className="w-3.5 h-3.5" />

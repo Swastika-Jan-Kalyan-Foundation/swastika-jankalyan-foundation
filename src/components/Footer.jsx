@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "../App.css"
 import "../index.css"
-import logo from "../assets/logo.png"
+import logo from "../assets/logo1.png"
+
+import {useNavigate} from 'react-router-dom'
 // ── SVG Icons ──────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -61,14 +63,14 @@ const ShieldIcon = () => (
 
 // ── Data ───────────────────────────────────────────────────────────────────
 const navLinks = [
-  { label: "Home", href: "https://swastikajankalyanfoundation.netlify.app/" },
-  { label: "About Us", href: "https://swastikajankalyanfoundation.netlify.app/aboutus" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/aboutus" },
   
-  { label: "Projects", href: "https://swastikajankalyanfoundation.netlify.app/projects" },
-  { label: "Become a Volunteer", href: "https://swastikajankalyanfoundation.netlify.app/volunteerwus" },
-  { label: "Track Your Impact", href: "https://swastikajankalyanfoundation.netlify.app/trackyourimpact" },
-  { label: "Donate", href: "https://swastikajankalyanfoundation.netlify.app/donatetous" },
-  { label: "Contact Us", href: "https://swastikajankalyanfoundation.netlify.app/contactus" },
+  { label: "Projects", href: "/projects" },
+  { label: "Become a Volunteer", href: "/volunteerwus" },
+  { label: "Track Your Impact", href: "/trackyourimpact" },
+  { label: "Donate", href: "/donatetous" },
+  { label: "Contact Us", href: "/contactus" },
 ];
 
 const socials = [
@@ -125,6 +127,7 @@ export default function FloatingFooter() {
   const [subscribed, setSubscribed] = useState(false);
   const [hoveredSocial, setHoveredSocial] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
   const handleSubscribe = async (e) => {
     e.preventDefault();
     setIsLoading(true)
@@ -276,7 +279,7 @@ export default function FloatingFooter() {
               {/* Nav in 2-col grid */}
               <nav className="grid grid-cols-2 gap-x-3 gap-y-2.5">
                 {navLinks.map((link) => (
-                  <a key={link.label} href={link.href} className="ngo-nav-link text-sm font-medium py-0.5">
+                  <a onClick={() => navigate(`${link.href}`)} key={link.label}  className="ngo-nav-link text-sm font-medium py-0.5">
                     {link.label}
                   </a>
                 ))}
