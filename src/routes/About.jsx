@@ -179,7 +179,7 @@ const pillars = [
 /* ─────────────────────────────────────────────────────────
    TEAM CAROUSEL COMPONENT
 ───────────────────────────────────────────────────────── */
-function TeamCarousel({ members, renderCard }) {
+function BoardMemberCarousel({ members, renderCard }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -191,6 +191,90 @@ function TeamCarousel({ members, renderCard }) {
     }, []);
 
     const visibleCount = isMobile ? 1 : 3;
+    const total = members.length;
+
+    const next = () => setCurrentIndex(prev => (prev + 1) % total);
+    const prev = () => setCurrentIndex(prev => (prev - 1 + total) % total);
+
+    const visibleMembers = Array.from({ length: visibleCount }, (_, i) =>
+        members[(currentIndex + i) % total]
+    );
+
+    return (
+        <div style={{ position: "relative" }}>
+            {/* Arrow Left — floats on the left edge */}
+            <button
+                onClick={prev}
+                style={{
+                    position: "absolute", left: -20, top: "50%",
+                    transform: "translateY(-60%)",
+                    zIndex: 10,
+                    width: 40, height: 40, borderRadius: "50%",
+                    background: "#ffffff",
+                    border: "1.5px solid rgba(45,106,79,0.25)",
+                    cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "0 2px 12px rgba(45,106,79,0.15)",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#2d6a4f"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#fff"); }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#ffffff"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#2d6a4f"); }}
+            >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            {/* Cards */}
+            <div style={{
+                display: "grid",
+                gridTemplateColumns: `repeat(${visibleCount}, 1fr)`,
+                gap: 24,
+                padding: "0 28px",
+            }}>
+                {visibleMembers.map((member, i) => (
+                    <div key={`${currentIndex}-${i}`}>
+                        {renderCard(member, (currentIndex + i) % total)}
+                    </div>
+                ))}
+            </div>
+
+            {/* Arrow Right — floats on the right edge */}
+            <button
+                onClick={next}
+                style={{
+                    position: "absolute", right: -20, top: "50%",
+                    transform: "translateY(-60%)",
+                    zIndex: 10,
+                    width: 40, height: 40, borderRadius: "50%",
+                    background: "#ffffff",
+                    border: "1.5px solid rgba(45,106,79,0.25)",
+                    cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "0 2px 12px rgba(45,106,79,0.15)",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#2d6a4f"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#fff"); }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#ffffff"; e.currentTarget.querySelector("svg").setAttribute("stroke", "#2d6a4f"); }}
+            >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    );
+}
+
+function TeamMemberCarousel({ members, renderCard }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
+    const visibleCount = isMobile ? 1 : 2;
     const total = members.length;
 
     const next = () => setCurrentIndex(prev => (prev + 1) % total);
@@ -338,22 +422,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             initials: "PS",
             image: cohopr,
         },
-        {
-            name: "Shubham Gupta",
-            designation: "Co-Lead of Operations",
-            gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
-            accent: "#3b82f6",
-            initials: "SG",
-            image: cohopr,
-        },
-        {
-            name: "Shruti Sinha",
-            designation: "Co-Lead of Operations",
-            gradient: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-            accent: "#16a34a",
-            initials: "SS",
-            image: cohopr
-        },
+       
     ];
 
     const renderBoardCard = (member, i) => (
@@ -544,7 +613,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
                         </div>
                         <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, #2d6a4f55)" }} />
                     </div>
-                    <TeamCarousel members={boardMembers} renderCard={renderBoardCard} />
+                    <BoardMemberCarousel members={boardMembers} renderCard={renderBoardCard} />
                 </div>
 
                 {/* ── HIERARCHY CONNECTOR ── */}
@@ -580,7 +649,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
                         </div>
                         <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, #40916c55)" }} />
                     </div>
-                    <TeamCarousel members={teamMembers} renderCard={renderTeamCard} />
+                    <TeamMemberCarousel members={teamMembers} renderCard={renderTeamCard} />
                 </div>
             </div>
         </section>
