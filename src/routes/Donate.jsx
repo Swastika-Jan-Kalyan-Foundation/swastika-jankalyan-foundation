@@ -15,7 +15,7 @@ const purposes = [
   "Other",
 ];
 
-const currencies = ["INR ₹", "USD $", "EUR €", "GBP £"];
+const currencies = ["INR ", "USD ", "EUR ", "GBP "];
 const quickAmounts = [500, 1000, 2500, 5000, 10000];
 
 export const Donate = () => {
