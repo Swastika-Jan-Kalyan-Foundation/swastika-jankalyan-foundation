@@ -389,7 +389,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             name: "Aashika Sinha",
             designation: "Director",
             secondaryDesignation: "(Dept. of IT, Social Media and Information)",
-            memberImage: headofit,
+            memberImage: "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_800,c_limit/v1778139499/headofit.png",
             gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
             accent: "#7c3aed",
             crown: false,
@@ -1354,10 +1354,10 @@ export const About = () => {
           SECTION: MEET OUR TEAM
       ──────────────────────────────────────────────────── */}
             <TeamSection
-                memberdirector={memberdirector}
-                chairman={chairman}
-                director={director}
-                headoffin={headoffin}
+                memberdirector="https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_800,c_limit/v1778139504/managingdirector.png"
+                chairman="https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_800,c_limit/v1778139499/chairman.png"
+                director="https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_800,c_limit/v1778139501/director_enxtug.png"
+                headoffin="https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_800,c_limit/v1778139499/headoffin.png"
             />
 
             {/* ────────────────────────────────────────────────────
@@ -1428,7 +1428,7 @@ export const About = () => {
                                     boxShadow: "0 8px 24px rgba(45,106,79,0.18)",
                                     overflow: "hidden",
                                 }}>
-                                    <img src={memberdirector} />
+                                    <img src="https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_800,c_limit/v1778139504/managingdirector.png" />
                                 </div>
                                 <div style={{ textAlign: "center" }}>
                                     <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 14, color: "#1a2e1a", margin: "0 0 2px" }}>

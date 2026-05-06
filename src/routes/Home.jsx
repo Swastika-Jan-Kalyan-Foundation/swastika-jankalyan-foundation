@@ -210,7 +210,20 @@ export const Home = () => {
   const [scrolled, setScrolled] = useState(false);
   const heroRef = useRef(null);
 
-  const slides = useMemo(() => [img1, img2, img3, img4, img5], []);
+  const slides = useMemo(
+    () => [
+      "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_1200,c_limit/v1778139500/imgcrs1.jpg",
+  
+      "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_1200,c_limit/v1778139502/imgcrs2.jpg",
+  
+      "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_1200,c_limit/v1778139500/imgcrs3.jpg",
+  
+      "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_1200,c_limit/v1778139503/imgcrs4.jpg",
+  
+      "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_1200,c_limit/v1778139504/imgcrs5.jpg",
+    ],
+    []
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -470,6 +483,7 @@ export const Home = () => {
                   alt={`Slide ${i + 1}`}
                   className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
                   style={{ opacity: i === currentSlide ? 1 : 0 }}
+                  loading="lazy"
                 />
               ))}
               {/* overlay gradient */}
