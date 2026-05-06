@@ -314,8 +314,8 @@ export default function FloatingFooter() {
                 </div>
 
                 <div className="flex items-center gap-2.5 justify-center" style={{ color: "rgba(255,255,255,0.58)" }}>
-                  <a href="mailto:swastikajankalyanfoundation@gmail.com" ><span style={{ color: "#8bf89b" }}><MailIcon /></span></a>
-                  <a href="mailto:swastikajankalyanfoundation@gmail.com" ><span>swastikajankalyanfoundation@gmail.com</span></a>
+                  <a href="mailto:info@swastikajankalyanfoundation.com" ><span style={{ color: "#8bf89b" }}><MailIcon /></span></a>
+                  <a href="mailto:info@swastikajankalyanfoundation.com" ><span>info@swastikajankalyanfoundation.com</span></a>
                 </div>
               </div>
 

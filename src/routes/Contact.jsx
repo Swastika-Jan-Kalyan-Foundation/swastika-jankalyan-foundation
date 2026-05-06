@@ -317,7 +317,7 @@ export const ContactUs = () => {
               /* ── Mobile: collapsible accordions ── */
               <>
                 <Collapsible title="📋 Contact Details" defaultOpen={true}>
-                  <InfoCard icon="📧" title="Email Us"      value="swastikajankalyanfoundation@gmail.com"    sub="We reply within 24 hours" />
+                  <InfoCard icon="📧" title="Email Us"      value="info@swastikajankalyanfoundation.com"    sub="We reply within 24 hours" />
                   <InfoCard icon="📞" title="Call Us"       value="+91 92298 75702"   sub="Mon–Sat, 10am – 6pm IST" />
                   <InfoCard icon="📍" title="Our Office"    value="Ranchi, Jharkhand" sub="India – 834001" />
                   <InfoCard icon="🕐" title="Working Hours" value="Mon – Saturday"    sub="10:00 AM – 6:00 PM IST" />
@@ -339,7 +339,7 @@ export const ContactUs = () => {
                     Contact <span style={{ color:"#40916c" }}>Details</span>
                   </h3>
                   <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-                    <InfoCard icon="📧" title="Email Us"      value="swastikajankalyanfoundation@gmail.com"    sub="We reply within 24 hours" />
+                    <InfoCard icon="📧" title="Email Us"      value="info@swastikajankalyanfoundation.com"    sub="We reply within 24 hours" />
                     <InfoCard icon="📞" title="Call Us"       value="+91 92298 75702"   sub="Mon–Sat, 10am – 6pm IST" />
                     <InfoCard icon="📍" title="Our Office"    value="1st Floor, Opposite Durga Mandir, Lower Hatia, Near Sunday Market, Hatia, Ranchi, Jharkhand" sub="India – 834001" />
                     <InfoCard icon="🕐" title="Working Hours" value="Mon – Saturday"    sub="10:00 AM – 6:00 PM IST" />
