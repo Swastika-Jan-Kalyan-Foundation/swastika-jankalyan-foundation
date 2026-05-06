@@ -5,7 +5,7 @@ import memberdirector from '../assets/memberdirector.png'
 import headoffin from '../assets/headoffin.png'
 import cohopr from '../assets/cohopr.jpeg'
 import hodedesign from '../assets/hodedesign.jpeg'
-import ngoLogo from '../assets/logo.png'
+import ngoLogo from '../assets/logo1.png'
 import headofit from '../assets/headofit.png'
 const statutoryDetails = [
     { label: "Organization Name", value: "Swastika Jan Kalyan Foundation", icon: "🏛️" },
