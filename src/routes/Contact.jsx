@@ -194,6 +194,8 @@ export const ContactUs = () => {
   const [focused, setFocused] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -203,6 +205,35 @@ export const ContactUs = () => {
   }, []);
 
   const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const response = await fetch("https://sjkf-backend-api-production.up.railway.app/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.name,
+          phoneNumber: form.phone,
+          email: form.email,
+          concern: form.subject,
+          message: form.message,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setError(data.message || "Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const inp = (name) => ({
     width:"100%", padding:"13px 16px", borderRadius:12, fontFamily:"Sora, sans-serif",
@@ -245,8 +276,9 @@ export const ContactUs = () => {
         @keyframes dropIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
         @keyframes fadeUp  { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
         .fade-up { animation: fadeUp 0.55s ease both; }
-        .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(52,183,120,0.35) !important; }
+        .submit-btn:not(:disabled):hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(52,183,120,0.35) !important; }
         .submit-btn:active { transform:translateY(0); }
+        @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
 
       {/* HERO */}
@@ -340,7 +372,7 @@ export const ContactUs = () => {
               </div>
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            <form onSubmit={handleSubmit}
               style={{ padding:"2rem", display:"flex", flexDirection:"column", gap:18 }}>
 
               {/* Name + Phone */}
@@ -393,20 +425,45 @@ export const ContactUs = () => {
                 </span>
               </div>
 
+              {/* Error message */}
+              {error && (
+                <div style={{ display:"flex", alignItems:"center", gap:10, background:"#fff5f5", borderRadius:12, padding:"12px 16px", border:"1px solid #ffcdd2" }}>
+                  <span style={{ fontSize:18 }}>⚠️</span>
+                  <span style={{ color:"#c62828", fontSize:13, lineHeight:1.5 }}>{error}</span>
+                </div>
+              )}
+
               {/* Submit */}
-              <button type="submit" className="submit-btn"
+              <button type="submit" className="submit-btn" disabled={loading}
                 style={{
                   width:"100%", padding:"15px", borderRadius:14, border:"none",
-                  background:"linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",
-                  color:"white", fontSize:16, fontWeight:700, cursor:"pointer",
+                  background: loading
+                    ? "linear-gradient(90deg,#2d6a4f 0%,#52b788 100%)"
+                    : "linear-gradient(90deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%)",
+                  color:"white", fontSize:16, fontWeight:700,
+                  cursor: loading ? "not-allowed" : "pointer",
                   fontFamily:"Sora, sans-serif", letterSpacing:"0.02em",
                   display:"flex", alignItems:"center", justifyContent:"center", gap:10,
                   transition:"all 0.2s",
+                  opacity: loading ? 0.85 : 1,
                 }}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M2 10L18 2L12 18L10 11L2 10Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round"/>
-                </svg>
-                Send Message
+                {loading ? (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      style={{ animation:"spin 0.8s linear infinite" }}>
+                      <circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,0.35)" strokeWidth="2.5"/>
+                      <path d="M10 2a8 8 0 0 1 8 8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                    </svg>
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M2 10L18 2L12 18L10 11L2 10Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round"/>
+                    </svg>
+                    Send Message
+                  </>
+                )}
               </button>
 
               <p style={{ textAlign:"center", color:"#a8d5be", fontSize:12, margin:0 }}>
