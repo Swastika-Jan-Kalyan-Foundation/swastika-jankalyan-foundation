@@ -398,7 +398,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             name: "Prince Kumar",
             designation: "Director",
             secondaryDesignation: "(Dept. of Public Relations & Marketing)",
-            memberImage: headoffin,
+            memberImage:"https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,w_256/v1778151462/headofpubrel_r213vq.png",
             gradient: "linear-gradient(135deg, #f0e4fd 0%, #dfc4fb 100%)",
             accent: "#7c3aed",
             crown: false,
