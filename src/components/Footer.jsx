@@ -183,6 +183,7 @@ export default function FloatingFooter() {
           position: relative;
           transition: color 0.22s ease, padding-left 0.22s ease;
           color: rgba(255,255,255,0.52);
+          cursor: pointer;
         }
         .ngo-nav-link::before {
           content: '';
@@ -279,7 +280,7 @@ export default function FloatingFooter() {
               {/* Nav in 2-col grid */}
               <nav className="grid grid-cols-2 gap-x-3 gap-y-2.5">
                 {navLinks.map((link) => (
-                  <a onClick={() => navigate(`${link.href}`)} key={link.label}  className="ngo-nav-link text-sm font-medium py-0.5">
+                  <a  onClick={() => navigate(`${link.href}`)} key={link.label}  className="ngo-nav-link text-sm font-medium py-0.5">
                     {link.label}
                   </a>
                 ))}
