@@ -441,7 +441,7 @@ export const Donate = () => {
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-[#374151] uppercase tracking-wider">Full Address *</label>
-                      <input required type="email" value={form.fulladress} onChange={e => set("fulladress", e.target.value)}
+                      <input required value={form.fulladress} onChange={e => set("fulladress", e.target.value)}
                         placeholder="House No 21, Road No 5, Rajiv Chowk, Ranchi - 834001"
                         className="input-field w-full px-4 py-3 rounded-xl text-sm text-[#1a2e1a] font-medium"
                         style={{ border: "1.5px solid #e5e7eb", background: "#fafff9" }} />
