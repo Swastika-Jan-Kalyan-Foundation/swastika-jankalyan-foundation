@@ -428,14 +428,18 @@ export const Volunteer = () => {
                 <CornerArcSVG style={{ position: "absolute", top: -20, right: -20, width: 100, opacity: 0.3 }} />
                 <h3 style={{ color: "#1b4332", fontSize: 18, fontWeight: 800, margin: "0 0 0.5rem" }}>Why Volunteer<br/><span style={{ color: "#40916c" }}>With Us?</span></h3>
                 <p style={{ color: "#52796f", fontSize: 13, lineHeight: 1.7, margin: "0 0 1.25rem" }}>
-                  We operate with zero overhead on donations below ₹10,000. Every hour you give is tracked, celebrated, and makes a real difference.
+                  Every hour you give is tracked, celebrated, and makes a real difference.
+                </p>
+                <p  className="bold" style={{ color: "#52796f", fontSize: 13, lineHeight: 1.7, margin: "0 0 1.25rem" }}>
+                  Mental satisfaction and peace of 'Giving back to the Society'
                 </p>
                 {[
                   "Flexible remote & on-ground roles",
-                  "Certificate & letter of recommendation",
+                  "Certificate & Letter of Recommendation",
                   "Leadership & mentorship opportunities",
                   "Be part of 7 specialized teams",
                   "Monthly volunteer spotlights",
+                  "Career advancement & professional growth",
                 ].map(t => (
                   <div key={t} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 9 }}>
                     <CheckCircle />
