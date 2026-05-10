@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../App.css"
 import "../index.css"
 import logo from "../assets/logo.png";
+import logomain from '../assets/logo1.png'
 import {useNavigate} from 'react-router-dom'
 const CloseSVG = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="w-5 h-5">
@@ -37,7 +38,8 @@ export default function NavBar() {
         { label: "Projects", href: "/projects" },
         { label: "Become a Volunteer", href: "/volunteerwus" },
     
-    
+
+        {label: "Careers", href: "/"},
         { label: "Contact Us", href: "/contactus" },
       ];
     return(
@@ -128,7 +130,7 @@ export default function NavBar() {
           {/* header with close */}
           <div className="flex items-center justify-between px-6 pt-5 pb-4">
             <div>
-              <img  className="h-20 w-20" src={logo} />
+              <img  className="h-20 w-20" src={logomain} />
             </div>
 
             {/* Close button */}

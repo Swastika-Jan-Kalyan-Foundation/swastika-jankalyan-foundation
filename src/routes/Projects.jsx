@@ -173,7 +173,7 @@ export const Projects =  () => {
 
                     <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center", marginBottom: 16 }}>
                         <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
-                        <span className="section-label">Past Projects & Achievements</span>
+                        <span className="section-label">Ongoing Projects & Achievements</span>
                         <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
                     </div>
                     <h2 style={{
@@ -316,7 +316,7 @@ export const Projects =  () => {
 
                     <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center", marginBottom: 16 }}>
                         <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
-                        <span className="section-label">Future Initiatives</span>
+                        <span className="section-label">Upcoming Projects</span>
                         <div style={{ height: 1, width: 48, background: "#2d6a4f", opacity: 0.4 }} />
                     </div>
                     <h2 style={{
