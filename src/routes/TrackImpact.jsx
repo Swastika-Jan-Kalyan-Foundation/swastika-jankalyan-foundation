@@ -449,7 +449,7 @@ export const TrackImpact = () => {
               <div>
                 <div style={{ fontSize:11, fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"rgba(27,67,50,0.6)", marginBottom:4 }}>Your Impact Report</div>
                 <h2 style={{ color:"#1b4332", fontSize:"clamp(1.3rem,3vw,1.9rem)", fontWeight:800, margin:"0 0 0.3rem" }}>
-                  {result.data.icon} Thank you, {result.name}!
+                  {result.data.icon} Thank you, {result.data.name}!
                 </h2>
                 <p style={{ color:"#2d6a4f", fontSize:14, margin:0 }}>
                   Donated <strong>₹{result.amount.toLocaleString()}</strong> on {result.date} · Tier: <strong>{result.data.label}</strong>
