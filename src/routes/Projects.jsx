@@ -284,9 +284,9 @@ export const Projects =  () => {
                         </div>
                         <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
                             {[
-                                { val: "6,300+", lbl: "People Helped" },
-                                { val: "4", lbl: "Major Projects" },
-                                { val: "3 States", lbl: "Reached" },
+                                { val: "50+", lbl: "People Helped" },
+                                { val: "2", lbl: "Major Projects" },
+                               
                             ].map(stat => (
                                 <div key={stat.lbl} style={{ textAlign: "center" }}>
                                     <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: 24, color: "#74c69d", margin: "0 0 2px" }}>{stat.val}</p>
