@@ -17,7 +17,7 @@ const quickAmounts = [500, 1000, 2500, 5000, 10000];
 export const Donate = () => {
   const Razorpay = useRazorpay()
   const [form, setForm] = useState({
-    name: "", email: "", phone: "", amount: "", currency: "INR ₹",
+    name: "", email: "", panNumber: "", fulladress: "", phone: "", amount: "", currency: "INR ₹",
     purpose: "", message: "",
   });
   const [activeAmount, setActiveAmount] = useState(null);
@@ -117,6 +117,8 @@ export const Donate = () => {
 
                 fullName: form.name,
                 email: form.email,
+                panNumber: form.panNumber,
+                address: form.fulladress,
                 phoneNumber: form.phone,
                 amount: inrAmount,
                 originalAmount: Number(form.amount),
@@ -431,7 +433,7 @@ export const Donate = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-[#374151] uppercase tracking-wider">PAN Number *</label>
-                      <input required value={form.name} onChange={e => set("name", e.target.value)}
+                      <input required value={form.panNumber} onChange={e => set("panNumber", e.target.value)}
                         placeholder="ABCDE1234G"
                         className="input-field w-full px-4 py-3 rounded-xl text-sm text-[#1a2e1a] font-medium"
                         style={{ border: "1.5px solid #e5e7eb", background: "#fafff9" }} />
@@ -439,7 +441,7 @@ export const Donate = () => {
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-[#374151] uppercase tracking-wider">Full Address *</label>
-                      <input required type="email" value={form.email} onChange={e => set("email", e.target.value)}
+                      <input required type="email" value={form.fulladress} onChange={e => set("fulladress", e.target.value)}
                         placeholder="House No 21, Road No 5, Rajiv Chowk, Ranchi - 834001"
                         className="input-field w-full px-4 py-3 rounded-xl text-sm text-[#1a2e1a] font-medium"
                         style={{ border: "1.5px solid #e5e7eb", background: "#fafff9" }} />
@@ -541,7 +543,7 @@ export const Donate = () => {
                               )}
                               {!rateLoading && inrVal !== null && (
                                 <span className="text-sm font-semibold text-[#40916c] ml-2">
-                                  (≈ {inrVal.toLocaleString("en-IN")})
+                                  (≈ ₹{inrVal.toLocaleString("en-IN")})
                                 </span>
                               )}
                             </>
