@@ -70,7 +70,7 @@ const navLinks = [
   { label: "Become a Volunteer", href: "/volunteerwus" },
   { label: "Track Your Impact", href: "/trackyourimpact" },
   { label: "Donate", href: "/donatetous" },
-  { label: "Careers", href: "/" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact Us", href: "/contactus" },
 ];
 
