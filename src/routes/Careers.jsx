@@ -411,7 +411,7 @@ export default function CareersPage() {
                       "General Application"
                     </p>
                   </div>
-                  <p className="text-[#74c69d] text-xs mt-4 text-center font-medium">Address available on the Contact page</p>
+                  <p className="text-[#74c69d] text-xs mt-4 text-center font-medium">Address available on the <Link to='/contactus' ><span className="text-[#1b4332]" >Contact Page</span></Link></p>
                 </div>
 
                 {/* Email card */}
