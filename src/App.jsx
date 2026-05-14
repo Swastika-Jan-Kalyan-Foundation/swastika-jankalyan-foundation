@@ -15,6 +15,7 @@ import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import NavBar from './components/Navbar'
 import SwastikaChatbot from './components/Swastika'
+import Careers from './routes/Careers'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -32,7 +33,7 @@ function App() {
         <Route path='/contactus' element={<ContactUs />} />
         <Route path='/trackyourimpact' element={<TrackImpact />} />
         <Route path='/annualreport' element={<AnnualReport />} />
-    
+        <Route path='/careers' element={<Careers />} />
         </Routes>
         <SwastikaChatbot />
      <Footer /> 
