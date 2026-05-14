@@ -422,6 +422,14 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             initials: "PS",
             image: cohopr,
         },
+        {
+            name: "Aayush Aroon",
+            designation: "Head of Project Development",
+            gradient: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
+            accent: "#d97706",
+            initials: "AA",
+            image: "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,w_256/v1778748226/aayush_aroon.png"
+        }
        
     ];
 
