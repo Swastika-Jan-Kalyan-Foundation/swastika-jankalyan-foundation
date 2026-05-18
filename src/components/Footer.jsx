@@ -3,7 +3,8 @@ import "../App.css"
 import "../index.css"
 import logo from "../assets/logo1.png"
 
-import {useNavigate} from 'react-router-dom'
+
+import {Link, useNavigate} from 'react-router-dom'
 // ── SVG Icons ──────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -445,9 +446,9 @@ export default function FloatingFooter() {
               © 2026 Swastika Jan Kalyan Foundation. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-xs">
-              <a href="#" className="ngo-bot-link">Privacy Policy</a>
+              <Link to="/privacypolicy"><a className="ngo-bot-link">Privacy Policy</a></Link>
               <span className="text-white/15">·</span>
-              <a href="#" className="ngo-bot-link">Terms of Use</a>
+              <Link to="/termsofuse"><a  className="ngo-bot-link">Terms of Use</a></Link>
               <span className="text-white/15">·</span>
               <a href="#" className="ngo-bot-link">Grievance</a>
             </div>

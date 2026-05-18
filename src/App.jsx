@@ -16,6 +16,9 @@ import Footer from './components/Footer'
 import NavBar from './components/Navbar'
 import SwastikaChatbot from './components/Swastika'
 import Careers from './routes/Careers'
+import {VerifyCertificate} from './routes/VerifyCertificate'
+import TermsOfUse from './components/TermsOfUse'
+import PrivacyPolicy from './components/PrivacyPolicy'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -34,6 +37,9 @@ function App() {
         <Route path='/trackyourimpact' element={<TrackImpact />} />
         <Route path='/annualreport' element={<AnnualReport />} />
         <Route path='/careers' element={<Careers />} />
+        <Route path='/verifycertificate' element={<VerifyCertificate />} />
+        <Route path='/termsofuse' element={<TermsOfUse />} />
+        <Route path='/privacypolicy' element={<PrivacyPolicy />} />
         </Routes>
         <SwastikaChatbot />
      <Footer /> 
