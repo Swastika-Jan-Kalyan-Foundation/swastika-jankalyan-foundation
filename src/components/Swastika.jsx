@@ -82,7 +82,7 @@ const FIELD_ICONS = {
   fullName: <IconUser />, email: <IconMail />, phone: <IconPhone />,
   amount: <IconCoin />, purpose: <IconSeedling />, message: <IconMsg />,
   gender: <IconGender />, dob: <IconCal />, instagram: <IconInsta />,
-  address: <IconPin />, education: <IconGrad />, career: <IconBriefcase />,
+  address: <IconPin />, panNumber: <IconClip />, education: <IconGrad />, career: <IconBriefcase />,
   skills: <IconZap />, teams: <IconTeam />, leadership: <IconCrown />,
   experience: <IconClip />, whyJoin: <IconThink />, subject: <IconInfo />,
 };
@@ -116,6 +116,8 @@ const DONATE_FLOW = [
   { key:"purpose",     type:"options", bot:"What's the **purpose** of your donation?",
     options:["Tree Plantation Drive","Tribal Children Education","Clean Water Initiative","Healthcare Plans","Women Empowerment","Disaster Relief","General Funds","Others"] },
   { key:"message",     type:"text",    bot:"Any **message** you'd like to leave for us? (optional)" },
+  { key:"panNumber",   type:"text",    bot:"Please enter your **PAN number** (required for tax receipts)." },
+  { key:"address",     type:"text",    bot:"Your **full address**? (required for 80G certificate)" },
   { key:"__confirm__", type:"confirm", bot:"Please **review** your donation details below and confirm!" },
 ];
 
@@ -419,6 +421,7 @@ export default function Swastika() {
                 fullName: data.fullName, email: data.email, phoneNumber: data.phone,
                 amount: Number(data.amount), currency:"INR",
                 donationPurpose: data.purpose, message: data.message || "",
+                panNumber: data.panNumber, address: data.address,
                 isAnonymous: false,
               }),
             });
