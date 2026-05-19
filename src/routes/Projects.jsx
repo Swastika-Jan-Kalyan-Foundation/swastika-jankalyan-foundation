@@ -754,16 +754,17 @@ export const Projects = () => {
                     maxWidth: 1100, margin: "0 auto 56px",
                     display: "flex", alignItems: "center", justifyContent: "space-between",
                 }}>
-                    {/* Left arrow — News Archive */}
+                    {/* Left arrow — News Archive / Projects */}
                     <button
                         className="nav-arrow-btn"
                         onClick={() => navigate("left")}
-                        disabled={activePanel === "news" || animating}
+                        disabled={animating}
+                        style={{ visibility: activePanel === "news" ? "hidden" : "visible" }}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
                         </svg>
-                        News Archive
+                        {activePanel === "events" ? "Projects" : "News Archive"}
                     </button>
 
                     {/* Centre dots */}
@@ -779,13 +780,14 @@ export const Projects = () => {
                         ))}
                     </div>
 
-                    {/* Right arrow — Events */}
+                    {/* Right arrow — Events / Projects */}
                     <button
                         className="nav-arrow-btn"
                         onClick={() => navigate("right")}
-                        disabled={activePanel === "events" || animating}
+                        disabled={animating}
+                        style={{ visibility: activePanel === "events" ? "hidden" : "visible" }}
                     >
-                        Events
+                        {activePanel === "news" ? "Projects" : "Events"}
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
                         </svg>
