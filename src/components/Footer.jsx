@@ -450,7 +450,7 @@ export default function FloatingFooter() {
               <span className="text-white/15">·</span>
               <Link to="/termsofuse"><a  className="ngo-bot-link">Terms of Use</a></Link>
               <span className="text-white/15">·</span>
-              <a href="#" className="ngo-bot-link">Grievance</a>
+             
             </div>
           </div>
 
