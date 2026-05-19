@@ -114,7 +114,7 @@ export const Donate = () => {
                 razorpay_order_id: razorpayResponse.razorpay_order_id,
                 razorpay_payment_id: razorpayResponse.razorpay_payment_id,
                 razorpay_signature: razorpayResponse.razorpay_signature,
-
+                
                 fullName: form.name,
                 email: form.email,
                 panNumber: form.panNumber,
@@ -299,14 +299,14 @@ export const Donate = () => {
                 Why Your Donation<br /><span className="text-[#2d6a4f]">Matters</span>
               </h2>
               <p className="text-sm text-gray-500 leading-relaxed mb-6">
-                We operate with zero administrative overhead on donations below ₹10,000. Every contribution is tracked, reported, and celebrated.
+              Transformation starts from the ground up. At Swastika Jan Kalyan Foundation, your contribution doesn’t just fund a project; it fuels a movement. By giving to the foundation, you become an active partner in building a cleaner, more educated, and healthier community. We don’t believe in a one-size-fits-all approach to charity. Instead, your collective support is pooled to address the most urgent needs on the ground, ensuring your generosity creates sustainable, lasting change. 
               </p>
               <div className="flex flex-col gap-4">
                 {[
-                  { emoji: "🌳", label: "₹500", desc: "Plants 5 native saplings" },
-                  { emoji: "📚", label: "₹1,000", desc: "Funds school supplies for 2 children" },
-                  { emoji: "💧", label: "₹2,500", desc: "Provides clean water for a family for 1 month" },
-                  { emoji: "🏥", label: "₹5,000", desc: "Covers medical check-up for 3 families" },
+                  { emoji: "📚", label: "Empowering Education", desc: "Helping us bring digital literacy to marginalized youth and enrich school libraries to foster a lifelong love of learning." },
+                  { emoji: "🌳", label: "Restoring the Enviroment", desc: "Sustaining active community projects to clear our waterways, plant native saplings, and protect local ecosystems." },
+                  { emoji: "🏥", label: "Advanced Sanitation", desc: "Building cleaner, healthier public spaces through dedicated awareness and cleanup drives.  " },
+
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-4 p-3 rounded-2xl" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(45,106,79,0.1)" }}>
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style={{ background: "rgba(45,106,79,0.1)" }}>
@@ -318,6 +318,9 @@ export const Donate = () => {
                     </div>
                   </div>
                 ))}
+                <p className="italic text-sm text-gray-500 leading-relaxed mb-6">
+                Every contribution, regardless of size, strengthens our ability to serve the community transparently and effectively.
+              </p>
               </div>
 
               {/* Trust badges */}
