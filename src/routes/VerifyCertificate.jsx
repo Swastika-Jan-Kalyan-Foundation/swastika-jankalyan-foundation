@@ -215,7 +215,10 @@ export const VerifyCertificate = () => {
       if (res.ok) {
         const json = await res.json();
         const raw = json.data ?? json;
-        const cert = normalizeApiCert(Array.isArray(raw) ? raw[0] : raw);
+        const unwrapped = Array.isArray(raw) ? raw[0] : raw;
+        console.log("API JSON full:", JSON.stringify(json, null, 2));
+        console.log("Unwrapped cert object:", JSON.stringify(unwrapped, null, 2));
+        const cert = normalizeApiCert(unwrapped);
         setResult(cert);
         setLoading(false);
         setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
