@@ -72,6 +72,7 @@ const navLinks = [
   { label: "Track Your Impact", href: "/trackyourimpact" },
   { label: "Donate", href: "/donatetous" },
   { label: "Careers", href: "/careers" },
+  { label: "Verify Certificate", href: "/verifycertificate" },
   { label: "Contact Us", href: "/contactus" },
 ];
 

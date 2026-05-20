@@ -37,9 +37,7 @@ export default function NavBar() {
     
         { label: "Projects", href: "/projects" },
         { label: "Become a Volunteer", href: "/volunteerwus" },
-    
-
-        {label: "Careers", href: "/careers"},
+  
         { label: "Contact Us", href: "/contactus" },
       ];
     return(
