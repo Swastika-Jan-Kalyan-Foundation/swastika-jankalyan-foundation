@@ -446,6 +446,23 @@ export default function FloatingFooter() {
             <p className="text-white/28 text-xs">
               © 2026 Swastika Jan Kalyan Foundation. All rights reserved.
             </p>
+        
+            <p className="text-white/30 text-xs">
+              Developed and Managed by{" "}
+              <a href="https://reactneuraldeveloper.netlify.app" >
+              <span
+                style={{
+                  color: "#8bf89b",
+                  fontWeight: 600,
+                  textShadow: "0 0 8px #8bf89b, 0 0 18px #5FAF6B88, 0 0 32px #5FAF6B44",
+                  letterSpacing: "0.03em",
+                }}
+              >
+                Gyan Shresth
+              </span>
+              </a>
+            </p>
+        
             <div className="flex items-center gap-4 text-xs">
               <Link to="/privacypolicy"><a className="ngo-bot-link">Privacy Policy</a></Link>
               <span className="text-white/15">·</span>
