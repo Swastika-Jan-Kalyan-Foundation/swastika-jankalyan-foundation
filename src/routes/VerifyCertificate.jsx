@@ -214,7 +214,8 @@ export const VerifyCertificate = () => {
 
       if (res.ok) {
         const json = await res.json();
-        const cert = normalizeApiCert(json.data ?? json);
+        const raw = json.data ?? json;
+        const cert = normalizeApiCert(Array.isArray(raw) ? raw[0] : raw);
         setResult(cert);
         setLoading(false);
         setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
