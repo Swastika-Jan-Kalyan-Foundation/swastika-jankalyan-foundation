@@ -186,7 +186,7 @@ export const VerifyCertificate = () => {
       title:             raw.certificateTitle   ?? raw.title                               ?? "",
       summary:           raw.certificateSummary ?? raw.summary         ?? raw.description   ?? "",
       modeOfIssue:       raw.modeOfIssue        ?? raw.mode            ?? "Digital",
-      signingAuthority:  raw.signingAuthority   ?? raw.signedBy                            ?? "",
+      signingAuthority:  raw.signingAutority   ?? raw.signedBy                            ?? "",
       recommendor:       raw.recommender        ?? raw.recommendor     ?? raw.recommendedBy ?? "",
     };
   };
