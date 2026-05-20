@@ -186,8 +186,9 @@ export const VerifyCertificate = () => {
       title:             raw.certificateTitle   ?? raw.title                               ?? "",
       summary:           raw.certificateSummary ?? raw.summary         ?? raw.description   ?? "",
       modeOfIssue:       raw.modeOfIssue        ?? raw.mode            ?? "Digital",
-      signingAuthority:  raw.signingAutority   ?? raw.signedBy                            ?? "",
+      signingAuthority:  raw.signingAuthority   ?? raw.signingAutority  ?? raw.signedBy    ?? "",
       recommendor:       raw.recommender        ?? raw.recommendor     ?? raw.recommendedBy ?? "",
+      physicalCopy:      raw.physicalCopy        ?? "",
     };
   };
 
@@ -472,6 +473,7 @@ export const VerifyCertificate = () => {
                   { icon:"📋", label:"Mode of Issue",     value: result.modeOfIssue },
                   { icon:"✍️", label:"Signing Authority", value: result.signingAuthority },
                   { icon:"🤝", label:"Recommended By",   value: result.recommendor },
+                  { icon:"📄", label:"Physical Copy",    value: result.physicalCopy },
                 ].map(({ icon, label, value }) => (
                   <div key={label} className="cert-field" style={{ background:"#f7fdf9", border:"1.5px solid #e8f5e9", borderRadius:14, padding:"11px 13px", transition:"background 0.18s", cursor:"default" }}>
                     <div style={{ display:"flex", alignItems:"center", gap:6, marginBottom:3 }}>
