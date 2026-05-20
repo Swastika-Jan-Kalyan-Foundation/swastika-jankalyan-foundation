@@ -13,7 +13,58 @@ const purposes = [
 
 const currencies = ["INR ", "USD ", "EUR ", "GBP "];
 const quickAmounts = [500, 1000, 2500, 5000, 10000];
-
+const TickEmblem = () => (
+  <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  
+  <circle
+    cx="28"
+    cy="28"
+    r="27"
+    stroke="#5FAF6B"
+    stroke-width="1"
+    stroke-dasharray="4 3"
+    opacity="0.55"
+  />
+  
+  <circle
+    cx="28"
+    cy="28"
+    r="21"
+    stroke="#8bf89b"
+    stroke-width="0.5"
+    opacity="0.3"
+  />
+  
+  
+  <circle
+    cx="28"
+    cy="28"
+    r="12"
+    fill="#8bf89b"
+    opacity="0.12"
+  />
+  
+  
+  <path
+    d="M17 29L25 37L39 21"
+    stroke="#8bf89b"
+    stroke-width="3.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  
+  <path
+    d="M17 29L25 37L39 21"
+    stroke="#5FAF6B"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.9"
+  />
+  
+  </svg>
+  );
 export const Donate = () => {
   const Razorpay = useRazorpay()
   const [form, setForm] = useState({
@@ -372,7 +423,7 @@ export const Donate = () => {
 
                     {/* Icon */}
                     <div style={{ width: 84, height: 84, borderRadius: "50%", background: "linear-gradient(145deg,#e8f5ee,#c8ead8)", border: "3px solid rgba(82,183,136,0.4)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", fontSize: 38, boxShadow: "0 12px 32px rgba(45,106,79,0.2), 0 0 0 8px rgba(82,183,136,0.1)", animation: "popIn 0.5s 0.3s cubic-bezier(0.34,1.56,0.64,1) both" }}>
-                      <LeafEmblem />
+                      <TickEmblem />
                     </div>
 
                     <h2 style={{ fontSize: 27, fontWeight: 800, color: "#1b4332", margin: "0 0 0.4rem", letterSpacing: "-0.5px", animation: "fadeUp 0.5s 0.5s both" }}>
