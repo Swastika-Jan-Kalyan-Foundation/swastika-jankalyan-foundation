@@ -104,8 +104,6 @@ What We Do:
 • Women Empowerment & Skill Development
 • Disaster Relief Operations
 
-Since our founding, we have planted 5,200+ trees, impacted 12,400+ lives, supported 28 villages, and inspired 340+ volunteers to join the cause.
-
 Together, we are building a greener, kinder tomorrow.`;
 
 const DONATE_FLOW = [
