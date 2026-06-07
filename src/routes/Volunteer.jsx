@@ -128,7 +128,7 @@ export const Volunteer = () => {
     };
   
     try {
-      const res = await fetch("https://sjkf-backend-api-production.up.railway.app/api/volunteers", {
+      const res = await fetch("https://sjkfapi.onrender.com/api/volunteers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -211,7 +211,7 @@ export const ContactUs = () => {
     setError("");
     setLoading(true);
     try {
-      const response = await fetch("https://sjkf-backend-api-production.up.railway.app/api/contact", {
+      const response = await fetch("https://sjkfapi.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

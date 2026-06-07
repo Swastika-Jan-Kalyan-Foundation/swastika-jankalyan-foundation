@@ -122,7 +122,7 @@ export const Donate = () => {
         ? Number(form.amount)
         : Math.round(Number(form.amount) / exchangeRates[currencyCode]);
 
-      const orderResponse = await fetch("https://sjkf-backend-api-production.up.railway.app/api/donations/create-order", {
+      const orderResponse = await fetch("https://sjkfapi.onrender.com/api/donations/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -156,7 +156,7 @@ export const Donate = () => {
         handler: async function (razorpayResponse) {
           try {
             // 3. Verify payment and save donation only after successful payment
-            const response = await fetch("https://sjkf-backend-api-production.up.railway.app/api/donations/verify-payment", {
+            const response = await fetch("https://sjkfapi.onrender.com/api/donations/verify-payment", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

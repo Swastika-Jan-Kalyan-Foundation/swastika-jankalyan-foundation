@@ -210,7 +210,7 @@ export const VerifyCertificate = () => {
 
     /* ── 1. Try live backend API ── */
     try {
-      const url = `https://sjkf-backend-api-production.up.railway.app/api/certificate/${encodeURIComponent(cleanedId)}?issueDate=${encodeURIComponent(dateIssued)}`;
+      const url = `https://sjkfapi.onrender.com/api/certificate/${encodeURIComponent(cleanedId)}?issueDate=${encodeURIComponent(dateIssued)}`;
       const res  = await fetch(url);
 
       if (res.ok) {
