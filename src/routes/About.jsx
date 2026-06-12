@@ -415,7 +415,7 @@ function TeamSection({ memberdirector, chairman, director, headoffin }) {
             image: hodedesign  
         },
         {
-            name: "Piyush Bhusan Sharma",
+            name: "Piyush Bhushan Sharma",
             designation: "Head of Operations",
             gradient: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
             accent: "#d97706",
