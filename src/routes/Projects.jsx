@@ -108,6 +108,23 @@ const newsArchive = [
 ];
 
 const eventsData = [
+     {
+        date: "20 Jun 2026",
+        day: "SAT",
+        title: "Blood Donation Camp",
+        category: "Health",
+        categoryColor: "#40916c",
+        location: "Bishu Palance",
+        time: "10:00 AM – 12:00 PM",
+        desc: "Our NGO organized a blood donation camp to support the community, promote awareness about the importance of blood donation adn mark the 1st anniversary of the Swastika Jan Kalyan Foundation.",
+        //spots: "20 spots left",
+        images: [
+            "https://res.cloudinary.com/dztzunudp/image/upload/v1782149333/blooddoncamp2026-1.jpg",
+            "https://res.cloudinary.com/dztzunudp/image/upload/v1782149332/blooddoncamp2026-2.jpg",
+            "https://res.cloudinary.com/dztzunudp/image/upload/v1782149332/blooddoncamp2026-3.jpg"
+
+        ],
+    },
       {
         date: "21 Jun 2025",
         day: "SAT",
