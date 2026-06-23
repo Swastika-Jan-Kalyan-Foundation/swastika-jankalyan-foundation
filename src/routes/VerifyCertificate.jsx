@@ -318,7 +318,7 @@ export const VerifyCertificate = () => {
               <LeafEmblem/>
             </div>
             <h2 style={{ color:"#1b4332", fontSize:20, fontWeight:800, margin:"0 0 0.4rem" }}>Verify your certificate</h2>
-            <p style={{ color:"#74b69a", fontSize:13, margin:0 }}>Enter your Certificate ID (try: CERTI-1001 to CERTI-1004 or CERTI-2025)</p>
+            <p style={{ color:"#74b69a", fontSize:13, margin:0 }}>Enter your Certificate ID (try: SJKF-2026-SS-01, SJKF-2026-SS-02 or SJKF-2026-SS-03)</p>
           </div>
 
           <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
