@@ -641,7 +641,7 @@ export const Donate = () => {
               </button>
 
                   <p className="text-center text-xs text-gray-400">
-                    🔒 Secured with 256-bit SSL encryption. Tax receipt will be emailed automatically.
+                    🔒 If you want your data to be completely removed from our records then contact us at <a href="mailto:info@swastikajankalyanfoundation.com" style={{ color: "#52b788", textDecoration: "underline" }}>info@swastikajankalyanfoundation.com </a>.
                   </p>
                 </form>
               )}

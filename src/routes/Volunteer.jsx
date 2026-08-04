@@ -668,7 +668,7 @@ export const Volunteer = () => {
               </button>
 
               <p style={{ textAlign: "center", color: "#a8d5be", fontSize: 12, marginTop: 14 }}>
-                By submitting, you agree to be contacted by our team. Your data is kept confidential.
+                If you want your data to be completely removed from our records, please contact us at <a href="mailto:info@swastikajankalyanfoundation.com" style={{ color: "#52b788", textDecoration: "underline" }}>info@swastikajankalyanfoundation.com </a>.
               </p>
             </form>
           </div>
