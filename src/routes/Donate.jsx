@@ -706,10 +706,7 @@ export const Donate = () => {
                 style={{ background: "#ffffff", border: "2px solid #2d6a4f", letterSpacing: "0.03em" }}>
                 Register as Volunteer →
               </button>
-              <button className="px-8 py-3 rounded-2xl font-semibold text-xs text-gray-500 cursor-pointer border-none"
-                style={{ background: "transparent", textDecoration: "underline", textDecorationColor: "rgba(107,114,128,0.4)" }}>
-                Learn more about volunteering
-              </button>
+             
             </div>
           </div>
         </div>
