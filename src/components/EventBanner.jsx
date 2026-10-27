@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import bannerImg from "../assets/diwaliBanner.png"; // <- put your banner here (any name/format, update this line)
+const bannerImg = "https://res.cloudinary.com/dztzunudp/image/upload/f_auto,q_auto,dpr_auto,w_1200,c_limit/v1793096388/diwaliBanner_qzfyws.png";
 
 const BANNER_LINK = ""; // optional: e.g. "/volunteerwus" makes the banner clickable. Leave "" for none.
 const BANNER_ALT = "Event banner";
