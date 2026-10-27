@@ -19,12 +19,14 @@ import Careers from './routes/Careers'
 import {VerifyCertificate} from './routes/VerifyCertificate'
 import TermsOfUse from './components/TermsOfUse'
 import PrivacyPolicy from './components/PrivacyPolicy'
+import EventBanner from './components/EventBanner'
 function App() {
   const [count, setCount] = useState(0)
 
 
   return (
     <>
+    <EventBanner />
     <NavBar />
     <ScrollToTop />
       <Routes>
